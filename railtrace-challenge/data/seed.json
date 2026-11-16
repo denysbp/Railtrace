@@ -1,0 +1,540 @@
+{
+  "lines": [
+    {
+      "code": "AZ",
+      "name": "Linha Azul",
+      "stations": [
+        "REB",
+        "AMD",
+        "ALF",
+        "PON",
+        "CAR",
+        "CML",
+        "AMO",
+        "LAR",
+        "JZO",
+        "PES",
+        "SSE",
+        "PAR",
+        "MPO",
+        "AVE",
+        "RES",
+        "BCH",
+        "TPA",
+        "SAP"
+      ]
+    },
+    {
+      "code": "AM",
+      "name": "Linha Amarela",
+      "stations": [
+        "ODI",
+        "SRO",
+        "AMX",
+        "LUM",
+        "QCO",
+        "CGR",
+        "CUN",
+        "ECA",
+        "CPE",
+        "SAL",
+        "PIC",
+        "MPO",
+        "RAT"
+      ]
+    },
+    {
+      "code": "VD",
+      "name": "Linha Verde",
+      "stations": [
+        "TEL",
+        "CGR",
+        "ALV",
+        "ROM",
+        "ARE",
+        "ALA",
+        "ARR",
+        "ANJ",
+        "INT",
+        "MMO",
+        "ROS",
+        "BCH",
+        "CSO"
+      ]
+    },
+    {
+      "code": "VM",
+      "name": "Linha Vermelha",
+      "stations": [
+        "SSE",
+        "SAL",
+        "ALA",
+        "OLA",
+        "BVI",
+        "CHE",
+        "OLI",
+        "CRU",
+        "ORI",
+        "MOS",
+        "ENC",
+        "AER"
+      ]
+    }
+  ],
+  "stations": [
+    {
+      "code": "REB",
+      "name": "Reboleira"
+    },
+    {
+      "code": "AMD",
+      "name": "Amadora Este"
+    },
+    {
+      "code": "ALF",
+      "name": "Alfornelos"
+    },
+    {
+      "code": "PON",
+      "name": "Pontinha"
+    },
+    {
+      "code": "CAR",
+      "name": "Carnide"
+    },
+    {
+      "code": "CML",
+      "name": "Colégio Militar/Luz"
+    },
+    {
+      "code": "AMO",
+      "name": "Alto dos Moinhos"
+    },
+    {
+      "code": "LAR",
+      "name": "Laranjeiras"
+    },
+    {
+      "code": "JZO",
+      "name": "Jardim Zoológico"
+    },
+    {
+      "code": "PES",
+      "name": "Praça de Espanha"
+    },
+    {
+      "code": "SSE",
+      "name": "São Sebastião"
+    },
+    {
+      "code": "PAR",
+      "name": "Parque"
+    },
+    {
+      "code": "MPO",
+      "name": "Marquês de Pombal"
+    },
+    {
+      "code": "AVE",
+      "name": "Avenida"
+    },
+    {
+      "code": "RES",
+      "name": "Restauradores"
+    },
+    {
+      "code": "BCH",
+      "name": "Baixa-Chiado"
+    },
+    {
+      "code": "TPA",
+      "name": "Terreiro do Paço"
+    },
+    {
+      "code": "SAP",
+      "name": "Santa Apolónia"
+    },
+    {
+      "code": "ODI",
+      "name": "Odivelas"
+    },
+    {
+      "code": "SRO",
+      "name": "Senhor Roubado"
+    },
+    {
+      "code": "AMX",
+      "name": "Ameixoeira"
+    },
+    {
+      "code": "LUM",
+      "name": "Lumiar"
+    },
+    {
+      "code": "QCO",
+      "name": "Quinta das Conchas"
+    },
+    {
+      "code": "CGR",
+      "name": "Campo Grande"
+    },
+    {
+      "code": "CUN",
+      "name": "Cidade Universitária"
+    },
+    {
+      "code": "ECA",
+      "name": "Entre Campos"
+    },
+    {
+      "code": "CPE",
+      "name": "Campo Pequeno"
+    },
+    {
+      "code": "SAL",
+      "name": "Saldanha"
+    },
+    {
+      "code": "PIC",
+      "name": "Picoas"
+    },
+    {
+      "code": "RAT",
+      "name": "Rato"
+    },
+    {
+      "code": "TEL",
+      "name": "Telheiras"
+    },
+    {
+      "code": "ALV",
+      "name": "Alvalade"
+    },
+    {
+      "code": "ROM",
+      "name": "Roma"
+    },
+    {
+      "code": "ARE",
+      "name": "Areeiro"
+    },
+    {
+      "code": "ALA",
+      "name": "Alameda"
+    },
+    {
+      "code": "ARR",
+      "name": "Arroios"
+    },
+    {
+      "code": "ANJ",
+      "name": "Anjos"
+    },
+    {
+      "code": "INT",
+      "name": "Intendente"
+    },
+    {
+      "code": "MMO",
+      "name": "Martim Moniz"
+    },
+    {
+      "code": "ROS",
+      "name": "Rossio"
+    },
+    {
+      "code": "CSO",
+      "name": "Cais do Sodré"
+    },
+    {
+      "code": "OLA",
+      "name": "Olaias"
+    },
+    {
+      "code": "BVI",
+      "name": "Bela Vista"
+    },
+    {
+      "code": "CHE",
+      "name": "Chelas"
+    },
+    {
+      "code": "OLI",
+      "name": "Olivais"
+    },
+    {
+      "code": "CRU",
+      "name": "Cabo Ruivo"
+    },
+    {
+      "code": "ORI",
+      "name": "Oriente"
+    },
+    {
+      "code": "MOS",
+      "name": "Moscavide"
+    },
+    {
+      "code": "ENC",
+      "name": "Encarnação"
+    },
+    {
+      "code": "AER",
+      "name": "Aeroporto"
+    }
+  ],
+  "trainsets": [
+    {
+      "serial": "TS-0001",
+      "line": "AZ"
+    },
+    {
+      "serial": "TS-0002",
+      "line": "VM"
+    },
+    {
+      "serial": "TS-0003",
+      "line": "VD"
+    },
+    {
+      "serial": "TS-0004",
+      "line": "VD"
+    },
+    {
+      "serial": "TS-0005",
+      "line": "VD"
+    }
+  ],
+  "duties": [
+    {
+      "code": "AZ-D01-20261102",
+      "line": "AZ",
+      "planned_start": "2026-11-02T07:00:00Z",
+      "planned_end": "2026-11-02T11:00:00Z"
+    },
+    {
+      "code": "AZ-D02-20261102",
+      "line": "AZ",
+      "planned_start": "2026-11-02T13:00:00Z",
+      "planned_end": "2026-11-02T17:00:00Z"
+    },
+    {
+      "code": "VD-D03-20261102",
+      "line": "VD",
+      "planned_start": "2026-11-02T07:00:00Z",
+      "planned_end": "2026-11-02T11:00:00Z"
+    },
+    {
+      "code": "VD-D04-20261102",
+      "line": "VD",
+      "planned_start": "2026-11-02T13:00:00Z",
+      "planned_end": "2026-11-02T17:00:00Z"
+    },
+    {
+      "code": "VM-D01-20261102",
+      "line": "VM",
+      "planned_start": "2026-11-02T06:00:00Z",
+      "planned_end": "2026-11-02T10:00:00Z"
+    },
+    {
+      "code": "VM-D02-20261102",
+      "line": "VM",
+      "planned_start": "2026-11-02T16:00:00Z",
+      "planned_end": "2026-11-02T20:00:00Z"
+    },
+    {
+      "code": "AZ-D01-20261103",
+      "line": "AZ",
+      "planned_start": "2026-11-03T07:00:00Z",
+      "planned_end": "2026-11-03T11:00:00Z"
+    },
+    {
+      "code": "AZ-D02-20261103",
+      "line": "AZ",
+      "planned_start": "2026-11-03T13:00:00Z",
+      "planned_end": "2026-11-03T17:00:00Z"
+    },
+    {
+      "code": "VD-D03-20261103",
+      "line": "VD",
+      "planned_start": "2026-11-03T07:00:00Z",
+      "planned_end": "2026-11-03T11:00:00Z"
+    },
+    {
+      "code": "VD-D04-20261103",
+      "line": "VD",
+      "planned_start": "2026-11-03T13:00:00Z",
+      "planned_end": "2026-11-03T17:00:00Z"
+    },
+    {
+      "code": "VM-D01-20261103",
+      "line": "VM",
+      "planned_start": "2026-11-03T06:00:00Z",
+      "planned_end": "2026-11-03T10:00:00Z"
+    },
+    {
+      "code": "VM-D02-20261103",
+      "line": "VM",
+      "planned_start": "2026-11-03T16:00:00Z",
+      "planned_end": "2026-11-03T20:00:00Z"
+    },
+    {
+      "code": "AZ-D01-20261104",
+      "line": "AZ",
+      "planned_start": "2026-11-04T07:00:00Z",
+      "planned_end": "2026-11-04T11:00:00Z"
+    },
+    {
+      "code": "AZ-D02-20261104",
+      "line": "AZ",
+      "planned_start": "2026-11-04T13:00:00Z",
+      "planned_end": "2026-11-04T17:00:00Z"
+    },
+    {
+      "code": "VD-D03-20261104",
+      "line": "VD",
+      "planned_start": "2026-11-04T07:00:00Z",
+      "planned_end": "2026-11-04T11:00:00Z"
+    },
+    {
+      "code": "VD-D04-20261104",
+      "line": "VD",
+      "planned_start": "2026-11-04T13:00:00Z",
+      "planned_end": "2026-11-04T17:00:00Z"
+    },
+    {
+      "code": "VM-D01-20261104",
+      "line": "VM",
+      "planned_start": "2026-11-04T06:00:00Z",
+      "planned_end": "2026-11-04T10:00:00Z"
+    },
+    {
+      "code": "VM-D02-20261104",
+      "line": "VM",
+      "planned_start": "2026-11-04T16:00:00Z",
+      "planned_end": "2026-11-04T20:00:00Z"
+    },
+    {
+      "code": "VD-T01-20261104",
+      "line": "VD",
+      "planned_start": "2026-11-04T09:00:00Z",
+      "planned_end": "2026-11-04T15:00:00Z"
+    }
+  ],
+  "assignments": [
+    {
+      "trainset": "TS-0001",
+      "duty": "AZ-D01-20261102",
+      "started_at": "2026-11-02T07:00:00Z",
+      "ended_at": "2026-11-02T11:00:00Z"
+    },
+    {
+      "trainset": "TS-0001",
+      "duty": "AZ-D02-20261102",
+      "started_at": "2026-11-02T13:00:00Z",
+      "ended_at": "2026-11-02T17:00:00Z"
+    },
+    {
+      "trainset": "TS-0003",
+      "duty": "VD-D03-20261102",
+      "started_at": "2026-11-02T07:00:00Z",
+      "ended_at": "2026-11-02T11:00:00Z"
+    },
+    {
+      "trainset": "TS-0003",
+      "duty": "VD-D04-20261102",
+      "started_at": "2026-11-02T13:00:00Z",
+      "ended_at": "2026-11-02T17:00:00Z"
+    },
+    {
+      "trainset": "TS-0002",
+      "duty": "VM-D01-20261102",
+      "started_at": "2026-11-02T06:00:00Z",
+      "ended_at": "2026-11-02T10:00:00Z"
+    },
+    {
+      "trainset": "TS-0002",
+      "duty": "VM-D02-20261102",
+      "started_at": "2026-11-02T16:00:00Z",
+      "ended_at": "2026-11-02T20:00:00Z"
+    },
+    {
+      "trainset": "TS-0001",
+      "duty": "AZ-D01-20261103",
+      "started_at": "2026-11-03T07:00:00Z",
+      "ended_at": "2026-11-03T11:00:00Z"
+    },
+    {
+      "trainset": "TS-0001",
+      "duty": "AZ-D02-20261103",
+      "started_at": "2026-11-03T13:00:00Z",
+      "ended_at": "2026-11-03T17:00:00Z"
+    },
+    {
+      "trainset": "TS-0003",
+      "duty": "VD-D03-20261103",
+      "started_at": "2026-11-03T07:00:00Z",
+      "ended_at": "2026-11-03T10:00:00Z"
+    },
+    {
+      "trainset": "TS-0005",
+      "duty": "VD-D03-20261103",
+      "started_at": "2026-11-03T10:00:00Z",
+      "ended_at": "2026-11-03T11:00:00Z"
+    },
+    {
+      "trainset": "TS-0005",
+      "duty": "VD-D04-20261103",
+      "started_at": "2026-11-03T13:00:00Z",
+      "ended_at": "2026-11-03T17:00:00Z"
+    },
+    {
+      "trainset": "TS-0002",
+      "duty": "VM-D01-20261103",
+      "started_at": "2026-11-03T06:00:00Z",
+      "ended_at": "2026-11-03T10:00:00Z"
+    },
+    {
+      "trainset": "TS-0002",
+      "duty": "VM-D02-20261103",
+      "started_at": "2026-11-03T16:00:00Z",
+      "ended_at": "2026-11-03T20:00:00Z"
+    },
+    {
+      "trainset": "TS-0001",
+      "duty": "AZ-D01-20261104",
+      "started_at": "2026-11-04T07:00:00Z",
+      "ended_at": "2026-11-04T11:00:00Z"
+    },
+    {
+      "trainset": "TS-0001",
+      "duty": "AZ-D02-20261104",
+      "started_at": "2026-11-04T13:00:00Z",
+      "ended_at": "2026-11-04T17:00:00Z"
+    },
+    {
+      "trainset": "TS-0005",
+      "duty": "VD-D03-20261104",
+      "started_at": "2026-11-04T07:00:00Z",
+      "ended_at": "2026-11-04T11:00:00Z"
+    },
+    {
+      "trainset": "TS-0005",
+      "duty": "VD-D04-20261104",
+      "started_at": "2026-11-04T13:00:00Z",
+      "ended_at": "2026-11-04T17:00:00Z"
+    },
+    {
+      "trainset": "TS-0002",
+      "duty": "VM-D01-20261104",
+      "started_at": "2026-11-04T06:00:00Z",
+      "ended_at": "2026-11-04T10:00:00Z"
+    },
+    {
+      "trainset": "TS-0002",
+      "duty": "VM-D02-20261104",
+      "started_at": "2026-11-04T16:00:00Z",
+      "ended_at": "2026-11-04T20:00:00Z"
+    }
+  ]
+}

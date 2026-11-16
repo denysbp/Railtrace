@@ -1,0 +1,6935 @@
+{
+  "generated_with": {
+    "seed": 7,
+    "shuffled": false
+  },
+  "note": "Values the APIs must return. Compare numbers with a tolerance of 0.01.",
+  "checkpoint_a_after_step_4": {
+    "stats": {
+      "reports_total": 4650,
+      "measurements": 2752,
+      "attributed": 863,
+      "unattributed": 1889,
+      "quarantined": {
+        "bad_checksum": 5,
+        "clock_invalid": 2,
+        "conflict": 4,
+        "malformed": 5,
+        "unknown_metric": 2,
+        "unknown_station": 2,
+        "unknown_trainset": 288
+      },
+      "pending": 0
+    },
+    "batches": {
+      "depot-batch-01": {
+        "lines": 864,
+        "applied": 864,
+        "duplicate": 0,
+        "quarantined": {}
+      },
+      "depot-batch-02": {
+        "lines": 2207,
+        "applied": 322,
+        "duplicate": 1578,
+        "quarantined": {
+          "bad_checksum": 5,
+          "clock_invalid": 2,
+          "conflict": 3,
+          "malformed": 5,
+          "unknown_metric": 2,
+          "unknown_station": 2,
+          "unknown_trainset": 288
+        }
+      }
+    },
+    "live_posts": {
+      "lines": 1579,
+      "applied": 1578,
+      "duplicate": 0,
+      "quarantined": {
+        "conflict": 1
+      }
+    },
+    "readings": [
+      {
+        "duty": "VD-D03-20261103",
+        "metric": "SPD",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:00:00Z",
+            "value": 25.2,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T07:05:00Z",
+            "value": 28.6,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T07:10:00Z",
+            "value": 26.2,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T07:15:00Z",
+            "value": 25.9,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T07:20:00Z",
+            "value": 27.9,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T07:25:00Z",
+            "value": 27.5,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 10.7,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 30.6,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 30.0,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 30.9,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 27.2,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 28.2,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 28.9,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 11.0,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 28.3,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 28.9,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 29.2,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 26.0,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 25.7,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 25.3,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 0.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 26.0,
+            "trainset": "TS-0005",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 30.6,
+            "trainset": "TS-0005",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 27.0,
+            "trainset": "TS-0005",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 28.8,
+            "trainset": "TS-0005",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 9.1,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 25.6,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 28.4,
+            "trainset": "TS-0005",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 28.5,
+            "trainset": "TS-0005",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 27.2,
+            "trainset": "TS-0005",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 29.4,
+            "trainset": "TS-0005",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 27.1,
+            "trainset": "TS-0005",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 14.7,
+            "trainset": "TS-0005",
+            "station": "CSO"
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261103",
+        "metric": "AX4",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:00:00Z",
+            "value": 33.8,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T07:05:00Z",
+            "value": 34.6,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T07:10:00Z",
+            "value": 35.1,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T07:15:00Z",
+            "value": 33.7,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T07:20:00Z",
+            "value": 35.3,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T07:25:00Z",
+            "value": 33.4,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 21.6,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 38.8,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 37.2,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 37.6,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 34.0,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 36.7,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 44.7,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 51.5,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 58.3,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 64.4,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 71.4,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 77.8,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 84.3,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 90.2,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 93.6,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 83.1,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 73.9,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 65.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 57.9,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 51.9,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 46.6,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 42.7,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 38.0,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 34.3,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 31.8,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 28.6,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 27.3,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 25.2,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 23.4,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 21.3,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 33.3,
+            "trainset": "TS-0005",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 37.1,
+            "trainset": "TS-0005",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 35.3,
+            "trainset": "TS-0005",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 35.3,
+            "trainset": "TS-0005",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 21.3,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 31.9,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 34.6,
+            "trainset": "TS-0005",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 35.0,
+            "trainset": "TS-0005",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 34.5,
+            "trainset": "TS-0005",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 35.9,
+            "trainset": "TS-0005",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 35.1,
+            "trainset": "TS-0005",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 25.1,
+            "trainset": "TS-0005",
+            "station": "CSO"
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "metric": "AX3",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:00:00Z",
+            "value": 31.9,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T07:05:00Z",
+            "value": 31.8,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T07:10:00Z",
+            "value": 31.5,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T07:15:00Z",
+            "value": 31.3,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T07:20:00Z",
+            "value": 33.9,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T07:25:00Z",
+            "value": 32.3,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 36.4,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 31.0,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 32.4,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 17.8,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 29.8,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 32.1,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 34.6,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 34.1,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 35.6,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 35.2,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 35.5,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 34.3,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 21.6,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 33.0,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 37.1,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 36.0,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 36.3,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 37.6,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 33.3,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 35.7,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 35.8,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 33.9,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 31.8,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 34.3,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 34.8,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 32.9,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 34.7,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 36.6,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 34.8,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 34.5,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 34.5,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 24.5,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 36.8,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 35.7,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 34.0,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 37.5,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 37.0,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 33.9,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 33.1,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 33.0,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 23.7,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 36.7,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "metric": "AX8",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 37.5,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 31.2,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 32.6,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 21.2,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 32.8,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 34.5,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 35.1,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 35.7,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 39.1,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 36.4,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 37.9,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 36.0,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 24.8,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 36.1,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 37.6,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 36.5,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 37.4,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 37.9,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 34.4,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 38.3,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 38.2,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 33.9,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 33.7,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 37.7,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 36.8,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 35.1,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 36.2,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 38.3,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 35.1,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 36.7,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 36.1,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 24.4,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 39.1,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 36.6,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 35.3,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 38.8,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 37.6,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 35.3,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 34.5,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 34.6,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 26.5,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 37.8,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "metric": "KWH",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:00:00Z",
+            "value": 12.09,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T07:05:00Z",
+            "value": 11.64,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T07:10:00Z",
+            "value": 11.82,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T07:15:00Z",
+            "value": 11.22,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T07:20:00Z",
+            "value": 12.35,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T07:25:00Z",
+            "value": 10.96,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 11.39,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 12.16,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 11.7,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 6.65,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 11.42,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 11.93,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 10.92,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 10.51,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 13.09,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 11.76,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 13.41,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 11.96,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 6.12,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 11.31,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 12.66,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 12.48,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 11.96,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 12.44,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 11.66,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 12.77,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 12.08,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 11.52,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 11.58,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 11.86,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 12.25,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 10.94,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 11.63,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 11.91,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 10.92,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 11.09,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 11.43,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 6.54,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 12.07,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 12.5,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 11.65,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 12.9,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 13.29,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 11.16,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 11.49,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 11.85,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 6.79,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 12.45,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          }
+        ]
+      }
+    ],
+    "summaries": [
+      {
+        "duty": "VD-D03-20261103",
+        "trainsets": [
+          "TS-0003",
+          "TS-0005"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 17.18,
+          "KWH": 361.63,
+          "AX1": 36.6,
+          "AX2": 36.9,
+          "AX3": 36.8,
+          "AX4": 93.6,
+          "AX5": 38.1,
+          "AX6": 39.1,
+          "AX7": 39.2,
+          "AX8": 39.1
+        }
+      }
+    ],
+    "stations": [
+      {
+        "duty": "VD-D03-20261103",
+        "line": "VD",
+        "stations": [
+          {
+            "station": "TEL",
+            "name": "Telheiras",
+            "reports": 5,
+            "max_axle": 58.3
+          },
+          {
+            "station": "CGR",
+            "name": "Campo Grande",
+            "reports": 0,
+            "max_axle": null
+          },
+          {
+            "station": "ALV",
+            "name": "Alvalade",
+            "reports": 5,
+            "max_axle": 64.4
+          },
+          {
+            "station": "ROM",
+            "name": "Roma",
+            "reports": 0,
+            "max_axle": null
+          },
+          {
+            "station": "ARE",
+            "name": "Areeiro",
+            "reports": 5,
+            "max_axle": 71.4
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 0,
+            "max_axle": null
+          },
+          {
+            "station": "ARR",
+            "name": "Arroios",
+            "reports": 5,
+            "max_axle": 77.8
+          },
+          {
+            "station": "ANJ",
+            "name": "Anjos",
+            "reports": 0,
+            "max_axle": null
+          },
+          {
+            "station": "INT",
+            "name": "Intendente",
+            "reports": 5,
+            "max_axle": 84.3
+          },
+          {
+            "station": "MMO",
+            "name": "Martim Moniz",
+            "reports": 0,
+            "max_axle": null
+          },
+          {
+            "station": "ROS",
+            "name": "Rossio",
+            "reports": 4,
+            "max_axle": 90.2
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 0,
+            "max_axle": null
+          },
+          {
+            "station": "CSO",
+            "name": "Cais do Sodré",
+            "reports": 19,
+            "max_axle": 93.6
+          }
+        ]
+      }
+    ]
+  },
+  "final_after_step_7": {
+    "stats": {
+      "reports_total": 4650,
+      "measurements": 3040,
+      "attributed": 935,
+      "unattributed": 2105,
+      "quarantined": {
+        "bad_checksum": 5,
+        "clock_invalid": 2,
+        "conflict": 4,
+        "malformed": 5,
+        "unknown_metric": 2,
+        "unknown_station": 2
+      },
+      "pending": 0
+    },
+    "batches": {
+      "depot-batch-01": {
+        "lines": 864,
+        "applied": 864,
+        "duplicate": 0,
+        "quarantined": {}
+      },
+      "depot-batch-02": {
+        "lines": 2207,
+        "applied": 610,
+        "duplicate": 1578,
+        "quarantined": {
+          "bad_checksum": 5,
+          "clock_invalid": 2,
+          "conflict": 3,
+          "malformed": 5,
+          "unknown_metric": 2,
+          "unknown_station": 2
+        }
+      }
+    },
+    "live_posts": {
+      "lines": 1579,
+      "applied": 1578,
+      "duplicate": 0,
+      "quarantined": {
+        "conflict": 1
+      }
+    },
+    "readings": [
+      {
+        "duty": "VD-D03-20261103",
+        "metric": "SPD",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:00:00Z",
+            "value": 25.2,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T07:05:00Z",
+            "value": 28.6,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T07:10:00Z",
+            "value": 26.2,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T07:15:00Z",
+            "value": 25.9,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T07:20:00Z",
+            "value": 27.9,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T07:25:00Z",
+            "value": 27.5,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 10.7,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 30.6,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 30.0,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 30.9,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 27.2,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 28.2,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 28.9,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 11.0,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 28.3,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 28.9,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 29.2,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 26.0,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 25.7,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 25.3,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 14.7,
+            "trainset": "TS-0005",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 28.1,
+            "trainset": "TS-0005",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 29.8,
+            "trainset": "TS-0005",
+            "station": "MMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 27.4,
+            "trainset": "TS-0005",
+            "station": "ANJ"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 25.5,
+            "trainset": "TS-0005",
+            "station": "ALA"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 29.4,
+            "trainset": "TS-0005",
+            "station": "ROM"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 25.7,
+            "trainset": "TS-0005",
+            "station": "CGR"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 14.0,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 29.1,
+            "trainset": "TS-0005",
+            "station": "CGR"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 30.9,
+            "trainset": "TS-0005",
+            "station": "ROM"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 28.2,
+            "trainset": "TS-0005",
+            "station": "ALA"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 27.2,
+            "trainset": "TS-0005",
+            "station": "ANJ"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 26.7,
+            "trainset": "TS-0005",
+            "station": "MMO"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 28.6,
+            "trainset": "TS-0005",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 26.5,
+            "trainset": "TS-0005",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 26.3,
+            "trainset": "TS-0005",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 26.0,
+            "trainset": "TS-0005",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 30.6,
+            "trainset": "TS-0005",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 27.0,
+            "trainset": "TS-0005",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 28.8,
+            "trainset": "TS-0005",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 9.1,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 25.6,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 28.4,
+            "trainset": "TS-0005",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 28.5,
+            "trainset": "TS-0005",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 27.2,
+            "trainset": "TS-0005",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 29.4,
+            "trainset": "TS-0005",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 27.1,
+            "trainset": "TS-0005",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 14.7,
+            "trainset": "TS-0005",
+            "station": "CSO"
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261103",
+        "metric": "AX4",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:00:00Z",
+            "value": 33.8,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T07:05:00Z",
+            "value": 34.6,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T07:10:00Z",
+            "value": 35.1,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T07:15:00Z",
+            "value": 33.7,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T07:20:00Z",
+            "value": 35.3,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T07:25:00Z",
+            "value": 33.4,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 21.6,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 38.8,
+            "trainset": "TS-0003",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 37.2,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 37.6,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 34.0,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 36.7,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 44.7,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 51.5,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 58.3,
+            "trainset": "TS-0003",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 64.4,
+            "trainset": "TS-0003",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 71.4,
+            "trainset": "TS-0003",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 77.8,
+            "trainset": "TS-0003",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 84.3,
+            "trainset": "TS-0003",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 90.2,
+            "trainset": "TS-0003",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 24.7,
+            "trainset": "TS-0005",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 34.2,
+            "trainset": "TS-0005",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 37.9,
+            "trainset": "TS-0005",
+            "station": "MMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 36.0,
+            "trainset": "TS-0005",
+            "station": "ANJ"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 32.6,
+            "trainset": "TS-0005",
+            "station": "ALA"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 35.3,
+            "trainset": "TS-0005",
+            "station": "ROM"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 33.0,
+            "trainset": "TS-0005",
+            "station": "CGR"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 22.6,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 35.1,
+            "trainset": "TS-0005",
+            "station": "CGR"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 36.1,
+            "trainset": "TS-0005",
+            "station": "ROM"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 34.3,
+            "trainset": "TS-0005",
+            "station": "ALA"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 33.6,
+            "trainset": "TS-0005",
+            "station": "ANJ"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 35.1,
+            "trainset": "TS-0005",
+            "station": "MMO"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 37.1,
+            "trainset": "TS-0005",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 34.1,
+            "trainset": "TS-0005",
+            "station": "CSO"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 35.2,
+            "trainset": "TS-0005",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 33.3,
+            "trainset": "TS-0005",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 37.1,
+            "trainset": "TS-0005",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 35.3,
+            "trainset": "TS-0005",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 35.3,
+            "trainset": "TS-0005",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 21.3,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 31.9,
+            "trainset": "TS-0005",
+            "station": "TEL"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 34.6,
+            "trainset": "TS-0005",
+            "station": "ALV"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 35.0,
+            "trainset": "TS-0005",
+            "station": "ARE"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 34.5,
+            "trainset": "TS-0005",
+            "station": "ARR"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 35.9,
+            "trainset": "TS-0005",
+            "station": "INT"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 35.1,
+            "trainset": "TS-0005",
+            "station": "ROS"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 25.1,
+            "trainset": "TS-0005",
+            "station": "CSO"
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "metric": "AX3",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:00:00Z",
+            "value": 31.9,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T07:05:00Z",
+            "value": 31.8,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T07:10:00Z",
+            "value": 31.5,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T07:15:00Z",
+            "value": 31.3,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T07:20:00Z",
+            "value": 33.9,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T07:25:00Z",
+            "value": 32.3,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 36.4,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 31.0,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 32.4,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 17.8,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 29.8,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 32.1,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 34.6,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 34.1,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 35.6,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 35.2,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 35.5,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 34.3,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 21.6,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 33.0,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 37.1,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 36.0,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 36.3,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 37.6,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 33.3,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 35.7,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 35.8,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 33.9,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 31.8,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 34.3,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 34.8,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 32.9,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 34.7,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 36.6,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 34.8,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 34.5,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 34.5,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 24.5,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 36.8,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 35.7,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 34.0,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 37.5,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 37.0,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 33.9,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 33.1,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 33.0,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 23.7,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 36.7,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "metric": "AX8",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 37.5,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 31.2,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 32.6,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 21.2,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 32.8,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 34.5,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 35.1,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 35.7,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 39.1,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 36.4,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 37.9,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 36.0,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 24.8,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 36.1,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 37.6,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 36.5,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 37.4,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 37.9,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 34.4,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 38.3,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 38.2,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 33.9,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 33.7,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 37.7,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 36.8,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 35.1,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 36.2,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 38.3,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 35.1,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 36.7,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 36.1,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 24.4,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 39.1,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 36.6,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 35.3,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 38.8,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 37.6,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 35.3,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 34.5,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 34.6,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 26.5,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 37.8,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "metric": "KWH",
+        "points": [
+          {
+            "measured_at": "2026-11-03T07:00:00Z",
+            "value": 12.09,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T07:05:00Z",
+            "value": 11.64,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T07:10:00Z",
+            "value": 11.82,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T07:15:00Z",
+            "value": 11.22,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T07:20:00Z",
+            "value": 12.35,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T07:25:00Z",
+            "value": 10.96,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T07:30:00Z",
+            "value": 11.39,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T07:35:00Z",
+            "value": 12.16,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T07:40:00Z",
+            "value": 11.7,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:45:00Z",
+            "value": 6.65,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T07:50:00Z",
+            "value": 11.42,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T07:55:00Z",
+            "value": 11.93,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T08:00:00Z",
+            "value": 10.92,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T08:05:00Z",
+            "value": 10.51,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T08:10:00Z",
+            "value": 13.09,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T08:15:00Z",
+            "value": 11.76,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:20:00Z",
+            "value": 13.41,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:25:00Z",
+            "value": 11.96,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:30:00Z",
+            "value": 6.12,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:35:00Z",
+            "value": 11.31,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T08:40:00Z",
+            "value": 12.66,
+            "trainset": "TS-0001",
+            "station": "ALF"
+          },
+          {
+            "measured_at": "2026-11-03T08:45:00Z",
+            "value": 12.48,
+            "trainset": "TS-0001",
+            "station": "CAR"
+          },
+          {
+            "measured_at": "2026-11-03T08:50:00Z",
+            "value": 11.96,
+            "trainset": "TS-0001",
+            "station": "AMO"
+          },
+          {
+            "measured_at": "2026-11-03T08:55:00Z",
+            "value": 12.44,
+            "trainset": "TS-0001",
+            "station": "JZO"
+          },
+          {
+            "measured_at": "2026-11-03T09:00:00Z",
+            "value": 11.66,
+            "trainset": "TS-0001",
+            "station": "SSE"
+          },
+          {
+            "measured_at": "2026-11-03T09:05:00Z",
+            "value": 12.77,
+            "trainset": "TS-0001",
+            "station": "MPO"
+          },
+          {
+            "measured_at": "2026-11-03T09:10:00Z",
+            "value": 12.08,
+            "trainset": "TS-0001",
+            "station": "RES"
+          },
+          {
+            "measured_at": "2026-11-03T09:15:00Z",
+            "value": 11.52,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          },
+          {
+            "measured_at": "2026-11-03T09:20:00Z",
+            "value": 11.58,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T09:25:00Z",
+            "value": 11.86,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T09:30:00Z",
+            "value": 12.25,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T09:35:00Z",
+            "value": 10.94,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:40:00Z",
+            "value": 11.63,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T09:45:00Z",
+            "value": 11.91,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T09:50:00Z",
+            "value": 10.92,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T09:55:00Z",
+            "value": 11.09,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:00:00Z",
+            "value": 11.43,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:05:00Z",
+            "value": 6.54,
+            "trainset": "TS-0001",
+            "station": "REB"
+          },
+          {
+            "measured_at": "2026-11-03T10:10:00Z",
+            "value": 12.07,
+            "trainset": "TS-0001",
+            "station": "AMD"
+          },
+          {
+            "measured_at": "2026-11-03T10:15:00Z",
+            "value": 12.5,
+            "trainset": "TS-0001",
+            "station": "PON"
+          },
+          {
+            "measured_at": "2026-11-03T10:20:00Z",
+            "value": 11.65,
+            "trainset": "TS-0001",
+            "station": "CML"
+          },
+          {
+            "measured_at": "2026-11-03T10:25:00Z",
+            "value": 12.9,
+            "trainset": "TS-0001",
+            "station": "LAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:30:00Z",
+            "value": 13.29,
+            "trainset": "TS-0001",
+            "station": "PES"
+          },
+          {
+            "measured_at": "2026-11-03T10:35:00Z",
+            "value": 11.16,
+            "trainset": "TS-0001",
+            "station": "PAR"
+          },
+          {
+            "measured_at": "2026-11-03T10:40:00Z",
+            "value": 11.49,
+            "trainset": "TS-0001",
+            "station": "AVE"
+          },
+          {
+            "measured_at": "2026-11-03T10:45:00Z",
+            "value": 11.85,
+            "trainset": "TS-0001",
+            "station": "BCH"
+          },
+          {
+            "measured_at": "2026-11-03T10:50:00Z",
+            "value": 6.79,
+            "trainset": "TS-0001",
+            "station": "SAP"
+          },
+          {
+            "measured_at": "2026-11-03T10:55:00Z",
+            "value": 12.45,
+            "trainset": "TS-0001",
+            "station": "TPA"
+          }
+        ]
+      }
+    ],
+    "summaries": [
+      {
+        "duty": "AZ-D01-20261102",
+        "trainsets": [
+          "TS-0001"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.51,
+          "KWH": 538.07,
+          "AX1": 37.4,
+          "AX2": 37.5,
+          "AX3": 38.5,
+          "AX4": 38.8,
+          "AX5": 38.1,
+          "AX6": 38.9,
+          "AX7": 39.6,
+          "AX8": 39.3
+        }
+      },
+      {
+        "duty": "AZ-D02-20261102",
+        "trainsets": [
+          "TS-0001"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.29,
+          "KWH": 537.84,
+          "AX1": 37.5,
+          "AX2": 38.2,
+          "AX3": 37.3,
+          "AX4": 38.3,
+          "AX5": 39.2,
+          "AX6": 39.0,
+          "AX7": 38.8,
+          "AX8": 39.4
+        }
+      },
+      {
+        "duty": "VD-D03-20261102",
+        "trainsets": [
+          "TS-0003"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 25.95,
+          "KWH": 526.62,
+          "AX1": 37.9,
+          "AX2": 38.1,
+          "AX3": 38.6,
+          "AX4": 38.8,
+          "AX5": 39.3,
+          "AX6": 39.0,
+          "AX7": 39.5,
+          "AX8": 40.2
+        }
+      },
+      {
+        "duty": "VD-D04-20261102",
+        "trainsets": [
+          "TS-0003"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 25.85,
+          "KWH": 530.52,
+          "AX1": 38.1,
+          "AX2": 38.0,
+          "AX3": 38.8,
+          "AX4": 39.0,
+          "AX5": 39.1,
+          "AX6": 38.9,
+          "AX7": 40.0,
+          "AX8": 40.3
+        }
+      },
+      {
+        "duty": "VM-D01-20261102",
+        "trainsets": [
+          "TS-0002"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.11,
+          "KWH": 539.68,
+          "AX1": 37.7,
+          "AX2": 38.1,
+          "AX3": 38.0,
+          "AX4": 39.0,
+          "AX5": 38.8,
+          "AX6": 39.6,
+          "AX7": 39.8,
+          "AX8": 39.8
+        }
+      },
+      {
+        "duty": "VM-D02-20261102",
+        "trainsets": [
+          "TS-0002"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 25.92,
+          "KWH": 532.81,
+          "AX1": 37.6,
+          "AX2": 37.9,
+          "AX3": 37.7,
+          "AX4": 38.3,
+          "AX5": 38.5,
+          "AX6": 39.3,
+          "AX7": 38.6,
+          "AX8": 39.0
+        }
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "trainsets": [
+          "TS-0001"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.53,
+          "KWH": 548.28,
+          "AX1": 37.7,
+          "AX2": 36.8,
+          "AX3": 37.6,
+          "AX4": 38.3,
+          "AX5": 38.1,
+          "AX6": 37.8,
+          "AX7": 39.7,
+          "AX8": 39.1
+        }
+      },
+      {
+        "duty": "AZ-D02-20261103",
+        "trainsets": [
+          "TS-0001"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.48,
+          "KWH": 538.5,
+          "AX1": 37.9,
+          "AX2": 37.0,
+          "AX3": 37.5,
+          "AX4": 37.4,
+          "AX5": 38.9,
+          "AX6": 39.1,
+          "AX7": 39.2,
+          "AX8": 39.6
+        }
+      },
+      {
+        "duty": "VD-D03-20261103",
+        "trainsets": [
+          "TS-0003",
+          "TS-0005"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 25.89,
+          "KWH": 532.24,
+          "AX1": 38.2,
+          "AX2": 38.5,
+          "AX3": 37.8,
+          "AX4": 90.2,
+          "AX5": 38.5,
+          "AX6": 39.1,
+          "AX7": 39.2,
+          "AX8": 39.1
+        }
+      },
+      {
+        "duty": "VD-D04-20261103",
+        "trainsets": [
+          "TS-0005"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 25.95,
+          "KWH": 527.7,
+          "AX1": 37.2,
+          "AX2": 38.0,
+          "AX3": 38.1,
+          "AX4": 38.7,
+          "AX5": 39.1,
+          "AX6": 38.4,
+          "AX7": 39.4,
+          "AX8": 39.3
+        }
+      },
+      {
+        "duty": "VM-D01-20261103",
+        "trainsets": [
+          "TS-0002"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 25.64,
+          "KWH": 529.9,
+          "AX1": 36.9,
+          "AX2": 38.1,
+          "AX3": 38.4,
+          "AX4": 38.9,
+          "AX5": 38.7,
+          "AX6": 39.4,
+          "AX7": 39.0,
+          "AX8": 39.5
+        }
+      },
+      {
+        "duty": "VM-D02-20261103",
+        "trainsets": [
+          "TS-0002"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 25.79,
+          "KWH": 526.1,
+          "AX1": 37.9,
+          "AX2": 37.4,
+          "AX3": 37.9,
+          "AX4": 38.4,
+          "AX5": 38.8,
+          "AX6": 38.6,
+          "AX7": 39.2,
+          "AX8": 39.9
+        }
+      },
+      {
+        "duty": "AZ-D01-20261104",
+        "trainsets": [
+          "TS-0001"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.57,
+          "KWH": 539.47,
+          "AX1": 37.9,
+          "AX2": 38.3,
+          "AX3": 38.2,
+          "AX4": 38.7,
+          "AX5": 38.0,
+          "AX6": 39.6,
+          "AX7": 39.5,
+          "AX8": 39.5
+        }
+      },
+      {
+        "duty": "AZ-D02-20261104",
+        "trainsets": [
+          "TS-0001"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.41,
+          "KWH": 543.37,
+          "AX1": 37.4,
+          "AX2": 38.0,
+          "AX3": 38.8,
+          "AX4": 38.2,
+          "AX5": 38.4,
+          "AX6": 38.4,
+          "AX7": 39.2,
+          "AX8": 39.2
+        }
+      },
+      {
+        "duty": "VD-D03-20261104",
+        "trainsets": [
+          "TS-0005"
+        ],
+        "measurements": 47,
+        "metrics": {
+          "SPD": 25.71,
+          "KWH": 520.31,
+          "AX1": 37.1,
+          "AX2": 38.3,
+          "AX3": 37.0,
+          "AX4": 38.5,
+          "AX5": 38.4,
+          "AX6": 39.6,
+          "AX7": 39.3,
+          "AX8": 39.2
+        }
+      },
+      {
+        "duty": "VD-D04-20261104",
+        "trainsets": [
+          "TS-0005"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.35,
+          "KWH": 532.93,
+          "AX1": 37.5,
+          "AX2": 37.8,
+          "AX3": 37.5,
+          "AX4": 38.8,
+          "AX5": 38.4,
+          "AX6": 39.4,
+          "AX7": 39.2,
+          "AX8": 39.3
+        }
+      },
+      {
+        "duty": "VM-D01-20261104",
+        "trainsets": [
+          "TS-0002"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.1,
+          "KWH": 533.59,
+          "AX1": 37.7,
+          "AX2": 37.9,
+          "AX3": 38.5,
+          "AX4": 38.5,
+          "AX5": 39.4,
+          "AX6": 39.7,
+          "AX7": 39.4,
+          "AX8": 39.7
+        }
+      },
+      {
+        "duty": "VM-D02-20261104",
+        "trainsets": [
+          "TS-0002"
+        ],
+        "measurements": 48,
+        "metrics": {
+          "SPD": 26.26,
+          "KWH": 534.61,
+          "AX1": 38.1,
+          "AX2": 38.5,
+          "AX3": 38.2,
+          "AX4": 38.2,
+          "AX5": 38.0,
+          "AX6": 39.7,
+          "AX7": 39.7,
+          "AX8": 39.9
+        }
+      },
+      {
+        "duty": "VD-T01-20261104",
+        "trainsets": [
+          "TS-0099"
+        ],
+        "measurements": 72,
+        "metrics": {
+          "SPD": 26.17,
+          "KWH": 803.36,
+          "AX1": 37.8,
+          "AX2": 38.0,
+          "AX3": 38.6,
+          "AX4": 38.4,
+          "AX5": 38.8,
+          "AX6": 39.6,
+          "AX7": 39.7,
+          "AX8": 39.9
+        }
+      }
+    ],
+    "stations": [
+      {
+        "duty": "AZ-D01-20261102",
+        "line": "AZ",
+        "stations": [
+          {
+            "station": "REB",
+            "name": "Reboleira",
+            "reports": 4,
+            "max_axle": 37.6
+          },
+          {
+            "station": "AMD",
+            "name": "Amadora Este",
+            "reports": 2,
+            "max_axle": 36.2
+          },
+          {
+            "station": "ALF",
+            "name": "Alfornelos",
+            "reports": 3,
+            "max_axle": 38.4
+          },
+          {
+            "station": "PON",
+            "name": "Pontinha",
+            "reports": 2,
+            "max_axle": 38.1
+          },
+          {
+            "station": "CAR",
+            "name": "Carnide",
+            "reports": 3,
+            "max_axle": 39.6
+          },
+          {
+            "station": "CML",
+            "name": "Colégio Militar/Luz",
+            "reports": 2,
+            "max_axle": 38.3
+          },
+          {
+            "station": "AMO",
+            "name": "Alto dos Moinhos",
+            "reports": 3,
+            "max_axle": 38.8
+          },
+          {
+            "station": "LAR",
+            "name": "Laranjeiras",
+            "reports": 2,
+            "max_axle": 37.4
+          },
+          {
+            "station": "JZO",
+            "name": "Jardim Zoológico",
+            "reports": 3,
+            "max_axle": 38.2
+          },
+          {
+            "station": "PES",
+            "name": "Praça de Espanha",
+            "reports": 2,
+            "max_axle": 35.8
+          },
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 3,
+            "max_axle": 39.3
+          },
+          {
+            "station": "PAR",
+            "name": "Parque",
+            "reports": 2,
+            "max_axle": 35.2
+          },
+          {
+            "station": "MPO",
+            "name": "Marquês de Pombal",
+            "reports": 3,
+            "max_axle": 38.1
+          },
+          {
+            "station": "AVE",
+            "name": "Avenida",
+            "reports": 2,
+            "max_axle": 38.2
+          },
+          {
+            "station": "RES",
+            "name": "Restauradores",
+            "reports": 3,
+            "max_axle": 38.4
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 38.6
+          },
+          {
+            "station": "TPA",
+            "name": "Terreiro do Paço",
+            "reports": 4,
+            "max_axle": 39.1
+          },
+          {
+            "station": "SAP",
+            "name": "Santa Apolónia",
+            "reports": 3,
+            "max_axle": 36.1
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261102",
+        "line": "AZ",
+        "stations": [
+          {
+            "station": "REB",
+            "name": "Reboleira",
+            "reports": 4,
+            "max_axle": 38.0
+          },
+          {
+            "station": "AMD",
+            "name": "Amadora Este",
+            "reports": 2,
+            "max_axle": 39.3
+          },
+          {
+            "station": "ALF",
+            "name": "Alfornelos",
+            "reports": 3,
+            "max_axle": 38.0
+          },
+          {
+            "station": "PON",
+            "name": "Pontinha",
+            "reports": 2,
+            "max_axle": 38.6
+          },
+          {
+            "station": "CAR",
+            "name": "Carnide",
+            "reports": 3,
+            "max_axle": 38.4
+          },
+          {
+            "station": "CML",
+            "name": "Colégio Militar/Luz",
+            "reports": 2,
+            "max_axle": 35.2
+          },
+          {
+            "station": "AMO",
+            "name": "Alto dos Moinhos",
+            "reports": 3,
+            "max_axle": 36.3
+          },
+          {
+            "station": "LAR",
+            "name": "Laranjeiras",
+            "reports": 2,
+            "max_axle": 38.0
+          },
+          {
+            "station": "JZO",
+            "name": "Jardim Zoológico",
+            "reports": 3,
+            "max_axle": 37.7
+          },
+          {
+            "station": "PES",
+            "name": "Praça de Espanha",
+            "reports": 2,
+            "max_axle": 35.8
+          },
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 3,
+            "max_axle": 38.0
+          },
+          {
+            "station": "PAR",
+            "name": "Parque",
+            "reports": 2,
+            "max_axle": 37.4
+          },
+          {
+            "station": "MPO",
+            "name": "Marquês de Pombal",
+            "reports": 3,
+            "max_axle": 39.4
+          },
+          {
+            "station": "AVE",
+            "name": "Avenida",
+            "reports": 2,
+            "max_axle": 38.8
+          },
+          {
+            "station": "RES",
+            "name": "Restauradores",
+            "reports": 3,
+            "max_axle": 37.9
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 38.2
+          },
+          {
+            "station": "TPA",
+            "name": "Terreiro do Paço",
+            "reports": 4,
+            "max_axle": 39.2
+          },
+          {
+            "station": "SAP",
+            "name": "Santa Apolónia",
+            "reports": 3,
+            "max_axle": 37.1
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261102",
+        "line": "VD",
+        "stations": [
+          {
+            "station": "TEL",
+            "name": "Telheiras",
+            "reports": 6,
+            "max_axle": 38.3
+          },
+          {
+            "station": "CGR",
+            "name": "Campo Grande",
+            "reports": 2,
+            "max_axle": 39.0
+          },
+          {
+            "station": "ALV",
+            "name": "Alvalade",
+            "reports": 5,
+            "max_axle": 39.0
+          },
+          {
+            "station": "ROM",
+            "name": "Roma",
+            "reports": 2,
+            "max_axle": 38.5
+          },
+          {
+            "station": "ARE",
+            "name": "Areeiro",
+            "reports": 5,
+            "max_axle": 36.7
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 2,
+            "max_axle": 40.0
+          },
+          {
+            "station": "ARR",
+            "name": "Arroios",
+            "reports": 5,
+            "max_axle": 40.1
+          },
+          {
+            "station": "ANJ",
+            "name": "Anjos",
+            "reports": 2,
+            "max_axle": 38.4
+          },
+          {
+            "station": "INT",
+            "name": "Intendente",
+            "reports": 5,
+            "max_axle": 38.5
+          },
+          {
+            "station": "MMO",
+            "name": "Martim Moniz",
+            "reports": 2,
+            "max_axle": 37.4
+          },
+          {
+            "station": "ROS",
+            "name": "Rossio",
+            "reports": 5,
+            "max_axle": 39.7
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 38.9
+          },
+          {
+            "station": "CSO",
+            "name": "Cais do Sodré",
+            "reports": 5,
+            "max_axle": 40.2
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261102",
+        "line": "VD",
+        "stations": [
+          {
+            "station": "TEL",
+            "name": "Telheiras",
+            "reports": 6,
+            "max_axle": 39.1
+          },
+          {
+            "station": "CGR",
+            "name": "Campo Grande",
+            "reports": 2,
+            "max_axle": 35.7
+          },
+          {
+            "station": "ALV",
+            "name": "Alvalade",
+            "reports": 5,
+            "max_axle": 38.4
+          },
+          {
+            "station": "ROM",
+            "name": "Roma",
+            "reports": 2,
+            "max_axle": 40.0
+          },
+          {
+            "station": "ARE",
+            "name": "Areeiro",
+            "reports": 5,
+            "max_axle": 40.3
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 2,
+            "max_axle": 38.9
+          },
+          {
+            "station": "ARR",
+            "name": "Arroios",
+            "reports": 5,
+            "max_axle": 38.8
+          },
+          {
+            "station": "ANJ",
+            "name": "Anjos",
+            "reports": 2,
+            "max_axle": 37.0
+          },
+          {
+            "station": "INT",
+            "name": "Intendente",
+            "reports": 5,
+            "max_axle": 38.7
+          },
+          {
+            "station": "MMO",
+            "name": "Martim Moniz",
+            "reports": 2,
+            "max_axle": 38.1
+          },
+          {
+            "station": "ROS",
+            "name": "Rossio",
+            "reports": 5,
+            "max_axle": 39.3
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 37.5
+          },
+          {
+            "station": "CSO",
+            "name": "Cais do Sodré",
+            "reports": 5,
+            "max_axle": 36.8
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261102",
+        "line": "VM",
+        "stations": [
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 6,
+            "max_axle": 36.8
+          },
+          {
+            "station": "SAL",
+            "name": "Saldanha",
+            "reports": 2,
+            "max_axle": 36.8
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 5,
+            "max_axle": 37.8
+          },
+          {
+            "station": "OLA",
+            "name": "Olaias",
+            "reports": 2,
+            "max_axle": 38.2
+          },
+          {
+            "station": "BVI",
+            "name": "Bela Vista",
+            "reports": 5,
+            "max_axle": 39.8
+          },
+          {
+            "station": "CHE",
+            "name": "Chelas",
+            "reports": 2,
+            "max_axle": 39.0
+          },
+          {
+            "station": "OLI",
+            "name": "Olivais",
+            "reports": 6,
+            "max_axle": 39.8
+          },
+          {
+            "station": "CRU",
+            "name": "Cabo Ruivo",
+            "reports": 2,
+            "max_axle": 36.8
+          },
+          {
+            "station": "ORI",
+            "name": "Oriente",
+            "reports": 6,
+            "max_axle": 39.1
+          },
+          {
+            "station": "MOS",
+            "name": "Moscavide",
+            "reports": 2,
+            "max_axle": 39.1
+          },
+          {
+            "station": "ENC",
+            "name": "Encarnação",
+            "reports": 6,
+            "max_axle": 37.6
+          },
+          {
+            "station": "AER",
+            "name": "Aeroporto",
+            "reports": 4,
+            "max_axle": 39.2
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261102",
+        "line": "VM",
+        "stations": [
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 6,
+            "max_axle": 37.9
+          },
+          {
+            "station": "SAL",
+            "name": "Saldanha",
+            "reports": 2,
+            "max_axle": 37.8
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 5,
+            "max_axle": 37.2
+          },
+          {
+            "station": "OLA",
+            "name": "Olaias",
+            "reports": 2,
+            "max_axle": 39.3
+          },
+          {
+            "station": "BVI",
+            "name": "Bela Vista",
+            "reports": 5,
+            "max_axle": 38.6
+          },
+          {
+            "station": "CHE",
+            "name": "Chelas",
+            "reports": 2,
+            "max_axle": 38.3
+          },
+          {
+            "station": "OLI",
+            "name": "Olivais",
+            "reports": 6,
+            "max_axle": 39.0
+          },
+          {
+            "station": "CRU",
+            "name": "Cabo Ruivo",
+            "reports": 2,
+            "max_axle": 39.0
+          },
+          {
+            "station": "ORI",
+            "name": "Oriente",
+            "reports": 6,
+            "max_axle": 38.6
+          },
+          {
+            "station": "MOS",
+            "name": "Moscavide",
+            "reports": 2,
+            "max_axle": 38.5
+          },
+          {
+            "station": "ENC",
+            "name": "Encarnação",
+            "reports": 6,
+            "max_axle": 38.0
+          },
+          {
+            "station": "AER",
+            "name": "Aeroporto",
+            "reports": 4,
+            "max_axle": 35.7
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "line": "AZ",
+        "stations": [
+          {
+            "station": "REB",
+            "name": "Reboleira",
+            "reports": 4,
+            "max_axle": 36.8
+          },
+          {
+            "station": "AMD",
+            "name": "Amadora Este",
+            "reports": 2,
+            "max_axle": 39.1
+          },
+          {
+            "station": "ALF",
+            "name": "Alfornelos",
+            "reports": 3,
+            "max_axle": 37.6
+          },
+          {
+            "station": "PON",
+            "name": "Pontinha",
+            "reports": 2,
+            "max_axle": 37.2
+          },
+          {
+            "station": "CAR",
+            "name": "Carnide",
+            "reports": 3,
+            "max_axle": 39.7
+          },
+          {
+            "station": "CML",
+            "name": "Colégio Militar/Luz",
+            "reports": 2,
+            "max_axle": 35.7
+          },
+          {
+            "station": "AMO",
+            "name": "Alto dos Moinhos",
+            "reports": 3,
+            "max_axle": 38.2
+          },
+          {
+            "station": "LAR",
+            "name": "Laranjeiras",
+            "reports": 2,
+            "max_axle": 38.8
+          },
+          {
+            "station": "JZO",
+            "name": "Jardim Zoológico",
+            "reports": 3,
+            "max_axle": 39.1
+          },
+          {
+            "station": "PES",
+            "name": "Praça de Espanha",
+            "reports": 2,
+            "max_axle": 38.3
+          },
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 3,
+            "max_axle": 35.7
+          },
+          {
+            "station": "PAR",
+            "name": "Parque",
+            "reports": 2,
+            "max_axle": 36.6
+          },
+          {
+            "station": "MPO",
+            "name": "Marquês de Pombal",
+            "reports": 3,
+            "max_axle": 38.3
+          },
+          {
+            "station": "AVE",
+            "name": "Avenida",
+            "reports": 2,
+            "max_axle": 36.8
+          },
+          {
+            "station": "RES",
+            "name": "Restauradores",
+            "reports": 3,
+            "max_axle": 38.2
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 37.7
+          },
+          {
+            "station": "TPA",
+            "name": "Terreiro do Paço",
+            "reports": 4,
+            "max_axle": 38.3
+          },
+          {
+            "station": "SAP",
+            "name": "Santa Apolónia",
+            "reports": 3,
+            "max_axle": 35.8
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261103",
+        "line": "AZ",
+        "stations": [
+          {
+            "station": "REB",
+            "name": "Reboleira",
+            "reports": 4,
+            "max_axle": 38.3
+          },
+          {
+            "station": "AMD",
+            "name": "Amadora Este",
+            "reports": 2,
+            "max_axle": 35.6
+          },
+          {
+            "station": "ALF",
+            "name": "Alfornelos",
+            "reports": 3,
+            "max_axle": 38.3
+          },
+          {
+            "station": "PON",
+            "name": "Pontinha",
+            "reports": 2,
+            "max_axle": 37.9
+          },
+          {
+            "station": "CAR",
+            "name": "Carnide",
+            "reports": 3,
+            "max_axle": 39.6
+          },
+          {
+            "station": "CML",
+            "name": "Colégio Militar/Luz",
+            "reports": 2,
+            "max_axle": 37.5
+          },
+          {
+            "station": "AMO",
+            "name": "Alto dos Moinhos",
+            "reports": 3,
+            "max_axle": 38.1
+          },
+          {
+            "station": "LAR",
+            "name": "Laranjeiras",
+            "reports": 2,
+            "max_axle": 37.1
+          },
+          {
+            "station": "JZO",
+            "name": "Jardim Zoológico",
+            "reports": 3,
+            "max_axle": 37.7
+          },
+          {
+            "station": "PES",
+            "name": "Praça de Espanha",
+            "reports": 2,
+            "max_axle": 37.7
+          },
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 3,
+            "max_axle": 38.2
+          },
+          {
+            "station": "PAR",
+            "name": "Parque",
+            "reports": 2,
+            "max_axle": 37.9
+          },
+          {
+            "station": "MPO",
+            "name": "Marquês de Pombal",
+            "reports": 3,
+            "max_axle": 39.0
+          },
+          {
+            "station": "AVE",
+            "name": "Avenida",
+            "reports": 2,
+            "max_axle": 39.1
+          },
+          {
+            "station": "RES",
+            "name": "Restauradores",
+            "reports": 3,
+            "max_axle": 39.2
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 37.8
+          },
+          {
+            "station": "TPA",
+            "name": "Terreiro do Paço",
+            "reports": 4,
+            "max_axle": 38.8
+          },
+          {
+            "station": "SAP",
+            "name": "Santa Apolónia",
+            "reports": 3,
+            "max_axle": 35.7
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261103",
+        "line": "VD",
+        "stations": [
+          {
+            "station": "TEL",
+            "name": "Telheiras",
+            "reports": 6,
+            "max_axle": 58.3
+          },
+          {
+            "station": "CGR",
+            "name": "Campo Grande",
+            "reports": 2,
+            "max_axle": 38.3
+          },
+          {
+            "station": "ALV",
+            "name": "Alvalade",
+            "reports": 5,
+            "max_axle": 64.4
+          },
+          {
+            "station": "ROM",
+            "name": "Roma",
+            "reports": 2,
+            "max_axle": 38.8
+          },
+          {
+            "station": "ARE",
+            "name": "Areeiro",
+            "reports": 5,
+            "max_axle": 71.4
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 2,
+            "max_axle": 36.8
+          },
+          {
+            "station": "ARR",
+            "name": "Arroios",
+            "reports": 5,
+            "max_axle": 77.8
+          },
+          {
+            "station": "ANJ",
+            "name": "Anjos",
+            "reports": 2,
+            "max_axle": 36.3
+          },
+          {
+            "station": "INT",
+            "name": "Intendente",
+            "reports": 5,
+            "max_axle": 84.3
+          },
+          {
+            "station": "MMO",
+            "name": "Martim Moniz",
+            "reports": 2,
+            "max_axle": 38.8
+          },
+          {
+            "station": "ROS",
+            "name": "Rossio",
+            "reports": 5,
+            "max_axle": 90.2
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 37.9
+          },
+          {
+            "station": "CSO",
+            "name": "Cais do Sodré",
+            "reports": 5,
+            "max_axle": 39.1
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261103",
+        "line": "VD",
+        "stations": [
+          {
+            "station": "TEL",
+            "name": "Telheiras",
+            "reports": 6,
+            "max_axle": 38.8
+          },
+          {
+            "station": "CGR",
+            "name": "Campo Grande",
+            "reports": 2,
+            "max_axle": 37.3
+          },
+          {
+            "station": "ALV",
+            "name": "Alvalade",
+            "reports": 5,
+            "max_axle": 38.9
+          },
+          {
+            "station": "ROM",
+            "name": "Roma",
+            "reports": 2,
+            "max_axle": 37.2
+          },
+          {
+            "station": "ARE",
+            "name": "Areeiro",
+            "reports": 5,
+            "max_axle": 39.3
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 2,
+            "max_axle": 38.4
+          },
+          {
+            "station": "ARR",
+            "name": "Arroios",
+            "reports": 5,
+            "max_axle": 39.0
+          },
+          {
+            "station": "ANJ",
+            "name": "Anjos",
+            "reports": 2,
+            "max_axle": 38.1
+          },
+          {
+            "station": "INT",
+            "name": "Intendente",
+            "reports": 5,
+            "max_axle": 38.4
+          },
+          {
+            "station": "MMO",
+            "name": "Martim Moniz",
+            "reports": 2,
+            "max_axle": 36.2
+          },
+          {
+            "station": "ROS",
+            "name": "Rossio",
+            "reports": 5,
+            "max_axle": 39.4
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 38.8
+          },
+          {
+            "station": "CSO",
+            "name": "Cais do Sodré",
+            "reports": 5,
+            "max_axle": 37.1
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261103",
+        "line": "VM",
+        "stations": [
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 6,
+            "max_axle": 39.1
+          },
+          {
+            "station": "SAL",
+            "name": "Saldanha",
+            "reports": 2,
+            "max_axle": 38.6
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 5,
+            "max_axle": 37.8
+          },
+          {
+            "station": "OLA",
+            "name": "Olaias",
+            "reports": 2,
+            "max_axle": 35.5
+          },
+          {
+            "station": "BVI",
+            "name": "Bela Vista",
+            "reports": 5,
+            "max_axle": 38.7
+          },
+          {
+            "station": "CHE",
+            "name": "Chelas",
+            "reports": 2,
+            "max_axle": 37.5
+          },
+          {
+            "station": "OLI",
+            "name": "Olivais",
+            "reports": 6,
+            "max_axle": 39.1
+          },
+          {
+            "station": "CRU",
+            "name": "Cabo Ruivo",
+            "reports": 2,
+            "max_axle": 36.9
+          },
+          {
+            "station": "ORI",
+            "name": "Oriente",
+            "reports": 6,
+            "max_axle": 39.0
+          },
+          {
+            "station": "MOS",
+            "name": "Moscavide",
+            "reports": 2,
+            "max_axle": 34.6
+          },
+          {
+            "station": "ENC",
+            "name": "Encarnação",
+            "reports": 6,
+            "max_axle": 39.5
+          },
+          {
+            "station": "AER",
+            "name": "Aeroporto",
+            "reports": 4,
+            "max_axle": 37.7
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261103",
+        "line": "VM",
+        "stations": [
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 6,
+            "max_axle": 38.6
+          },
+          {
+            "station": "SAL",
+            "name": "Saldanha",
+            "reports": 2,
+            "max_axle": 38.4
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 5,
+            "max_axle": 39.8
+          },
+          {
+            "station": "OLA",
+            "name": "Olaias",
+            "reports": 2,
+            "max_axle": 38.9
+          },
+          {
+            "station": "BVI",
+            "name": "Bela Vista",
+            "reports": 5,
+            "max_axle": 39.6
+          },
+          {
+            "station": "CHE",
+            "name": "Chelas",
+            "reports": 2,
+            "max_axle": 37.8
+          },
+          {
+            "station": "OLI",
+            "name": "Olivais",
+            "reports": 6,
+            "max_axle": 39.9
+          },
+          {
+            "station": "CRU",
+            "name": "Cabo Ruivo",
+            "reports": 2,
+            "max_axle": 36.8
+          },
+          {
+            "station": "ORI",
+            "name": "Oriente",
+            "reports": 6,
+            "max_axle": 38.1
+          },
+          {
+            "station": "MOS",
+            "name": "Moscavide",
+            "reports": 2,
+            "max_axle": 36.0
+          },
+          {
+            "station": "ENC",
+            "name": "Encarnação",
+            "reports": 6,
+            "max_axle": 39.1
+          },
+          {
+            "station": "AER",
+            "name": "Aeroporto",
+            "reports": 4,
+            "max_axle": 35.1
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261104",
+        "line": "AZ",
+        "stations": [
+          {
+            "station": "REB",
+            "name": "Reboleira",
+            "reports": 4,
+            "max_axle": 39.4
+          },
+          {
+            "station": "AMD",
+            "name": "Amadora Este",
+            "reports": 2,
+            "max_axle": 39.5
+          },
+          {
+            "station": "ALF",
+            "name": "Alfornelos",
+            "reports": 3,
+            "max_axle": 39.5
+          },
+          {
+            "station": "PON",
+            "name": "Pontinha",
+            "reports": 2,
+            "max_axle": 39.0
+          },
+          {
+            "station": "CAR",
+            "name": "Carnide",
+            "reports": 3,
+            "max_axle": 35.7
+          },
+          {
+            "station": "CML",
+            "name": "Colégio Militar/Luz",
+            "reports": 2,
+            "max_axle": 39.0
+          },
+          {
+            "station": "AMO",
+            "name": "Alto dos Moinhos",
+            "reports": 3,
+            "max_axle": 37.1
+          },
+          {
+            "station": "LAR",
+            "name": "Laranjeiras",
+            "reports": 2,
+            "max_axle": 36.7
+          },
+          {
+            "station": "JZO",
+            "name": "Jardim Zoológico",
+            "reports": 3,
+            "max_axle": 37.5
+          },
+          {
+            "station": "PES",
+            "name": "Praça de Espanha",
+            "reports": 2,
+            "max_axle": 35.3
+          },
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 3,
+            "max_axle": 39.2
+          },
+          {
+            "station": "PAR",
+            "name": "Parque",
+            "reports": 2,
+            "max_axle": 36.0
+          },
+          {
+            "station": "MPO",
+            "name": "Marquês de Pombal",
+            "reports": 3,
+            "max_axle": 38.4
+          },
+          {
+            "station": "AVE",
+            "name": "Avenida",
+            "reports": 2,
+            "max_axle": 38.6
+          },
+          {
+            "station": "RES",
+            "name": "Restauradores",
+            "reports": 3,
+            "max_axle": 39.6
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 37.9
+          },
+          {
+            "station": "TPA",
+            "name": "Terreiro do Paço",
+            "reports": 4,
+            "max_axle": 39.2
+          },
+          {
+            "station": "SAP",
+            "name": "Santa Apolónia",
+            "reports": 3,
+            "max_axle": 38.8
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261104",
+        "line": "AZ",
+        "stations": [
+          {
+            "station": "REB",
+            "name": "Reboleira",
+            "reports": 4,
+            "max_axle": 36.4
+          },
+          {
+            "station": "AMD",
+            "name": "Amadora Este",
+            "reports": 2,
+            "max_axle": 37.2
+          },
+          {
+            "station": "ALF",
+            "name": "Alfornelos",
+            "reports": 3,
+            "max_axle": 36.4
+          },
+          {
+            "station": "PON",
+            "name": "Pontinha",
+            "reports": 2,
+            "max_axle": 37.3
+          },
+          {
+            "station": "CAR",
+            "name": "Carnide",
+            "reports": 3,
+            "max_axle": 38.4
+          },
+          {
+            "station": "CML",
+            "name": "Colégio Militar/Luz",
+            "reports": 2,
+            "max_axle": 38.3
+          },
+          {
+            "station": "AMO",
+            "name": "Alto dos Moinhos",
+            "reports": 3,
+            "max_axle": 39.1
+          },
+          {
+            "station": "LAR",
+            "name": "Laranjeiras",
+            "reports": 2,
+            "max_axle": 35.5
+          },
+          {
+            "station": "JZO",
+            "name": "Jardim Zoológico",
+            "reports": 3,
+            "max_axle": 39.0
+          },
+          {
+            "station": "PES",
+            "name": "Praça de Espanha",
+            "reports": 2,
+            "max_axle": 36.5
+          },
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 3,
+            "max_axle": 39.2
+          },
+          {
+            "station": "PAR",
+            "name": "Parque",
+            "reports": 2,
+            "max_axle": 38.4
+          },
+          {
+            "station": "MPO",
+            "name": "Marquês de Pombal",
+            "reports": 3,
+            "max_axle": 38.2
+          },
+          {
+            "station": "AVE",
+            "name": "Avenida",
+            "reports": 2,
+            "max_axle": 38.8
+          },
+          {
+            "station": "RES",
+            "name": "Restauradores",
+            "reports": 3,
+            "max_axle": 36.2
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 38.3
+          },
+          {
+            "station": "TPA",
+            "name": "Terreiro do Paço",
+            "reports": 4,
+            "max_axle": 39.2
+          },
+          {
+            "station": "SAP",
+            "name": "Santa Apolónia",
+            "reports": 3,
+            "max_axle": 37.9
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261104",
+        "line": "VD",
+        "stations": [
+          {
+            "station": "TEL",
+            "name": "Telheiras",
+            "reports": 6,
+            "max_axle": 39.2
+          },
+          {
+            "station": "CGR",
+            "name": "Campo Grande",
+            "reports": 2,
+            "max_axle": 37.5
+          },
+          {
+            "station": "ALV",
+            "name": "Alvalade",
+            "reports": 5,
+            "max_axle": 38.9
+          },
+          {
+            "station": "ROM",
+            "name": "Roma",
+            "reports": 2,
+            "max_axle": 36.0
+          },
+          {
+            "station": "ARE",
+            "name": "Areeiro",
+            "reports": 5,
+            "max_axle": 38.9
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 2,
+            "max_axle": 39.6
+          },
+          {
+            "station": "ARR",
+            "name": "Arroios",
+            "reports": 5,
+            "max_axle": 36.7
+          },
+          {
+            "station": "ANJ",
+            "name": "Anjos",
+            "reports": 2,
+            "max_axle": 37.2
+          },
+          {
+            "station": "INT",
+            "name": "Intendente",
+            "reports": 4,
+            "max_axle": 39.2
+          },
+          {
+            "station": "MMO",
+            "name": "Martim Moniz",
+            "reports": 2,
+            "max_axle": 38.5
+          },
+          {
+            "station": "ROS",
+            "name": "Rossio",
+            "reports": 5,
+            "max_axle": 38.1
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 39.0
+          },
+          {
+            "station": "CSO",
+            "name": "Cais do Sodré",
+            "reports": 5,
+            "max_axle": 36.2
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261104",
+        "line": "VD",
+        "stations": [
+          {
+            "station": "TEL",
+            "name": "Telheiras",
+            "reports": 6,
+            "max_axle": 38.6
+          },
+          {
+            "station": "CGR",
+            "name": "Campo Grande",
+            "reports": 2,
+            "max_axle": 38.9
+          },
+          {
+            "station": "ALV",
+            "name": "Alvalade",
+            "reports": 5,
+            "max_axle": 38.1
+          },
+          {
+            "station": "ROM",
+            "name": "Roma",
+            "reports": 2,
+            "max_axle": 36.1
+          },
+          {
+            "station": "ARE",
+            "name": "Areeiro",
+            "reports": 5,
+            "max_axle": 39.3
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 2,
+            "max_axle": 36.5
+          },
+          {
+            "station": "ARR",
+            "name": "Arroios",
+            "reports": 5,
+            "max_axle": 39.4
+          },
+          {
+            "station": "ANJ",
+            "name": "Anjos",
+            "reports": 2,
+            "max_axle": 38.6
+          },
+          {
+            "station": "INT",
+            "name": "Intendente",
+            "reports": 5,
+            "max_axle": 38.7
+          },
+          {
+            "station": "MMO",
+            "name": "Martim Moniz",
+            "reports": 2,
+            "max_axle": 38.5
+          },
+          {
+            "station": "ROS",
+            "name": "Rossio",
+            "reports": 5,
+            "max_axle": 38.1
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 2,
+            "max_axle": 36.4
+          },
+          {
+            "station": "CSO",
+            "name": "Cais do Sodré",
+            "reports": 5,
+            "max_axle": 37.8
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261104",
+        "line": "VM",
+        "stations": [
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 6,
+            "max_axle": 38.0
+          },
+          {
+            "station": "SAL",
+            "name": "Saldanha",
+            "reports": 2,
+            "max_axle": 39.3
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 5,
+            "max_axle": 36.3
+          },
+          {
+            "station": "OLA",
+            "name": "Olaias",
+            "reports": 2,
+            "max_axle": 36.2
+          },
+          {
+            "station": "BVI",
+            "name": "Bela Vista",
+            "reports": 5,
+            "max_axle": 39.4
+          },
+          {
+            "station": "CHE",
+            "name": "Chelas",
+            "reports": 2,
+            "max_axle": 37.3
+          },
+          {
+            "station": "OLI",
+            "name": "Olivais",
+            "reports": 6,
+            "max_axle": 39.7
+          },
+          {
+            "station": "CRU",
+            "name": "Cabo Ruivo",
+            "reports": 2,
+            "max_axle": 39.7
+          },
+          {
+            "station": "ORI",
+            "name": "Oriente",
+            "reports": 6,
+            "max_axle": 39.3
+          },
+          {
+            "station": "MOS",
+            "name": "Moscavide",
+            "reports": 2,
+            "max_axle": 39.7
+          },
+          {
+            "station": "ENC",
+            "name": "Encarnação",
+            "reports": 6,
+            "max_axle": 37.7
+          },
+          {
+            "station": "AER",
+            "name": "Aeroporto",
+            "reports": 4,
+            "max_axle": 36.9
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261104",
+        "line": "VM",
+        "stations": [
+          {
+            "station": "SSE",
+            "name": "São Sebastião",
+            "reports": 6,
+            "max_axle": 39.2
+          },
+          {
+            "station": "SAL",
+            "name": "Saldanha",
+            "reports": 2,
+            "max_axle": 39.9
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 5,
+            "max_axle": 39.7
+          },
+          {
+            "station": "OLA",
+            "name": "Olaias",
+            "reports": 2,
+            "max_axle": 36.7
+          },
+          {
+            "station": "BVI",
+            "name": "Bela Vista",
+            "reports": 5,
+            "max_axle": 38.1
+          },
+          {
+            "station": "CHE",
+            "name": "Chelas",
+            "reports": 2,
+            "max_axle": 37.5
+          },
+          {
+            "station": "OLI",
+            "name": "Olivais",
+            "reports": 6,
+            "max_axle": 38.2
+          },
+          {
+            "station": "CRU",
+            "name": "Cabo Ruivo",
+            "reports": 2,
+            "max_axle": 39.5
+          },
+          {
+            "station": "ORI",
+            "name": "Oriente",
+            "reports": 6,
+            "max_axle": 38.0
+          },
+          {
+            "station": "MOS",
+            "name": "Moscavide",
+            "reports": 2,
+            "max_axle": 37.8
+          },
+          {
+            "station": "ENC",
+            "name": "Encarnação",
+            "reports": 6,
+            "max_axle": 39.7
+          },
+          {
+            "station": "AER",
+            "name": "Aeroporto",
+            "reports": 4,
+            "max_axle": 38.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-T01-20261104",
+        "line": "VD",
+        "stations": [
+          {
+            "station": "TEL",
+            "name": "Telheiras",
+            "reports": 8,
+            "max_axle": 37.5
+          },
+          {
+            "station": "CGR",
+            "name": "Campo Grande",
+            "reports": 4,
+            "max_axle": 38.4
+          },
+          {
+            "station": "ALV",
+            "name": "Alvalade",
+            "reports": 7,
+            "max_axle": 37.7
+          },
+          {
+            "station": "ROM",
+            "name": "Roma",
+            "reports": 4,
+            "max_axle": 39.7
+          },
+          {
+            "station": "ARE",
+            "name": "Areeiro",
+            "reports": 7,
+            "max_axle": 39.4
+          },
+          {
+            "station": "ALA",
+            "name": "Alameda",
+            "reports": 4,
+            "max_axle": 37.0
+          },
+          {
+            "station": "ARR",
+            "name": "Arroios",
+            "reports": 7,
+            "max_axle": 39.9
+          },
+          {
+            "station": "ANJ",
+            "name": "Anjos",
+            "reports": 4,
+            "max_axle": 39.1
+          },
+          {
+            "station": "INT",
+            "name": "Intendente",
+            "reports": 6,
+            "max_axle": 37.3
+          },
+          {
+            "station": "MMO",
+            "name": "Martim Moniz",
+            "reports": 4,
+            "max_axle": 39.6
+          },
+          {
+            "station": "ROS",
+            "name": "Rossio",
+            "reports": 6,
+            "max_axle": 37.2
+          },
+          {
+            "station": "BCH",
+            "name": "Baixa-Chiado",
+            "reports": 4,
+            "max_axle": 39.7
+          },
+          {
+            "station": "CSO",
+            "name": "Cais do Sodré",
+            "reports": 7,
+            "max_axle": 39.7
+          }
+        ]
+      }
+    ],
+    "hourly": [
+      {
+        "duty": "AZ-D01-20261102",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-02T07:00:00Z",
+            "count": 12,
+            "value": 27.4,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T08:00:00Z",
+            "count": 12,
+            "value": 26.19,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T09:00:00Z",
+            "count": 12,
+            "value": 26.85,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T10:00:00Z",
+            "count": 12,
+            "value": 25.58,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261102",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-02T07:00:00Z",
+            "count": 12,
+            "value": 136.84,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T08:00:00Z",
+            "count": 12,
+            "value": 132.56,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T09:00:00Z",
+            "count": 12,
+            "value": 135.29,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T10:00:00Z",
+            "count": 12,
+            "value": 133.38,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261102",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-02T07:00:00Z",
+            "count": 12,
+            "value": 38.8,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T08:00:00Z",
+            "count": 12,
+            "value": 36.9,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T09:00:00Z",
+            "count": 12,
+            "value": 37.9,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T10:00:00Z",
+            "count": 12,
+            "value": 38.2,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261102",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-02T13:00:00Z",
+            "count": 12,
+            "value": 26.47,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T14:00:00Z",
+            "count": 12,
+            "value": 26.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T15:00:00Z",
+            "count": 12,
+            "value": 27.78,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T16:00:00Z",
+            "count": 12,
+            "value": 24.79,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261102",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-02T13:00:00Z",
+            "count": 12,
+            "value": 135.26,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T14:00:00Z",
+            "count": 12,
+            "value": 134.83,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T15:00:00Z",
+            "count": 12,
+            "value": 140.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T16:00:00Z",
+            "count": 12,
+            "value": 127.65,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261102",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-02T13:00:00Z",
+            "count": 12,
+            "value": 38.3,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T14:00:00Z",
+            "count": 12,
+            "value": 37.5,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T15:00:00Z",
+            "count": 12,
+            "value": 37.6,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T16:00:00Z",
+            "count": 12,
+            "value": 38.1,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261102",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-02T07:00:00Z",
+            "count": 12,
+            "value": 26.74,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T08:00:00Z",
+            "count": 12,
+            "value": 25.17,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T09:00:00Z",
+            "count": 12,
+            "value": 26.8,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T10:00:00Z",
+            "count": 12,
+            "value": 25.09,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261102",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-02T07:00:00Z",
+            "count": 12,
+            "value": 134.46,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T08:00:00Z",
+            "count": 12,
+            "value": 127.58,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T09:00:00Z",
+            "count": 12,
+            "value": 135.58,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T10:00:00Z",
+            "count": 12,
+            "value": 129.0,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261102",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-02T07:00:00Z",
+            "count": 12,
+            "value": 38.8,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T08:00:00Z",
+            "count": 12,
+            "value": 37.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T09:00:00Z",
+            "count": 12,
+            "value": 38.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T10:00:00Z",
+            "count": 12,
+            "value": 38.1,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261102",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-02T13:00:00Z",
+            "count": 12,
+            "value": 25.92,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T14:00:00Z",
+            "count": 12,
+            "value": 25.75,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T15:00:00Z",
+            "count": 12,
+            "value": 26.88,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T16:00:00Z",
+            "count": 12,
+            "value": 24.85,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261102",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-02T13:00:00Z",
+            "count": 12,
+            "value": 132.6,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T14:00:00Z",
+            "count": 12,
+            "value": 132.75,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T15:00:00Z",
+            "count": 12,
+            "value": 136.74,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T16:00:00Z",
+            "count": 12,
+            "value": 128.43,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261102",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-02T13:00:00Z",
+            "count": 12,
+            "value": 37.7,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T14:00:00Z",
+            "count": 12,
+            "value": 39.0,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T15:00:00Z",
+            "count": 12,
+            "value": 38.8,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T16:00:00Z",
+            "count": 12,
+            "value": 36.2,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261102",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-02T06:00:00Z",
+            "count": 12,
+            "value": 26.14,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T07:00:00Z",
+            "count": 12,
+            "value": 27.58,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T08:00:00Z",
+            "count": 12,
+            "value": 25.87,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T09:00:00Z",
+            "count": 12,
+            "value": 24.87,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261102",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-02T06:00:00Z",
+            "count": 12,
+            "value": 135.78,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T07:00:00Z",
+            "count": 12,
+            "value": 139.51,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T08:00:00Z",
+            "count": 12,
+            "value": 133.47,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T09:00:00Z",
+            "count": 12,
+            "value": 130.92,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261102",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-02T06:00:00Z",
+            "count": 12,
+            "value": 37.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T07:00:00Z",
+            "count": 12,
+            "value": 39.0,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T08:00:00Z",
+            "count": 12,
+            "value": 38.3,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T09:00:00Z",
+            "count": 12,
+            "value": 36.6,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261102",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-02T16:00:00Z",
+            "count": 12,
+            "value": 26.16,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T17:00:00Z",
+            "count": 12,
+            "value": 26.68,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T18:00:00Z",
+            "count": 12,
+            "value": 25.92,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T19:00:00Z",
+            "count": 12,
+            "value": 24.91,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261102",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-02T16:00:00Z",
+            "count": 12,
+            "value": 131.9,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T17:00:00Z",
+            "count": 12,
+            "value": 136.36,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T18:00:00Z",
+            "count": 12,
+            "value": 134.79,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T19:00:00Z",
+            "count": 12,
+            "value": 129.76,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261102",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-02T16:00:00Z",
+            "count": 12,
+            "value": 37.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T17:00:00Z",
+            "count": 12,
+            "value": 37.8,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T18:00:00Z",
+            "count": 12,
+            "value": 38.3,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-02T19:00:00Z",
+            "count": 12,
+            "value": 37.5,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-03T07:00:00Z",
+            "count": 12,
+            "value": 26.0,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T08:00:00Z",
+            "count": 12,
+            "value": 26.77,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T09:00:00Z",
+            "count": 12,
+            "value": 27.58,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T10:00:00Z",
+            "count": 12,
+            "value": 25.75,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-03T07:00:00Z",
+            "count": 12,
+            "value": 135.33,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T08:00:00Z",
+            "count": 12,
+            "value": 138.62,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T09:00:00Z",
+            "count": 12,
+            "value": 140.21,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T10:00:00Z",
+            "count": 12,
+            "value": 134.12,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261103",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-03T07:00:00Z",
+            "count": 12,
+            "value": 37.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T08:00:00Z",
+            "count": 12,
+            "value": 38.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T09:00:00Z",
+            "count": 12,
+            "value": 37.5,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T10:00:00Z",
+            "count": 12,
+            "value": 38.3,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261103",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-03T13:00:00Z",
+            "count": 12,
+            "value": 26.83,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T14:00:00Z",
+            "count": 12,
+            "value": 26.71,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T15:00:00Z",
+            "count": 12,
+            "value": 28.0,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T16:00:00Z",
+            "count": 12,
+            "value": 24.38,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261103",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-03T13:00:00Z",
+            "count": 12,
+            "value": 135.65,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T14:00:00Z",
+            "count": 12,
+            "value": 136.24,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T15:00:00Z",
+            "count": 12,
+            "value": 138.74,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T16:00:00Z",
+            "count": 12,
+            "value": 127.87,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261103",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-03T13:00:00Z",
+            "count": 12,
+            "value": 37.4,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T14:00:00Z",
+            "count": 12,
+            "value": 37.3,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T15:00:00Z",
+            "count": 12,
+            "value": 37.4,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T16:00:00Z",
+            "count": 12,
+            "value": 37.1,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261103",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-03T07:00:00Z",
+            "count": 12,
+            "value": 26.58,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T08:00:00Z",
+            "count": 12,
+            "value": 25.28,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T09:00:00Z",
+            "count": 12,
+            "value": 26.51,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T10:00:00Z",
+            "count": 12,
+            "value": 25.2,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261103",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-03T07:00:00Z",
+            "count": 12,
+            "value": 135.11,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T08:00:00Z",
+            "count": 12,
+            "value": 130.85,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T09:00:00Z",
+            "count": 12,
+            "value": 137.38,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T10:00:00Z",
+            "count": 12,
+            "value": 128.9,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261103",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-03T07:00:00Z",
+            "count": 12,
+            "value": 38.8,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T08:00:00Z",
+            "count": 12,
+            "value": 90.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T09:00:00Z",
+            "count": 12,
+            "value": 37.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T10:00:00Z",
+            "count": 12,
+            "value": 37.1,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261103",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-03T13:00:00Z",
+            "count": 12,
+            "value": 26.19,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T14:00:00Z",
+            "count": 12,
+            "value": 24.95,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T15:00:00Z",
+            "count": 12,
+            "value": 27.14,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T16:00:00Z",
+            "count": 12,
+            "value": 25.53,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261103",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-03T13:00:00Z",
+            "count": 12,
+            "value": 134.3,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T14:00:00Z",
+            "count": 12,
+            "value": 127.42,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T15:00:00Z",
+            "count": 12,
+            "value": 136.04,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T16:00:00Z",
+            "count": 12,
+            "value": 129.94,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261103",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-03T13:00:00Z",
+            "count": 12,
+            "value": 38.3,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T14:00:00Z",
+            "count": 12,
+            "value": 38.7,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T15:00:00Z",
+            "count": 12,
+            "value": 37.7,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T16:00:00Z",
+            "count": 12,
+            "value": 38.4,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261103",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-03T06:00:00Z",
+            "count": 12,
+            "value": 26.18,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T07:00:00Z",
+            "count": 12,
+            "value": 25.79,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T08:00:00Z",
+            "count": 12,
+            "value": 25.53,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T09:00:00Z",
+            "count": 12,
+            "value": 25.05,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261103",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-03T06:00:00Z",
+            "count": 12,
+            "value": 136.36,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T07:00:00Z",
+            "count": 12,
+            "value": 131.63,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T08:00:00Z",
+            "count": 12,
+            "value": 132.76,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T09:00:00Z",
+            "count": 12,
+            "value": 129.15,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261103",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-03T06:00:00Z",
+            "count": 12,
+            "value": 38.9,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T07:00:00Z",
+            "count": 12,
+            "value": 35.9,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T08:00:00Z",
+            "count": 12,
+            "value": 38.5,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T09:00:00Z",
+            "count": 12,
+            "value": 38.0,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261103",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-03T16:00:00Z",
+            "count": 12,
+            "value": 26.89,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T17:00:00Z",
+            "count": 12,
+            "value": 26.7,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T18:00:00Z",
+            "count": 12,
+            "value": 24.84,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T19:00:00Z",
+            "count": 12,
+            "value": 24.72,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261103",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-03T16:00:00Z",
+            "count": 12,
+            "value": 135.11,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T17:00:00Z",
+            "count": 12,
+            "value": 133.25,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T18:00:00Z",
+            "count": 12,
+            "value": 129.18,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T19:00:00Z",
+            "count": 12,
+            "value": 128.56,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261103",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-03T16:00:00Z",
+            "count": 12,
+            "value": 38.3,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T17:00:00Z",
+            "count": 12,
+            "value": 36.9,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T18:00:00Z",
+            "count": 12,
+            "value": 38.0,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-03T19:00:00Z",
+            "count": 12,
+            "value": 38.4,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261104",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-04T07:00:00Z",
+            "count": 12,
+            "value": 26.88,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T08:00:00Z",
+            "count": 12,
+            "value": 26.58,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 27.3,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T10:00:00Z",
+            "count": 12,
+            "value": 25.53,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261104",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-04T07:00:00Z",
+            "count": 12,
+            "value": 135.58,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T08:00:00Z",
+            "count": 12,
+            "value": 135.29,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 137.95,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T10:00:00Z",
+            "count": 12,
+            "value": 130.65,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D01-20261104",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-04T07:00:00Z",
+            "count": 12,
+            "value": 38.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T08:00:00Z",
+            "count": 12,
+            "value": 38.7,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 37.6,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T10:00:00Z",
+            "count": 12,
+            "value": 37.7,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261104",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-04T13:00:00Z",
+            "count": 12,
+            "value": 27.08,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T14:00:00Z",
+            "count": 12,
+            "value": 26.22,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T15:00:00Z",
+            "count": 12,
+            "value": 28.13,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T16:00:00Z",
+            "count": 12,
+            "value": 24.21,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261104",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-04T13:00:00Z",
+            "count": 12,
+            "value": 138.74,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T14:00:00Z",
+            "count": 12,
+            "value": 134.71,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T15:00:00Z",
+            "count": 12,
+            "value": 141.88,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T16:00:00Z",
+            "count": 12,
+            "value": 128.04,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "AZ-D02-20261104",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-04T13:00:00Z",
+            "count": 12,
+            "value": 37.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T14:00:00Z",
+            "count": 12,
+            "value": 38.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T15:00:00Z",
+            "count": 12,
+            "value": 37.6,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T16:00:00Z",
+            "count": 12,
+            "value": 37.7,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261104",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-04T07:00:00Z",
+            "count": 12,
+            "value": 26.25,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T08:00:00Z",
+            "count": 12,
+            "value": 25.42,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 26.45,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T10:00:00Z",
+            "count": 11,
+            "value": 24.65,
+            "coverage": 0.917
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261104",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-04T07:00:00Z",
+            "count": 12,
+            "value": 133.96,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T08:00:00Z",
+            "count": 12,
+            "value": 131.77,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 135.64,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T10:00:00Z",
+            "count": 11,
+            "value": 118.94,
+            "coverage": 0.917
+          }
+        ]
+      },
+      {
+        "duty": "VD-D03-20261104",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-04T07:00:00Z",
+            "count": 12,
+            "value": 36.5,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T08:00:00Z",
+            "count": 12,
+            "value": 38.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 38.5,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T10:00:00Z",
+            "count": 11,
+            "value": 37.9,
+            "coverage": 0.917
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261104",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-04T13:00:00Z",
+            "count": 12,
+            "value": 27.07,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T14:00:00Z",
+            "count": 12,
+            "value": 26.21,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T15:00:00Z",
+            "count": 12,
+            "value": 26.56,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T16:00:00Z",
+            "count": 12,
+            "value": 25.55,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261104",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-04T13:00:00Z",
+            "count": 12,
+            "value": 136.0,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T14:00:00Z",
+            "count": 12,
+            "value": 131.67,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T15:00:00Z",
+            "count": 12,
+            "value": 132.97,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T16:00:00Z",
+            "count": 12,
+            "value": 132.29,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-D04-20261104",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-04T13:00:00Z",
+            "count": 12,
+            "value": 38.8,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T14:00:00Z",
+            "count": 12,
+            "value": 38.5,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T15:00:00Z",
+            "count": 12,
+            "value": 38.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T16:00:00Z",
+            "count": 12,
+            "value": 38.1,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261104",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-04T06:00:00Z",
+            "count": 12,
+            "value": 26.49,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T07:00:00Z",
+            "count": 12,
+            "value": 27.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T08:00:00Z",
+            "count": 12,
+            "value": 25.51,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 25.28,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261104",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-04T06:00:00Z",
+            "count": 12,
+            "value": 138.51,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T07:00:00Z",
+            "count": 12,
+            "value": 137.37,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T08:00:00Z",
+            "count": 12,
+            "value": 130.96,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 126.75,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D01-20261104",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-04T06:00:00Z",
+            "count": 12,
+            "value": 37.4,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T07:00:00Z",
+            "count": 12,
+            "value": 38.5,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T08:00:00Z",
+            "count": 12,
+            "value": 37.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 36.9,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261104",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-04T16:00:00Z",
+            "count": 12,
+            "value": 26.35,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T17:00:00Z",
+            "count": 12,
+            "value": 27.37,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T18:00:00Z",
+            "count": 12,
+            "value": 25.47,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T19:00:00Z",
+            "count": 12,
+            "value": 25.85,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261104",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-04T16:00:00Z",
+            "count": 12,
+            "value": 134.1,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T17:00:00Z",
+            "count": 12,
+            "value": 137.57,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T18:00:00Z",
+            "count": 12,
+            "value": 130.9,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T19:00:00Z",
+            "count": 12,
+            "value": 132.04,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VM-D02-20261104",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-04T16:00:00Z",
+            "count": 12,
+            "value": 38.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T17:00:00Z",
+            "count": 12,
+            "value": 37.8,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T18:00:00Z",
+            "count": 12,
+            "value": 37.5,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T19:00:00Z",
+            "count": 12,
+            "value": 37.0,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-T01-20261104",
+        "metric": "SPD",
+        "buckets": [
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 25.81,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T10:00:00Z",
+            "count": 12,
+            "value": 25.42,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T11:00:00Z",
+            "count": 12,
+            "value": 27.08,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T12:00:00Z",
+            "count": 12,
+            "value": 24.45,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T13:00:00Z",
+            "count": 12,
+            "value": 26.96,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T14:00:00Z",
+            "count": 12,
+            "value": 27.28,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-T01-20261104",
+        "metric": "KWH",
+        "buckets": [
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 133.36,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T10:00:00Z",
+            "count": 12,
+            "value": 129.57,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T11:00:00Z",
+            "count": 12,
+            "value": 138.76,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T12:00:00Z",
+            "count": 12,
+            "value": 125.79,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T13:00:00Z",
+            "count": 12,
+            "value": 138.09,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T14:00:00Z",
+            "count": 12,
+            "value": 137.79,
+            "coverage": 1.0
+          }
+        ]
+      },
+      {
+        "duty": "VD-T01-20261104",
+        "metric": "AX4",
+        "buckets": [
+          {
+            "hour": "2026-11-04T09:00:00Z",
+            "count": 12,
+            "value": 38.0,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T10:00:00Z",
+            "count": 12,
+            "value": 37.8,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T11:00:00Z",
+            "count": 12,
+            "value": 38.2,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T12:00:00Z",
+            "count": 12,
+            "value": 37.3,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T13:00:00Z",
+            "count": 12,
+            "value": 38.4,
+            "coverage": 1.0
+          },
+          {
+            "hour": "2026-11-04T14:00:00Z",
+            "count": 12,
+            "value": 37.9,
+            "coverage": 1.0
+          }
+        ]
+      }
+    ]
+  }
+}
