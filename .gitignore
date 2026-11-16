@@ -1,0 +1,6 @@
+# Challange files
+railtrace-challenge/
+
+# enviroment
+.venv
+.env
