@@ -4,3 +4,6 @@ railtrace-challenge/
 # enviroment
 .venv
 .env
+# python
+__pycache__/
+dist/
