@@ -11,8 +11,6 @@ class AssignmentCreate(BaseModel):
 
     @model_validator(mode="after")
     def _check_interval(self) -> Self:
-        # Coerência interna do próprio payload; sobreposições e a linha
-        # da composição vs. linha da Duty ficam para a camada domain/.
         if self.ended_at <= self.started_at:
             raise ValueError("ended_at tem de ser posterior a started_at")
         return self

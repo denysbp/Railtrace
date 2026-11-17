@@ -2,8 +2,6 @@ from enum import Enum
 
 
 class ReportStatus(str, Enum):
-    """Estado de processamento de um relatório original."""
-
     PENDING = "pending"
     APPLIED = "applied"
     DUPLICATE = "duplicate"
@@ -12,10 +10,6 @@ class ReportStatus(str, Enum):
 
 
 class QuarantineReason(str, Enum):
-    """Motivo pelo qual um relatório foi colocado em quarentena.
-
-    Só tem significado quando o status é ReportStatus.QUARANTINED.
-    """
 
     MALFORMED = "malformed"
     BAD_CHECKSUM = "bad_checksum"
@@ -23,3 +17,4 @@ class QuarantineReason(str, Enum):
     UNKNOWN_TRAINSET = "unknown_trainset"
     UNKNOWN_STATION = "unknown_station"
     UNKNOWN_METRIC = "unknown_metric"
+    CONFLICT = "conflict"

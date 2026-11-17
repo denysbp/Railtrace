@@ -11,8 +11,7 @@ if TYPE_CHECKING:
     from app.models.duty import Duty
     from app.models.trainset import Trainset
 
-# Intervalo semiaberto [started_at, ended_at): uma atribuição que acaba às
-# 11:00 não colide com outra que começa às 11:00.
+# Teoria dos conjuntos
 _PERIOD = text("tstzrange(started_at, ended_at, '[)')")
 
 

@@ -22,11 +22,3 @@ Os relatórios chegam como texto (`$TRN,...`) e podem vir mal formados, duplicad
 
   Não pode haver quarentena sem motivo, nem motivo sem quarentena.
 
-## Alternativas consideradas
-
-- **Fazer o parsing de forma síncrona na API:** a resposta fica mais lenta e um relatório inválido podia perder-se. Com o original guardado, posso sempre reprocessar.
-- **Um status por motivo (`quarantined_bad_checksum`, …):** o enum de status explode e fica mais difícil contar "quantos estão em quarentena".
-
-## Consequências
-
-- O `status` é mutável, por isso a tabela não é estritamente imutável. Mas o dado original (`raw_content`) é, e é esse que permite auditar e reprocessar.

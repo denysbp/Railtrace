@@ -6,7 +6,9 @@ from app.models.base import Base
 from app.models.duty import Duty
 from app.models.enums import QuarantineReason, ReportStatus
 from app.models.line import Line
+from app.models.line_station import LineStation
 from app.models.report_raw import ReportRaw
+from app.models.station import Station
 from app.models.trainset import Trainset
 
 __all__ = [
@@ -14,8 +16,10 @@ __all__ = [
     "Base",
     "Duty",
     "Line",
+    "LineStation",
     "QuarantineReason",
     "ReportRaw",
     "ReportStatus",
+    "Station",
     "Trainset",
 ]
