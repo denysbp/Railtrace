@@ -9,6 +9,8 @@ DATA := $(data)
 
 all: up
 
+
+
 up: $(ENV_FILE)
 	$(COMPOSE) up -d --build --wait
 	@$(COMPOSE) ps

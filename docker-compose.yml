@@ -1,3 +1,15 @@
+# Configuração partilhada pelos serviços que usam a imagem do backend (api, init, cli)
+x-backend: &backend
+  build:
+    context: .
+    dockerfile: backend/Dockerfile
+  image: railtrace-backend
+  environment:
+    DB_HOST: db
+    DB_NAME: ${DB_NAME:-railtrace}
+    DB_URL: postgresql+psycopg://${DB_USER:-railtrace}:${DB_PASSWORD:-railtrace}@db:5432/${DB_NAME:-railtrace}
+    API_PORT: ${API_PORT:-8000}
+
 services:
   db:
     image: postgres:17-alpine
@@ -16,18 +28,34 @@ services:
       timeout: 3s
       retries: 10
 
+  # Corre uma vez em cada `up`: migrações + seed (o seed é idempotente) e termina
+  init:
+    <<: *backend
+    command: ["sh", "-c", "alembic upgrade head && railtrace seed --file data/seed.json"]
+    volumes:
+      - ./data:/app/data:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
   api:
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
+    <<: *backend
     restart: unless-stopped
-    environment:
-      DB_HOST: db
-      DB_NAME: ${DB_NAME:-railtrace}
-      DB_URL: postgresql+psycopg://${DB_USER:-railtrace}:${DB_PASSWORD:-railtrace}@db:5432/${DB_NAME:-railtrace}
-      API_PORT: ${API_PORT:-8000}
     ports:
       - "${API_PORT:-8000}:${API_PORT:-8000}"
+    depends_on:
+      db:
+        condition: service_healthy
+      init:
+        condition: service_completed_successfully
+
+  # Só corre com: docker compose run --rm cli <comando>
+  cli:
+    <<: *backend
+    profiles: ["cli"]
+    entrypoint: ["railtrace"]
+    volumes:
+      - ./data:/app/data:ro
     depends_on:
       db:
         condition: service_healthy

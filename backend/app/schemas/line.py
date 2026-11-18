@@ -1,5 +1,7 @@
 from pydantic import BaseModel, ConfigDict, Field
 
+from app.schemas.station import StationResponse
+
 
 class LineCreate(BaseModel):
     code: str = Field(min_length=2, max_length=2, examples=["AZ"])
@@ -12,3 +14,11 @@ class LineResponse(BaseModel):
     id: int
     code: str
     name: str
+
+
+class LineWithStationsResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    code: str
+    name: str
+    stations: list[StationResponse]  # pela ordem do percurso

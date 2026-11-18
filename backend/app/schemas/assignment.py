@@ -40,4 +40,18 @@ class AssignmentResponse(BaseModel):
     trainset_id: int
     duty_id: int
     started_at: AwareDatetime
-    ended_at: AwareDatetime
+    ended_at: AwareDatetime | None
+
+
+class DutyAssignmentCreate(BaseModel):
+    """Body do POST /duties/{code}/assignments (a duty vem do path)."""
+
+    trainset: str = Field(min_length=1, examples=["TS-0001"])
+    started_at: AwareDatetime
+    ended_at: AwareDatetime | None = None
+
+    @model_validator(mode="after")
+    def _check_interval(self) -> Self:
+        if self.ended_at is not None and self.ended_at <= self.started_at:
+            raise ValueError("ended_at tem de ser posterior a started_at")
+        return self
