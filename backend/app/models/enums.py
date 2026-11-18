@@ -10,7 +10,6 @@ class ReportStatus(str, Enum):
 
 
 class QuarantineReason(str, Enum):
-
     MALFORMED = "malformed"
     BAD_CHECKSUM = "bad_checksum"
     CLOCK_INVALID = "clock_invalid"

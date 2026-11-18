@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from app.api.routes.reports import reports_router
+from app.api.router import api_router
 
 app = FastAPI(title="Railtrace")
 
-app.include_router(reports_router)
+app.include_router(api_router)
 
 @app.get("/health")
 def health() -> dict[str, str]:

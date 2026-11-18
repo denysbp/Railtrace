@@ -1,9 +1,8 @@
 from fastapi import (
-    FastAPI,
     Depends,
     APIRouter,
     status,
-    Request,
+    Body,
     HTTPException
 )
 from sqlalchemy.orm import Session
@@ -22,22 +21,23 @@ reports_router = APIRouter(
     response_model=ReportAcceptedResponse,
     status_code=status.HTTP_202_ACCEPTED
 )
-def report(request: Request, db: Session = Depends(get_db)):
-    try:
-        content = request.body()
-
-        if len(content) > MAX_REPORT_SIZE:
-            raise HTTPException(
-                status_code=status.HTTP_413_CONTENT_TOO_LARGE,
-                detail="Report exceeds the 1 KB limit"
-            )
-        report_raw = ReportRaw(
-            raw_content= content.decode()
+def report(
+    request: str = Body(..., media_type="text/plain"),
+    db: Session = Depends(get_db)
+):
+    if len(request.encode()) > MAX_REPORT_SIZE:
+        raise HTTPException(
+            status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+            detail="Report exceeds the 1 KB limit"
         )
+    report_raw = ReportRaw(
+        raw_content=request
+    )
+    try:
         db.add(report_raw)
         db.commit()
         db.refresh(report_raw)
-        return ReportAcceptedResponse(report_id=report_raw.id)
     except Exception:
         db.rollback()
         raise
+    return ReportAcceptedResponse(report_id=report_raw.id)
