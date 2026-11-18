@@ -15,3 +15,5 @@ class ReportResponse(BaseModel):
     received_at: AwareDatetime
     status: ReportStatus
     quarantine_reason: QuarantineReason | None
+    batch_id: int | None
+    batch_line: int | None

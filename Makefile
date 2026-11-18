@@ -3,6 +3,7 @@
 ENV_FILE := .env
 ENV_VARS := DB_HOST DB_NAME DB_USER DB_PASSWORD DB_PORT DB_URL API_PORT
 COMPOSE  := docker compose --env-file $(ENV_FILE)
+DATA := $(data)
 
 .DEFAULT_GOAL := all
 
@@ -22,6 +23,29 @@ logs:
 
 ps:
 	$(COMPOSE) ps
+
+# population db
+
+populate: batch-1  live-stream batch-2
+
+batch-1: $(data)/depot-batch-01.txt
+	curl -X 'POST' \
+		'http://127.0.0.1:8000/v1/depot/batches' \
+		-H 'accept: */*' \
+		-H 'Content-Type: multipart/form-data' \
+		-F 'file=@data/depot-batch-04.txt;type=text/plain'
+
+
+batch-2: $(data)/depot-batch-02.txt
+	curl -X 'POST' \
+		'http://127.0.0.1:8000/v1/depot/batches' \
+		-H 'accept: */*' \
+		-H 'Content-Type: multipart/form-data' \
+		-F 'file=@data/depot-batch-02.txt;type=text/plain'
+
+
+live-stream: $(DATA)
+	uv run $(DATA)/send_live.py --file $(DATA)/live-stream.txt
 
 migrate:
 	$(COMPOSE) exec api alembic upgrade head

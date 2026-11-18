@@ -3,6 +3,7 @@
 
 from app.models.assignment import Assignment
 from app.models.base import Base
+from app.models.batch import Batch
 from app.models.duty import Duty
 from app.models.enums import QuarantineReason, ReportStatus
 from app.models.line import Line
@@ -14,6 +15,7 @@ from app.models.trainset import Trainset
 __all__ = [
     "Assignment",
     "Base",
+    "Batch",
     "Duty",
     "Line",
     "LineStation",

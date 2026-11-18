@@ -6,7 +6,6 @@ class ReportStatus(str, Enum):
     APPLIED = "applied"
     DUPLICATE = "duplicate"
     QUARANTINED = "quarantined"
-    CONFLICT = "conflict"
 
 
 class QuarantineReason(str, Enum):

@@ -1,10 +1,22 @@
 from datetime import datetime
+from typing import TYPE_CHECKING
 
-from sqlalchemy import CheckConstraint, DateTime, Enum as SQLAlchemyEnum, Text, func
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import (
+    CheckConstraint,
+    DateTime,
+    Enum as SQLAlchemyEnum,
+    ForeignKey,
+    Text,
+    UniqueConstraint,
+    func,
+)
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import Base
 from app.models.enums import QuarantineReason, ReportStatus
+
+if TYPE_CHECKING:
+    from app.models.batch import Batch
 
 
 def _enum_values(enum_cls: type) -> list[str]:
@@ -26,6 +38,14 @@ class ReportRaw(Base):
             "(status = 'quarantined') = (quarantine_reason IS NOT NULL)",
             name="ck_reports_raw_quarantine_reason",
         ),
+        # batch_line só existe (e é obrigatório) quando o relatório veio de um batch
+        CheckConstraint(
+            "(batch_id IS NULL) = (batch_line IS NULL)",
+            name="ck_reports_raw_batch_line",
+        ),
+        CheckConstraint("batch_line >= 1", name="ck_reports_raw_batch_line_positive"),
+        # A mesma linha do ficheiro não pode ser gravada duas vezes no mesmo batch
+        UniqueConstraint("batch_id", "batch_line", name="uq_reports_raw_batch_line"),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -50,3 +70,14 @@ class ReportRaw(Base):
         SQLAlchemyEnum(QuarantineReason, name="quarantine_reason", values_callable=_enum_values),
         nullable=True,
     )
+
+    # NULL = enviado sozinho em tempo real (POST /v1/reports)
+    batch_id: Mapped[int | None] = mapped_column(
+        # append-only: não se apaga um batch com relatórios
+        ForeignKey("batches.id", ondelete="RESTRICT", name="fk_reports_raw_batch_id_batches"),
+        nullable=True,
+    )
+    # Número da linha no ficheiro original (1 = primeira linha), para rastreabilidade
+    batch_line: Mapped[int | None] = mapped_column(nullable=True)
+
+    batch: Mapped["Batch | None"] = relationship(back_populates="reports")
