@@ -7,7 +7,7 @@ from app.schemas.assignment import (
 from app.schemas.batch import BatchResponse
 from app.schemas.duty import DutyResponse, DutyWithAssignmentsResponse
 from app.schemas.line import LineCreate, LineResponse, LineWithStationsResponse
-from app.schemas.report import ReportAcceptedResponse, ReportResponse
+from app.schemas.report import ReportAcceptedResponse, ReportResponse, ReportQuarantineResponse
 from app.schemas.station import StationResponse
 from app.schemas.trainset import TrainsetCreate, TrainsetResponse
 
@@ -27,4 +27,5 @@ __all__ = [
     "StationResponse",
     "TrainsetCreate",
     "TrainsetResponse",
+    "ReportQuarantineResponse"
 ]

@@ -17,3 +17,10 @@ class ReportResponse(BaseModel):
     quarantine_reason: QuarantineReason | None
     batch_id: int | None
     batch_line: int | None
+
+
+class ReportQuarantineResponse(BaseModel):
+    reason: QuarantineReason
+    raw_line: str
+    source: str
+    received_at: AwareDatetime

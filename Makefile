@@ -59,6 +59,9 @@ db: $(ENV_FILE)
 api: $(ENV_FILE)
 	$(COMPOSE) up -d --build api
 
+dev:
+	uv run fastapi dev backend/app/main.py --host 0.0.0.0 --port 8000
+
 
 env: $(ENV_FILE)
 

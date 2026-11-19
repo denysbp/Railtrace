@@ -49,8 +49,7 @@ class Assignment(Base):
     )
 
     started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    # NULL = assignment em aberto (sem fim); o tstzrange trata-o como intervalo infinito
-    ended_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    ended_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
     trainset: Mapped["Trainset"] = relationship(back_populates="assignments")
     duty: Mapped["Duty"] = relationship(back_populates="assignments")

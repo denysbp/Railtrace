@@ -26,12 +26,20 @@ class AssignmentOverlapError(Exception):
     pass
 
 
+class AssignmentNotFoundError(Exception):
+    pass
+
+
+class InvalidIntervalError(Exception):
+    pass
+
+
 def create_assignment(
     db: Session,
     duty_code: str,
     trainset_serial: str,
     started_at: datetime,
-    ended_at: datetime | None,
+    ended_at: datetime,
 ) -> Assignment:
     """Liga uma composição a uma duty.
 
@@ -58,6 +66,35 @@ def create_assignment(
     )
     try:
         db.add(assignment)
+        db.commit()
+    except IntegrityError as e:
+        db.rollback()
+        if isinstance(e.orig, ExclusionViolation):
+            raise AssignmentOverlapError from e
+        raise
+    return assignment
+
+
+def update_assignment(
+    db: Session,
+    assignment_id: int,
+    started_at: datetime | None,
+    ended_at: datetime | None,
+) -> Assignment:
+    assignment = db.get(Assignment, assignment_id)
+    if assignment is None:
+        raise AssignmentNotFoundError
+
+    if started_at is None:
+        started_at = assignment.started_at
+    if ended_at is None:
+        ended_at = assignment.ended_at
+    if ended_at <= started_at:
+        raise InvalidIntervalError
+
+    assignment.started_at = started_at
+    assignment.ended_at = ended_at
+    try:
         db.commit()
     except IntegrityError as e:
         db.rollback()

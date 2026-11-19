@@ -17,7 +17,6 @@ class AssignmentCreate(BaseModel):
 
 
 class AssignmentUpdate(BaseModel):
-    """Alteração parcial do intervalo. Trocar composição ou Duty = nova Assignment."""
 
     started_at: AwareDatetime | None = None
     ended_at: AwareDatetime | None = None
@@ -40,7 +39,7 @@ class AssignmentResponse(BaseModel):
     trainset_id: int
     duty_id: int
     started_at: AwareDatetime
-    ended_at: AwareDatetime | None
+    ended_at: AwareDatetime
 
 
 class DutyAssignmentCreate(BaseModel):
@@ -48,10 +47,10 @@ class DutyAssignmentCreate(BaseModel):
 
     trainset: str = Field(min_length=1, examples=["TS-0001"])
     started_at: AwareDatetime
-    ended_at: AwareDatetime | None = None
+    ended_at: AwareDatetime
 
     @model_validator(mode="after")
     def _check_interval(self) -> Self:
-        if self.ended_at is not None and self.ended_at <= self.started_at:
+        if self.ended_at <= self.started_at:
             raise ValueError("ended_at tem de ser posterior a started_at")
         return self
