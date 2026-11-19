@@ -17,6 +17,7 @@ from app.models.enums import QuarantineReason, ReportStatus
 
 if TYPE_CHECKING:
     from app.models.batch import Batch
+    from app.models.report_revision import ReportRevision
 
 
 def _enum_values(enum_cls: type) -> list[str]:
@@ -82,3 +83,5 @@ class ReportRaw(Base):
     batch_line: Mapped[int | None] = mapped_column(nullable=True)
 
     batch: Mapped["Batch | None"] = relationship(back_populates="reports")
+    # Revisão criada a partir deste relatório (None se ainda não foi processado ou ficou em quarentena)
+    revision: Mapped["ReportRevision | None"] = relationship(back_populates="report_raw")
