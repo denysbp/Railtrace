@@ -51,7 +51,7 @@ services:
   worker:
     <<: *backend
     restart: unless-stopped
-    command: ["uv", "run", "-m backend.app.worker"]
+    command: ["python", "-u", "-m", "app.worker"]
     depends_on:
       db:
         condition: service_healthy
