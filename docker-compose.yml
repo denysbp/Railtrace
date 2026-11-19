@@ -48,6 +48,16 @@ services:
       init:
         condition: service_completed_successfully
 
+  worker:
+    <<: *backend
+    restart: unless-stopped
+    command: ["uv", "run", "-m backend.app.worker"]
+    depends_on:
+      db:
+        condition: service_healthy
+      init:
+        condition: service_completed_successfully
+
   # Só corre com: docker compose run --rm cli <comando>
   cli:
     <<: *backend
