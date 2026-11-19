@@ -25,7 +25,8 @@ def _enum_values(enum_cls: type) -> list[str]:
 
 
 class ReportRaw(Base):
-    """Relatório tal como foi recebido pela API (append-only).
+    """
+    Relatório tal como foi recebido pela API (append-only).
 
     A API só grava raw_content. O Worker faz o parsing depois e só
     altera status / quarantine_reason; raw_content nunca é alterado.

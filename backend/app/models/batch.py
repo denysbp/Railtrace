@@ -28,7 +28,5 @@ class Batch(Base):
     reports: Mapped[list["ReportRaw"]] = relationship(
         back_populates="batch",
         order_by="ReportRaw.batch_line",
-        # O ORM não mexe nos relatórios ao apagar o batch (não põe batch_id = NULL);
-        # a FK com RESTRICT recusa o delete na BD
         passive_deletes="all",
     )

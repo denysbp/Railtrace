@@ -28,7 +28,6 @@ services:
       timeout: 3s
       retries: 10
 
-  # Corre uma vez em cada `up`: migrações + seed (o seed é idempotente) e termina
   init:
     <<: *backend
     command: ["sh", "-c", "alembic upgrade head && railtrace seed --file data/seed.json"]
