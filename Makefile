@@ -3,7 +3,7 @@
 ENV_FILE := .env
 ENV_VARS := DB_HOST DB_NAME DB_USER DB_PASSWORD DB_PORT DB_URL API_PORT
 COMPOSE  := docker compose --env-file $(ENV_FILE)
-DATA := $(data)
+DATA := data
 
 .DEFAULT_GOAL := all
 
@@ -28,9 +28,10 @@ ps:
 
 # population db
 
-populate: batch-1  live-stream batch-2
+populate: batch-1 batch-2
 
-batch-1: $(data)/depot-batch-01.txt
+
+batch-1: $(DATA)/depot-batch-01.txt
 	curl -X 'POST' \
 		'http://127.0.0.1:8000/v1/depot/batches' \
 		-H 'accept: */*' \
@@ -38,7 +39,7 @@ batch-1: $(data)/depot-batch-01.txt
 		-F 'file=@data/depot-batch-04.txt;type=text/plain'
 
 
-batch-2: $(data)/depot-batch-02.txt
+batch-2: $(DATA)/depot-batch-02.txt
 	curl -X 'POST' \
 		'http://127.0.0.1:8000/v1/depot/batches' \
 		-H 'accept: */*' \
@@ -62,6 +63,9 @@ api: $(ENV_FILE)
 dev:
 	uv run fastapi dev backend/app/main.py --host 0.0.0.0 --port 8000
 
+
+worker:
+	uv run -m backend.app.worker
 
 env: $(ENV_FILE)
 
