@@ -11,6 +11,7 @@ from app.models.line_station import LineStation
 from app.models.measurement import Measurement, MeasurementMetric
 from app.models.report_raw import ReportRaw
 from app.models.report_revision import ReportRevision, ReportRevisionMetric
+from app.models.rollup import DutyHourlyRollup, DutyMetricSummary, DutyStationStats
 from app.models.station import Station
 from app.models.trainset import Trainset
 
@@ -19,6 +20,9 @@ __all__ = [
     "Base",
     "Batch",
     "Duty",
+    "DutyHourlyRollup",
+    "DutyMetricSummary",
+    "DutyStationStats",
     "Line",
     "LineStation",
     "Measurement",

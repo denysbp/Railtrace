@@ -12,7 +12,9 @@ def ingest_batch(db: Session, name: str, file: BinaryIO) -> int:
 
     # utf-8-sig: os ficheiros do depósito começam com um BOM; sem isto a
     # primeira linha seria "﻿# depot ..." e não começaria por "#"
-    text = io.TextIOWrapper(file, encoding="utf-8-sig")
+    # newline="\n": separa só em "\n" e não converte nada; o "\r" de um CRLF
+    # sai no rstrip abaixo (um "\r" isolado no meio da linha fica intacto)
+    text = io.TextIOWrapper(file, encoding="utf-8-sig", newline="\n")
 
     for number, line in enumerate(text, start=1):
         line = line.rstrip("\r\n")

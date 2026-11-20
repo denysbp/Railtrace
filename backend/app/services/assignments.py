@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.models.assignment import Assignment
 from app.models.duty import Duty
 from app.models.trainset import Trainset
+from app.services.attribution import reattribute_measurements
 
 
 class DutyNotFoundError(Exception):
@@ -64,14 +65,11 @@ def create_assignment(
         started_at=started_at,
         ended_at=ended_at,
     )
-    try:
-        db.add(assignment)
-        db.commit()
-    except IntegrityError as e:
-        db.rollback()
-        if isinstance(e.orig, ExclusionViolation):
-            raise AssignmentOverlapError from e
-        raise
+    db.add(assignment)
+    _flush_or_overlap(db)
+    # R5: as medições da composição dentro do novo intervalo passam a ser desta duty
+    reattribute_measurements(db, trainset.id, started_at, ended_at)
+    db.commit()
     return assignment
 
 
@@ -92,13 +90,24 @@ def update_assignment(
     if ended_at <= started_at:
         raise InvalidIntervalError
 
+    # R5: afetadas = medições entre o intervalo antigo e o novo (as que entram e as que saem)
+    affected_start = min(assignment.started_at, started_at)
+    affected_end = max(assignment.ended_at, ended_at)
+
     assignment.started_at = started_at
     assignment.ended_at = ended_at
+    _flush_or_overlap(db)
+    reattribute_measurements(db, assignment.trainset_id, affected_start, affected_end)
+    db.commit()
+    return assignment
+
+
+def _flush_or_overlap(db: Session) -> None:
+    """Envia o assignment para a BD; uma sobreposição (ExcludeConstraint) dá AssignmentOverlapError."""
     try:
-        db.commit()
+        db.flush()
     except IntegrityError as e:
         db.rollback()
         if isinstance(e.orig, ExclusionViolation):
             raise AssignmentOverlapError from e
         raise
-    return assignment
