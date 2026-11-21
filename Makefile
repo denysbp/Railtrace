@@ -7,12 +7,12 @@ DATA := data
 
 .DEFAULT_GOAL := all
 
-all: up
 
+all: up migrate
 
 
 up: $(ENV_FILE)
-	$(COMPOSE) up -d --build --wait
+	$(COMPOSE) up -d --build  --wait
 	@$(COMPOSE) ps
 
 down:
@@ -29,23 +29,7 @@ ps:
 # population db
 
 scenario:
-	docker compose run --rm cli seed --file data/seed.json
-
-
-batch-1: $(DATA)/depot-batch-01.txt
-	curl -X 'POST' \
-		'http://127.0.0.1:8000/v1/depot/batches' \
-		-H 'accept: */*' \
-		-H 'Content-Type: multipart/form-data' \
-		-F 'file=@data/depot-batch-04.txt;type=text/plain'
-
-
-batch-2: $(DATA)/depot-batch-02.txt
-	curl -X 'POST' \
-		'http://127.0.0.1:8000/v1/depot/batches' \
-		-H 'accept: */*' \
-		-H 'Content-Type: multipart/form-data' \
-		-F 'file=@data/depot-batch-02.txt;type=text/plain'
+	@bash scripts/scenario.sh
 
 
 live-stream: $(DATA)
