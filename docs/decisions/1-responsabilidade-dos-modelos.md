@@ -44,6 +44,17 @@ Escritos pelo Worker (ainda por implementar).
 | `Measurement` | `measurements` | Estado efetivo de uma medição depois de aplicadas as revisões válidas. Uma por composição e instante (`UNIQUE(trainset_id, measured_at)`). Guarda a atribuição a uma duty (`duty_id`, NULL quando não atribuída). |
 | `MeasurementMetric` | `measurement_metrics` | Valores efetivos das métricas de uma medição. PK `(measurement_id, metric)`. |
 
+### Read models dos endpoints de leitura (A2)
+
+Escritos pelo Worker na mesma transação em que processa cada relatório. Os endpoints de leitura só leem estas tabelas (e `measurements`).
+
+| Modelo | Tabela | Responsabilidade |
+|---|---|---|
+| `ReportOutcome` | `report_outcomes` | Resultado de cada relatório já processado: `status`, `quarantine_reason`, origem (`batch_id`, `batch_line`), linha original e hora de receção. Atualizado quando a R4 põe relatórios anteriores em conflito. Um relatório sem linha aqui ainda está por processar. Lido por `/depot/batches/{id}`, `/quarantine` e `/stats`. |
+| `DutyHourlyRollup` | `duty_hourly_rollups` | R7: por duty, métrica e hora UTC, `count`, `value` e `coverage`. |
+| `DutyMetricSummary` | `duty_metric_summaries` | R7: por duty e métrica, o valor sobre a duty inteira. |
+| `DutyStationStats` | `duty_station_stats` | R7: por duty e estação, o número de relatórios e o maior valor `AX*`. |
+
 ### Enums (`models/enums.py`)
 
 - `ReportStatus`: `pending`, `applied`, `duplicate`, `quarantined`.

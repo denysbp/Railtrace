@@ -1,3 +1,4 @@
+import json
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -36,6 +37,10 @@ def clean_tables():
             "report_revisions, reports_raw, batches, assignments, "
             "duty_hourly_rollups, duty_metric_summaries, duty_station_stats RESTART IDENTITY CASCADE"
         ))
+    with engine.begin() as conn:
+        # composições registadas pelos testes (ex.: R8); as do seed ficam
+        seed_serials = [t["serial"] for t in json.loads(SEED_FILE.read_text())["trainsets"]]
+        conn.execute(text("DELETE FROM trainsets WHERE serial <> ALL(:serials)"), {"serials": seed_serials})
     with SessionLocal() as db:
         load_seed(db, SEED_FILE)  # repõe os assignments
 

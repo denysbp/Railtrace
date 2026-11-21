@@ -9,6 +9,7 @@ from app.models.enums import QuarantineReason, ReportStatus
 from app.models.line import Line
 from app.models.line_station import LineStation
 from app.models.measurement import Measurement, MeasurementMetric
+from app.models.report_outcome import ReportOutcome
 from app.models.report_raw import ReportRaw
 from app.models.report_revision import ReportRevision, ReportRevisionMetric
 from app.models.rollup import DutyHourlyRollup, DutyMetricSummary, DutyStationStats
@@ -28,6 +29,7 @@ __all__ = [
     "Measurement",
     "MeasurementMetric",
     "QuarantineReason",
+    "ReportOutcome",
     "ReportRaw",
     "ReportRevision",
     "ReportRevisionMetric",

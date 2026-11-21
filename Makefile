@@ -28,7 +28,8 @@ ps:
 
 # population db
 
-populate: batch-1 batch-2
+scenario:
+	docker compose run --rm cli seed --file data/seed.json
 
 
 batch-1: $(DATA)/depot-batch-01.txt

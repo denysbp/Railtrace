@@ -1,10 +1,3 @@
-"""R7: recalcula os read models de rollups de uma duty a partir das suas medições.
-
-Recalcular a duty inteira (em vez de atualizar incrementalmente) é simples e sempre
-correto: uma duty tem poucas medições (~48), e qualquer alteração (correção, remoção,
-conflito, reatribuição) fica refletida da mesma forma.
-"""
-
 from collections.abc import Iterable
 
 from sqlalchemy import delete, insert, select
@@ -26,20 +19,31 @@ from app.models import (
 )
 
 
-def refresh_rollups(db: Session, duty_ids: Iterable[int | None]) -> None:
-    """Recalcula os rollups das duties indicadas (None = não atribuída, ignorado).
+DEFERRED_KEY = "deferred_rollup_duties"
 
-    Não faz commit: corre na transação de quem chama. As medições alteradas têm de
-    já ter sido flushed. Ordena os ids para que transações concorrentes bloqueiem as
-    duties pela mesma ordem (evita deadlocks).
-    """
-    for duty_id in sorted({duty_id for duty_id in duty_ids if duty_id is not None}):
+
+def refresh_rollups(db: Session, duty_ids: Iterable[int | None]) -> None:
+    ids = {duty_id for duty_id in duty_ids if duty_id is not None}
+    deferred = db.info.get(DEFERRED_KEY)
+    if deferred is not None:
+        deferred.update(ids)
+        return
+    for duty_id in sorted(ids):
         _recompute_duty(db, duty_id)
 
 
+def defer_rollups(db: Session) -> None:
+    """A partir daqui, refresh_rollups só junta as duties afetadas."""
+    db.info[DEFERRED_KEY] = set()
+
+
+def flush_deferred_rollups(db: Session) -> None:
+    """Calcula uma vez cada duty junta desde defer_rollups e volta ao modo normal."""
+    refresh_rollups_ids = db.info.pop(DEFERRED_KEY, set())
+    refresh_rollups(db, refresh_rollups_ids)
+
+
 def _recompute_duty(db: Session, duty_id: int) -> None:
-    # Bloqueia a duty até ao fim da transação: dois recálculos da mesma duty
-    # (Worker e API) não se cruzam no delete + insert.
     db.execute(select(Duty.id).where(Duty.id == duty_id).with_for_update())
 
     measurements = db.scalars(

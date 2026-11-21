@@ -1,4 +1,3 @@
-# Configuração partilhada pelos serviços que usam a imagem do backend (api, init, cli)
 x-backend: &backend
   build:
     context: .
@@ -28,15 +27,6 @@ services:
       timeout: 3s
       retries: 10
 
-  init:
-    <<: *backend
-    command: ["sh", "-c", "alembic upgrade head && railtrace seed --file data/seed.json"]
-    volumes:
-      - ./data:/app/data:ro
-    depends_on:
-      db:
-        condition: service_healthy
-
   api:
     <<: *backend
     restart: unless-stopped
@@ -45,8 +35,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      init:
-        condition: service_completed_successfully
 
   worker:
     <<: *backend
@@ -55,8 +43,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      init:
-        condition: service_completed_successfully
 
   # Só corre com: docker compose run --rm cli <comando>
   cli:

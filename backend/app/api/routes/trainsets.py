@@ -34,7 +34,7 @@ def create_trainset(
             status_code=status.HTTP_409_CONFLICT,
             detail=f"The trainset {body.serial} already exist"
         )
-    home_line = db.scalar(select(Line).where(Line.code == body.home_line_code))
+    home_line = db.scalar(select(Line).where(Line.code == body.line))
     if not home_line:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
