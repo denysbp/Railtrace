@@ -1,9 +1,3 @@
-"""Regra R7 (rollups) com o Strategy pattern da A5. Funções puras, sem BD.
-
-A agregação de cada métrica está definida num só sítio: METRIC_STRATEGIES.
-Uma métrica nova = uma entrada nesse registo (e, se for um tipo novo, uma estratégia nova).
-"""
-
 from abc import ABC, abstractmethod
 from collections import defaultdict
 from collections.abc import Iterable
@@ -11,7 +5,6 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from decimal import ROUND_HALF_UP, Decimal
 
-# --- Estratégias -------------------------------------------------------------
 
 
 class AggregationStrategy(ABC):
@@ -37,7 +30,6 @@ class MaxStrategy(AggregationStrategy):
         return max(values)
 
 
-# Registo único métrica -> estratégia (R7: SPD média, KWH soma, AX* máximo)
 METRIC_STRATEGIES: dict[str, AggregationStrategy] = {
     "SPD": MeanStrategy(),
     "KWH": SumStrategy(),
@@ -52,8 +44,6 @@ def strategy_for(metric: str) -> AggregationStrategy:
     return METRIC_STRATEGIES[metric]
 
 
-# --- Arredondamentos ---------------------------------------------------------
-
 SLOTS_PER_HOUR = 12  # um relatório a cada 5 minutos
 VALUE_PLACES = Decimal("0.01")
 COVERAGE_PLACES = Decimal("0.001")
@@ -65,15 +55,14 @@ def round_value(value: Decimal) -> Decimal:
 
 def coverage(count: int) -> Decimal:
     """min(count / 12, 1), com 3 casas decimais."""
-    return min(Decimal(count) / SLOTS_PER_HOUR, Decimal(1)).quantize(COVERAGE_PLACES, rounding=ROUND_HALF_UP)
+    return min(
+        Decimal(count) / SLOTS_PER_HOUR, Decimal(1)
+    ).quantize(COVERAGE_PLACES, rounding=ROUND_HALF_UP)
 
 
 def utc_hour(instant: datetime) -> datetime:
     """Início da hora UTC a que pertence o instante (fusos convertidos para UTC)."""
     return instant.astimezone(timezone.utc).replace(minute=0, second=0, microsecond=0)
-
-
-# --- Rollups -----------------------------------------------------------------
 
 
 @dataclass(frozen=True)

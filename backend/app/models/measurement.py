@@ -12,9 +12,7 @@ class Measurement(Base):
 
     __tablename__ = "measurements"
     __table_args__ = (
-        # Uma medição por composição e instante (também serve de índice por composição + tempo)
         UniqueConstraint("trainset_id", "measured_at", name="uq_measurements_trainset_measured_at"),
-        # Leituras de uma duty por ordem temporal
         Index("ix_measurements_duty_measured_at", "duty_id", "measured_at"),
     )
 

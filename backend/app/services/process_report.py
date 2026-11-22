@@ -78,7 +78,7 @@ def process_report(report: ReportRaw, db: Session) -> bool:
     """Aplica as regras a um relatório numa só transação.
 
     Devolve False em caso de erro técnico: faz rollback e o relatório continua
-    pending, para ser tentado outra vez (ver Worker).
+    pending, para ser tentado outra vez.
     """
     try:
         lock_read_models_shared(db)  # espera se um rebuild (A4) estiver a correr

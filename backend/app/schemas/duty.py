@@ -17,9 +17,6 @@ class DutyWithAssignmentsResponse(DutyResponse):
     assignments: list[AssignmentResponse]
 
 
-# --- Read models (R7) ---------------------------------------------------------
-# Valores como float: o Pydantic serializa Decimal como texto, e a API devolve números.
-
 class ReadingPoint(BaseModel):
     measured_at: AwareDatetime
     value: float

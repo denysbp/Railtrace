@@ -6,24 +6,14 @@ from .aggregation import METRIC_STRATEGIES
 CLOCK_MIN = datetime(2020, 1, 1, tzinfo=timezone.utc)
 CLOCK_MAX_AHEAD = timedelta(minutes=10)
 
-# Métricas conhecidas = as que têm estratégia de agregação (um só registo, A5)
 KNOWN_METRICS = frozenset(METRIC_STRATEGIES)
 
 
 def has_unknown_metric(metrics: str) -> bool:
-    """True se alguma chave do campo de métricas ("SPD=0.0;KWH=0.53;...") não é conhecida.
-
-    Chamar só depois de is_malformated_fields: assume pares "chave=valor" separados por ";".
-    Uma métrica removida ("AX8=-") também tem de ter uma chave conhecida.
-    """
     return any(pair.partition("=")[0] not in KNOWN_METRICS for pair in metrics.split(";"))
 
 
 def check_sum_valid(text: str) -> bool:
-    """True se o checksum depois do "*" é igual ao XOR dos bytes entre "$" e "*".
-
-    Nunca lança exceção: um checksum ausente ou que não é hexadecimal dá False.
-    """
     if not text.startswith("$") or text.count("*") != 1:
         return False
     body, value = text[1:].split("*")
@@ -36,9 +26,6 @@ def check_sum_valid(text: str) -> bool:
 
 
 def is_clock_invalid(measured_at: str, received_at: datetime) -> bool:
-    """True se measured_at não é uma data válida com fuso horário ou está fora de
-    [2020-01-01T00:00:00Z, received_at + 10 minutos]. Nunca lança exceção.
-    """
     try:
         instant = datetime.fromisoformat(measured_at)
     except ValueError:
@@ -50,8 +37,6 @@ def is_clock_invalid(measured_at: str, received_at: datetime) -> bool:
 
 
 def is_malformated_form(text: str) -> bool:
-    """R1 verificação 1: forma $...*hh, sem outro "$" nem "*"."""
-    # um só "$" (no início) e um só "*"
     if not text.startswith("$") or text.count("$") != 1 or text.count("*") != 1:
         return True
     checksum = text.split("*")[1]
@@ -60,10 +45,6 @@ def is_malformated_form(text: str) -> bool:
 
 
 def is_malformated_fields(text: str) -> bool:
-    """R1 verificação 3: 6 campos, tipo TRN, cada campo válido, sem chaves repetidas, ≥ 1 métrica.
-
-    Chamar só depois de is_malformated_form (assume a forma $...*hh).
-    """
     fields = text[1:].split("*")[0].split(",")
     if len(fields) != 6:
         return True

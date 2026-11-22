@@ -15,12 +15,6 @@ from app.models.trainset import Trainset
 
 
 def load_seed(db: Session, path: Path) -> dict[str, int]:
-    """
-    Carrega o seed numa só transação.
-    Idempotente: o que já existe não é inserido outra vez.
-
-    Devolve quantas linhas foram inseridas em cada tabela.
-    """
     with open(path, encoding="utf-8") as f:
         seed = json.load(f)
 
@@ -93,10 +87,6 @@ def load_seed(db: Session, path: Path) -> dict[str, int]:
 
 
 def _insert_ignore(db: Session, model, rows: list[dict]) -> int:
-    """
-    INSERT ... ON CONFLICT DO NOTHING: as linhas que já existem
-    (mesma chave única) são ignoradas.
-    """
     if not rows:
         return 0
     # RETURNING devolve só as linhas realmente inseridas

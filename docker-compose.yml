@@ -44,7 +44,20 @@ services:
       db:
         condition: service_healthy
 
-  # Só corre com: docker compose run --rm cli <comando>
+  web:
+    build:
+      context: ./frontend
+      args:
+        API_URL: http://api:${API_PORT:-8000}
+    image: railtrace-web
+    restart: unless-stopped
+    environment:
+      API_URL: http://api:${API_PORT:-8000}
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    depends_on:
+      - api
+
   cli:
     <<: *backend
     profiles: ["cli"]
