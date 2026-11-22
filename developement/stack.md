@@ -7,3 +7,6 @@ Python
 
 # Data Base
 - PostgreSQL
+
+# Front-end
+next.js
