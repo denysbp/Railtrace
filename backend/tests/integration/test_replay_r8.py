@@ -32,7 +32,7 @@ def test_replay_applies_report_after_trainset_is_registered():
 
     assert [(r.report_id, r.status.value, r.reason, r.changed) for r in results] == [(report, "applied", None, True)]
     assert outcome(report) == ("applied", None)
-    assert outcome_row(report) == ("applied", None)  # read model atualizado
+    assert outcome_row(report) == ("applied", None)  # read model updated
     assert measurement(serial="TS-0099") is not None
 
 
@@ -41,7 +41,7 @@ def test_dry_run_only_prints_and_changes_nothing():
     register_trainset("TS-0099")
 
     preview = replay_quarantine(QuarantineReason.UNKNOWN_TRAINSET, dry_run=True)
-    # vê o efeito do primeiro no segundo: aplicado + duplicado, como na execução real
+    # sees the effect of the first on the second: applied + duplicate, as in the real run
     assert [r.status.value for r in preview] == ["applied", "duplicate"]
     assert outcome(first) == UNKNOWN and outcome(second) == UNKNOWN
     assert outcome_row(first) == ("quarantined", "unknown_trainset")
@@ -54,7 +54,7 @@ def test_dry_run_only_prints_and_changes_nothing():
 
 def test_replay_keeps_reports_that_still_fail():
     (bad,) = submit(with_bad_checksum(make_line("SPD=1")))
-    (unknown,) = submit(make_line("SPD=1", serial="TS-0099"))  # composição continua por registar
+    (unknown,) = submit(make_line("SPD=1", serial="TS-0099"))  # trainset still not registered
 
     assert [r.changed for r in replay_quarantine(QuarantineReason.BAD_CHECKSUM)] == [False]
     assert [r.changed for r in replay_quarantine(QuarantineReason.UNKNOWN_TRAINSET)] == [False]
@@ -79,7 +79,7 @@ def test_replaying_a_conflict_keeps_it_in_conflict():
     results = replay_quarantine(QuarantineReason.CONFLICT)
     assert [r.changed for r in results] == [False, False]
     assert outcome(first) == outcome(second) == ("quarantined", "conflict")
-    assert revisions_count() == revisions_before  # a revisão já guardada não é duplicada
+    assert revisions_count() == revisions_before  # the already stored revision is not duplicated
     assert measurement() is None
 
 

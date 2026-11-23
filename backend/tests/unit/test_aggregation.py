@@ -31,11 +31,11 @@ def at(hour, minute=0):
 
 
 def points(metric, values, start=at(7)):
-    """Um valor a cada 5 minutos a partir de start."""
+    """One value every 5 minutes starting from start."""
     return [MetricPoint(start + timedelta(minutes=5 * i), metric, D(v)) for i, v in enumerate(values)]
 
 
-# --- Estratégias (A5) ----------------------------------------------------------
+# --- Strategies (A5) -----------------------------------------------------------
 
 def test_each_metric_kind_has_its_strategy():
     assert isinstance(strategy_for("SPD"), MeanStrategy)
@@ -52,7 +52,7 @@ def test_strategies():
 
 
 def test_known_metrics_come_from_the_strategy_registry():
-    # um só registo: uma métrica com estratégia é conhecida em R1 e agregável em R7
+    # a single record: a metric with a strategy is known in R1 and aggregable in R7
     assert KNOWN_METRICS == frozenset(METRIC_STRATEGIES)
     assert AXLE_METRICS == {f"AX{i}" for i in range(1, 9)}
 
@@ -64,10 +64,10 @@ def test_new_metric_needs_only_a_registry_entry(monkeypatch):
 
     monkeypatch.setitem(METRIC_STRATEGIES, "TMP", MinStrategy())
     (summary,) = duty_summary(points("TMP", ["21.5", "19.25", "20"]))
-    assert summary.value == D("19.25")  # 19.25 já tem 2 casas
+    assert summary.value == D("19.25")  # 19.25 already has 2 decimal places
 
 
-# --- Arredondamentos e coverage ---------------------------------------------------
+# --- Rounding and coverage --------------------------------------------------------
 
 @pytest.mark.parametrize("count, expected", [(1, "0.083"), (6, "0.500"), (7, "0.583"), (11, "0.917"), (12, "1.000"), (13, "1.000")])
 def test_coverage_is_min_count_over_12_with_3_decimals(count, expected):
@@ -81,7 +81,7 @@ def test_values_are_rounded_to_2_decimals_half_up():
     assert round_value(D("0.005")) == D("0.01")
 
 
-# --- Rollups por hora -----------------------------------------------------------
+# --- Hourly rollups -------------------------------------------------------------
 
 def test_hourly_spd_mean_kwh_sum_and_axle_max():
     data = points("SPD", ["10", "20", "30"]) + points("KWH", ["1.5", "2.25", "3"]) + points("AX1", ["36.1", "38.4", "37"])
@@ -97,7 +97,7 @@ def test_hourly_groups_by_utc_hour_and_converts_timezones():
     data = [
         MetricPoint(datetime(2026, 11, 2, 8, 0, tzinfo=lisbon), "SPD", D("10")),   # = 07:00Z
         MetricPoint(datetime(2026, 11, 2, 8, 59, tzinfo=lisbon), "SPD", D("20")),  # = 07:59Z
-        MetricPoint(at(8), "SPD", D("40")),                                        # 08:00Z: outra hora
+        MetricPoint(at(8), "SPD", D("40")),                                        # 08:00Z: another hour
     ]
     rollups = hourly_rollups(data)
     assert [(r.hour, r.count, r.value) for r in rollups] == [(at(7), 2, D("15.00")), (at(8), 1, D("40.00"))]
@@ -106,7 +106,7 @@ def test_hourly_groups_by_utc_hour_and_converts_timezones():
 
 
 def test_count_is_per_metric_when_some_measurements_lack_it():
-    # 12 medições com SPD, só 6 com KWH (ex.: KWH removido por uma revisão)
+    # 12 measurements with SPD, only 6 with KWH (e.g. KWH removed by a revision)
     data = points("SPD", ["1"] * 12) + points("KWH", ["1"] * 6)
     rollups = {r.metric: r for r in hourly_rollups(data)}
     assert (rollups["SPD"].count, rollups["SPD"].coverage) == (12, D("1.000"))
@@ -119,7 +119,7 @@ def test_no_points_no_rollups():
     assert station_stats([]) == []
 
 
-# --- Resumo da duty -------------------------------------------------------------
+# --- Duty summary ---------------------------------------------------------------
 
 def test_summary_uses_same_strategy_over_whole_duty():
     data = points("SPD", ["10", "20"], at(7)) + points("SPD", ["40"], at(9)) + points("KWH", ["1.111", "2.222"], at(7))
@@ -128,13 +128,13 @@ def test_summary_uses_same_strategy_over_whole_duty():
     assert (summary["KWH"].count, summary["KWH"].value) == (2, D("3.33"))
 
 
-# --- Por estação ----------------------------------------------------------------
+# --- By station -----------------------------------------------------------------
 
 def test_station_stats_count_reports_and_max_axle():
     readings = [
         StationReading(1, {"SPD": D("10"), "AX1": D("36.1"), "AX4": D("58.3")}),
         StationReading(1, {"SPD": D("12"), "AX2": D("40")}),
-        StationReading(2, {"SPD": D("5")}),  # sem AX*
+        StationReading(2, {"SPD": D("5")}),  # no AX*
     ]
     stats = {s.station: s for s in station_stats(readings)}
     assert (stats[1].reports, stats[1].max_axle) == (2, D("58.3"))

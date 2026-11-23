@@ -68,7 +68,7 @@ def test_same_identity_different_content_is_conflict():
 
 
 def test_identity_already_in_conflict_is_always_conflict():
-    # igual a uma das versões, mas a identidade já está em conflito: não é duplicado
+    # equal to one of the versions, but the identity is already in conflict: not a duplicate
     existing = [content(SPD="20"), content(SPD="25")]
     assert classify_revision(content(SPD="20"), existing, True) is RevisionOutcome.CONFLICT
 
@@ -78,7 +78,7 @@ def test_identity_already_in_conflict_is_always_conflict():
 def test_revisions_apply_in_rev_order_regardless_of_arrival():
     r0 = Revision(0, content("REB", SPD="10", KWH="1", AX8="30"))
     r1 = Revision(1, content("ALF", SPD="12", AX8=None))
-    expected = content("ALF", SPD="12", KWH="1")  # KWH mantém-se, AX8 removida, estação do rev mais alto
+    expected = content("ALF", SPD="12", KWH="1")  # KWH is kept, AX8 removed, station from the highest rev
     assert apply_revisions([r0, r1]) == expected
     assert apply_revisions([r1, r0]) == expected
 

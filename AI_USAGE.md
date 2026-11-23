@@ -1,17 +1,17 @@
 # How I Used AI
 
-Antes de começar qualquer projeto, procuro sempre compreender o problema, as regras de negócio e as possíveis soluções. Normalmente, este processo de análise e compreensão exige algum tempo, mas, neste projeto, tive um prazo mais limitado do que aquele a que estou habituado.
+Before starting any project, I always try to understand the problem, the business rules and the possible solutions. Normally, this process of analysis and understanding takes some time, but in this project I had a tighter deadline than I am used to.
 
-Por isso, a minha primeira decisão foi definir como iria utilizar a AI, tendo em conta as limitações de prompts e tokens disponíveis.
+Therefore, my first decision was to define how I would use AI, taking into account the limitations of prompts and available tokens.
 
-Decidi utilizar três ferramentas de AI, cada uma com uma função específica:
+I decided to use three AI tools, each with a specific role:
 
-- **ChatGPT — Assistente e conselheiro:** foi a única ferramenta que teve conhecimento de todo o contexto do projeto, incluindo o desafio, as regras de negócio e os requisitos. Utilizei-a para apresentar o meu raciocínio, discutir decisões de arquitetura e modelação e obter feedback, garantindo que as soluções respeitavam todas as regras.
-- **Claude Code — Implementador:** utilizei-o para implementar código com base nas instruções que lhe fornecia. A sua função era executar as tarefas solicitadas e deixar comentários quando necessário, sem tomar decisões de arquitetura ou de negócio por iniciativa própria. Sempre que o fazia, rejeitava essas alterações.
-- **GitHub Copilot — Tester:** utilizei-o para analisar o código e ajudar na criação e execução de testes.
+- **ChatGPT — Assistant and advisor:** it was the only tool that had knowledge of the entire project context, including the challenge, the business rules and the requirements. I used it to present my reasoning, discuss architecture and modelling decisions and get feedback, ensuring that the solutions respected all the rules.
+- **Claude Code — Implementer:** I used it to implement code based on the instructions I provided. Its role was to carry out the requested tasks and leave comments when necessary, without making architecture or business decisions on its own. Whenever it did, I rejected those changes.
+- **GitHub Copilot — Tester:** I used it to analyse the code and help create and run tests.
 
-Embora tenha utilizado três ferramentas de AI, apenas uma tinha conhecimento do contexto completo do projeto: o ChatGPT. O Claude Code recebia instruções específicas para cada tarefa, enquanto o GitHub Copilot se concentrava na análise do código e nos testes.
+Although I used three AI tools, only one had knowledge of the full project context: ChatGPT. Claude Code received specific instructions for each task, while GitHub Copilot focused on code analysis and tests.
 
-Da minha parte, escrevi diretamente algumas partes do código, nomeadamente a API, a classe `Worker` e partes do `docker-compose.yml` e do `Makefile`.
+On my part, I wrote some parts of the code directly, namely the API, the `Worker` class and parts of `docker-compose.yml` and `Makefile`.
 
-No entanto, o desenho da arquitetura, a separação dos módulos, as decisões de modelação e as decisões técnicas foram da minha responsabilidade. Procurei utilizar a AI como uma ferramenta de apoio à implementação e validação, mantendo sempre o controlo sobre as decisões tomadas ao longo do desenvolvimento.
+However, the architecture design, the separation of modules, the modelling decisions and the technical decisions were my responsibility. I sought to use AI as a tool to support implementation and validation, always maintaining control over the decisions made throughout development.

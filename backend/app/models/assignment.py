@@ -11,24 +11,24 @@ if TYPE_CHECKING:
     from app.models.duty import Duty
     from app.models.trainset import Trainset
 
-# Teoria dos conjuntos
+# Set theory
 _PERIOD = text("tstzrange(started_at, ended_at, '[)')")
 
 
 class Assignment(Base):
-    """Liga uma composição (Trainset) a uma Duty durante um intervalo."""
+    """Links a trainset to a duty over an interval."""
 
     __tablename__ = "assignments"
     __table_args__ = (
         CheckConstraint("ended_at > started_at", name="ck_assignments_interval"),
-        # Uma composição não pode estar em duas Duties ao mesmo tempo.
+        # A trainset cannot be in two duties at the same time.
         ExcludeConstraint(
             ("trainset_id", "="),
             (_PERIOD, "&&"),
             name="ex_assignments_trainset_no_overlap",
             using="gist",
         ),
-        # Uma Duty não pode ter duas composições ao mesmo tempo.
+        # A duty cannot have two trainsets at the same time.
         ExcludeConstraint(
             ("duty_id", "="),
             (_PERIOD, "&&"),

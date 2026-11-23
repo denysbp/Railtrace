@@ -33,16 +33,16 @@ class Worker:
                 report = self._get_report(db)
                 if report is not None:
                     report_id = report.id
-                    # Avança sempre, mesmo se falhar
-                    # um relatório com erro não bloqueia os seguintes
+                    # Always advance, even on failure
+                    # a failed report does not block the following ones
                     self.last_id = report_id
                     if process_report(report, db):
                         print(report_id, report.status)
                     else:
-                        print(report_id, "falhou: fica pending e é tentado na próxima passagem")
+                        print(report_id, "failed: stays pending and will be tried on the next pass")
             if report is None:
-                # Fim da fila:
-                # volta ao início para apanhar os pending que falharam.
+                # End of queue:
+                # go back to the start to pick up the pending ones that failed.
                 self.last_id = 0
                 sleep(1)
 

@@ -1,130 +1,130 @@
 # Railtrace
 
-Ingestão e análise de telemetria de composições de metro. É composto por quatro partes:
+Ingestion and analysis of metro trainset telemetry. It consists of four parts:
 
-- **API** (FastAPI): recebe os relatórios e serve as leituras;
-- **Worker**: aplica as regras a cada relatório;
-- **PostgreSQL**: guarda os dados e serve de fila entre a API e o Worker;
-- **frontend** (Next.js): as páginas de consulta.
+- **API** (FastAPI): receives reports and serves reads;
+- **Worker**: applies the rules to each report;
+- **PostgreSQL**: stores the data and serves as the queue between the API and the Worker;
+- **frontend** (Next.js): the query pages.
 
 ```
 backend/app/
-  api/        rotas HTTP (só traduzem pedidos e erros)
-  services/   coordenação: BD, transações, locks
-  domain/     regras como funções puras (só biblioteca padrão)
-  models/     tabelas SQLAlchemy e constraints
-  schemas/    bodies e respostas (Pydantic)
-  worker.py   consumidor da fila reports_raw
-  cli.py      comando `railtrace`
+  api/        HTTP routes (only translate requests and errors)
+  services/   coordination: DB, transactions, locks
+  domain/     rules as pure functions (standard library only)
+  models/     SQLAlchemy tables and constraints
+  schemas/    bodies and responses (Pydantic)
+  worker.py   reports_raw queue consumer
+  cli.py      `railtrace` command
 backend/migrations/   Alembic
-backend/tests/        unit/ (sem BD) e integration/ (railtrace-test)
-frontend/             Next.js (serviço `web`)
-scripts/scenario.sh   cenário automático (passos 2–7 + checkpoints)
-data/                 seed, batches, live stream e valores esperados
-docs/                 schema.md e decisions/
+backend/tests/        unit/ (no DB) and integration/ (railtrace-test)
+frontend/             Next.js (`web` service)
+scripts/scenario.sh   automated scenario (steps 2–7 + checkpoints)
+data/                 seed, batches, live stream and expected values
+docs/                 schema.md and decisions/
 ```
 
-## Requisitos
+## Requirements
 
-- Docker com Docker Compose
+- Docker with Docker Compose
 - `make`
-- [uv](https://docs.astral.sh/uv/) e Python 3.14: só para correr os testes, o CLI ou a API fora do Docker
-- Node 22: só para desenvolver o frontend fora do Docker
+- [uv](https://docs.astral.sh/uv/) and Python 3.14: only for running the tests, the CLI or the API outside Docker
+- Node 22: only for developing the frontend outside Docker
 
-## Como correr
+## How to run
 
 ```bash
-make env       # cria .env com valores "change-me" (se ainda não existir) — edita-o
+make env       # creates .env with "change-me" values (if it doesn't already exist) — edit it
 make           # = make up + make migrate
 ```
 
-O `.env` precisa, no mínimo, de `DB_NAME`, `DB_USER`, `DB_PASSWORD` e `API_PORT`. Dentro do compose, `DB_HOST` e `DB_URL` são definidos pelo próprio compose.
+The `.env` needs, at a minimum, `DB_NAME`, `DB_USER`, `DB_PASSWORD` and `API_PORT`. Within compose, `DB_HOST` and `DB_URL` are defined by compose itself.
 
-| Serviço | O que é | Endereço |
+| Service | What it is | Address |
 |---|---|---|
 | `db` | PostgreSQL 17 | `localhost:${DB_PORT:-5432}` |
-| `api` | FastAPI | http://localhost:8000, documentação em http://localhost:8000/docs |
-| `worker` | Processa a fila de relatórios | só tem logs (`make logs`) |
-| `web` | Frontend Next.js | http://localhost:3000 (`WEB_PORT` para mudar) |
-| `cli` | Comando `railtrace` (perfil `cli`, não arranca com `up`) | `docker compose run --rm cli …` |
+| `api` | FastAPI | http://localhost:8000, documentation at http://localhost:8000/docs |
+| `worker` | Processes the report queue | only has logs (`make logs`) |
+| `web` | Next.js frontend | http://localhost:3000 (`WEB_PORT` to change) |
+| `cli` | `railtrace` command (`cli` profile, does not start with `up`) | `docker compose run --rm cli …` |
 
-Outros alvos do `Makefile`:
+Other `Makefile` targets:
 
-| Comando | O que faz |
+| Command | What it does |
 |---|---|
-| `make up` / `make down` / `make restart` | Arranca, para ou reinicia todos os serviços |
-| `make migrate` | `alembic upgrade head` dentro do contentor `api` |
-| `make logs` / `make ps` | Logs e estado dos serviços |
-| `make live-stream` | Envia `data/live-stream.txt` para `POST /v1/reports`, uma linha por pedido |
-| `make dev` | API em modo desenvolvimento, fora do Docker (porta 8000) |
-| `make worker` | Worker fora do Docker |
-| `make clean` | Apaga caches Python e de testes |
+| `make up` / `make down` / `make restart` | Starts, stops or restarts all services |
+| `make migrate` | `alembic upgrade head` inside the `api` container |
+| `make logs` / `make ps` | Logs and status of the services |
+| `make live-stream` | Sends `data/live-stream.txt` to `POST /v1/reports`, one line per request |
+| `make dev` | API in development mode, outside Docker (port 8000) |
+| `make worker` | Worker outside Docker |
+| `make clean` | Deletes Python and test caches |
 
-Frontend fora do Docker:
+Frontend outside Docker:
 
 ```bash
-cd frontend && npm install && npm run dev    # http://localhost:3000, usa API_URL (por omissão http://localhost:8000)
+cd frontend && npm install && npm run dev    # http://localhost:3000, uses API_URL (defaults to http://localhost:8000)
 ```
 
 ### Endpoints
 
-| Método | Caminho | |
+| Method | Path | |
 |---|---|---|
-| POST | `/v1/reports` | Um relatório em `text/plain` (máx. 1 KB) → `202` |
-| POST | `/v1/depot/batches` | Ficheiro do depósito (`multipart`, máx. 5 MB) → `202` |
-| GET | `/v1/depot/batches/{id}` | Resultado de cada linha do batch |
-| GET | `/v1/lines` | Linhas com as estações por ordem |
-| GET | `/v1/duties?date=YYYY-MM-DD&line=` | Duties de um dia |
-| GET | `/v1/duties/{code}` | Duty e os seus assignments |
-| GET | `/v1/duties/{code}/readings?metric=` | Valores de uma métrica ao longo do tempo |
-| GET | `/v1/duties/{code}/hourly?metric=` | Rollups por hora UTC |
-| GET | `/v1/duties/{code}/summary` | Composições, medições e resumo por métrica |
-| GET | `/v1/duties/{code}/stations` | Estações da linha com o máximo de eixo |
-| POST | `/v1/duties/{code}/assignments` | Novo assignment (`409` se sobrepuser outro) |
-| PATCH | `/v1/assignments/{id}` | Muda início/fim (`409` se sobrepuser outro) |
-| POST | `/v1/trainsets` | Regista uma composição |
-| GET | `/v1/quarantine?reason=&limit=` | Relatórios em quarentena |
-| GET | `/v1/stats` | Totais |
+| POST | `/v1/reports` | One report in `text/plain` (max. 1 KB) → `202` |
+| POST | `/v1/depot/batches` | Depot file (`multipart`, max. 5 MB) → `202` |
+| GET | `/v1/depot/batches/{id}` | Result of each line of the batch |
+| GET | `/v1/lines` | Lines with their stations in order |
+| GET | `/v1/duties?date=YYYY-MM-DD&line=` | Duties for a day |
+| GET | `/v1/duties/{code}` | Duty and its assignments |
+| GET | `/v1/duties/{code}/readings?metric=` | Values of a metric over time |
+| GET | `/v1/duties/{code}/hourly?metric=` | Rollups by UTC hour |
+| GET | `/v1/duties/{code}/summary` | Trainsets, measurements and summary by metric |
+| GET | `/v1/duties/{code}/stations` | Stations of the line with the maximum axle value |
+| POST | `/v1/duties/{code}/assignments` | New assignment (`409` if it overlaps another) |
+| PATCH | `/v1/assignments/{id}` | Changes start/end (`409` if it overlaps another) |
+| POST | `/v1/trainsets` | Registers a trainset |
+| GET | `/v1/quarantine?reason=&limit=` | Reports in quarantine |
+| GET | `/v1/stats` | Totals |
 
-## Testes
+## Tests
 
 ```bash
-uv run pytest backend/tests/unit        # só o domínio: sem BD, ~0,2 s
-uv run pytest backend/tests             # unitários + integração
+uv run pytest backend/tests/unit        # domain only: no DB, ~0.2 s
+uv run pytest backend/tests             # unit + integration
 ```
 
-Os testes de integração correm **só** na base de dados `railtrace-test`. O `backend/tests/conftest.py` força `DB_NAME=railtrace-test` e a suite recusa-se a correr noutra BD. Antes de cada teste, as tabelas são esvaziadas e o seed é carregado outra vez. Se a BD não estiver acessível, os testes de integração são ignorados (`skip`).
+Integration tests run **only** on the `railtrace-test` database. `backend/tests/conftest.py` forces `DB_NAME=railtrace-test` and the suite refuses to run on another DB. Before each test, the tables are emptied and the seed is loaded again. If the DB is not accessible, the integration tests are skipped (`skip`).
 
-Para criar a BD de testes (uma vez), com o `db` a correr:
+To create the test database (once), with `db` running:
 
 ```bash
 docker compose --env-file .env exec db sh -c 'createdb -U "$POSTGRES_USER" railtrace-test'
 DB_NAME=railtrace-test DB_HOST=localhost uv run alembic upgrade head
 ```
 
-## Cenário
+## Scenario
 
 ```bash
 make scenario        # = bash scripts/scenario.sh
 ```
 
-O script corre contra a API em `http://127.0.0.1:8000` (pode mudar com `API=…`) e faz, por ordem:
+The script runs against the API at `http://127.0.0.1:8000` (can be changed with `API=…`) and does the following, in order:
 
-1. carrega o seed (`railtrace seed`, ver [decisão 0002](docs/decisions/2-carregar-o-seed.md));
-2. envia `depot-batch-01.txt`;
-3. envia `live-stream.txt`, uma linha por pedido;
-4. envia `depot-batch-02.txt`, espera por `pending = 0` e verifica o **checkpoint A** contra `data/expected.json`;
-5. retira a TS-0003 da `VD-D03-20261103` às 08:40Z: primeiro o `PATCH` do fim da TS-0003, depois o do início da TS-0005;
-6. regista a TS-0099 na linha VD, cria o assignment em `VD-T01-20261104` e corre `replay-quarantine --reason unknown_trainset`;
-7. espera por `pending = 0` e verifica o **checkpoint final**.
+1. loads the seed (`railtrace seed`, see [decision 0002](docs/decisions/2-carregar-o-seed.md));
+2. sends `depot-batch-01.txt`;
+3. sends `live-stream.txt`, one line per request;
+4. sends `depot-batch-02.txt`, waits for `pending = 0` and checks **checkpoint A** against `data/expected.json`;
+5. removes TS-0003 from `VD-D03-20261103` at 08:40Z: first the `PATCH` to the end of TS-0003, then the one to the start of TS-0005;
+6. registers TS-0099 on the VD line, creates the assignment in `VD-T01-20261104` and runs `replay-quarantine --reason unknown_trainset`;
+7. waits for `pending = 0` and checks the **final checkpoint**.
 
-Cada valor aparece como `PASS`/`FAIL`, e no fim o script mostra `SCENARIO: PASS` ou `SCENARIO: FAIL (n valores errados)` (código de saída 1).
+Each value appears as `PASS`/`FAIL`, and at the end the script shows `SCENARIO: PASS` or `SCENARIO: FAIL (n wrong values)` (exit code 1).
 
-**Tem de correr numa BD limpa.** O passo 5 altera assignments do seed. Ao voltar a correr, o passo 1 tenta inserir outra vez o assignment original, e isso viola `ex_assignments_duty_no_overlap` (ver [decisão 0006](docs/decisions/6-r6-na-bd.md)). Para recomeçar do zero, apaga o volume com `docker compose --env-file .env down -v && make`, ou aponta o `.env` para outra BD vazia e corre `make migrate`. **Atenção:** `down -v` apaga todos os dados.
+**Must run on a clean DB.** Step 5 changes seed assignments. When re-running, step 1 tries to insert the original assignment again, which violates `ex_assignments_duty_no_overlap` (see [decision 0006](docs/decisions/6-r6-na-bd.md)). To start from scratch, delete the volume with `docker compose --env-file .env down -v && make`, or point the `.env` to another empty DB and run `make migrate`. **Warning:** `down -v` deletes all data.
 
 ## CLI
 
-Dentro do Docker (o serviço `cli` monta `./data` em `/app/data` só para leitura):
+Inside Docker (the `cli` service mounts `./data` at `/app/data` read-only):
 
 ```bash
 docker compose --env-file .env run --rm cli seed --file data/seed.json
@@ -132,27 +132,27 @@ docker compose --env-file .env run --rm cli replay-quarantine --reason unknown_t
 docker compose --env-file .env run --rm cli rebuild-read-models
 ```
 
-Fora do Docker, o mesmo comando (usa o `.env`, com `DB_HOST=localhost`): `uv run railtrace <comando> …`.
+Outside Docker, the same command (uses the `.env`, with `DB_HOST=localhost`): `uv run railtrace <command> …`.
 
-| Comando | O que faz |
+| Command | What it does |
 |---|---|
-| `seed --file <json>` | Carrega linhas, estações, composições, duties e assignments. Idempotente para o que não foi alterado. |
-| `replay-quarantine --reason <motivo> [--dry-run]` | **R8**: volta a aplicar as regras aos relatórios em quarentena com esse motivo (ex.: depois de registar uma composição). Com `--dry-run` só mostra o que mudaria. Motivos: `malformed`, `bad_checksum`, `clock_invalid`, `unknown_trainset`, `unknown_station`, `unknown_metric`, `conflict`. |
-| `rebuild-read-models` | **A4**: apaga revisões, medições, resultados e rollups e volta a processar todos os relatórios por ordem de chegada, numa só transação. O Worker espera até acabar. |
+| `seed --file <json>` | Loads lines, stations, trainsets, duties and assignments. Idempotent for what has not been changed. |
+| `replay-quarantine --reason <reason> [--dry-run]` | **R8**: re-applies the rules to reports in quarantine with that reason (e.g. after registering a trainset). With `--dry-run` it only shows what would change. Reasons: `malformed`, `bad_checksum`, `clock_invalid`, `unknown_trainset`, `unknown_station`, `unknown_metric`, `conflict`. |
+| `rebuild-read-models` | **A4**: deletes revisions, measurements, results and rollups and reprocesses all reports in arrival order, in a single transaction. The Worker waits until it finishes. |
 
-## Níveis concluídos
+## Completed levels
 
 [x] - "level 1"
 [x] - "level 2"
 [] - "level 3"
 
-## Documentação
+## Documentation
 
-- [`docs/schema.md`](docs/schema.md): todas as tabelas, colunas e constraints.
-- [`docs/decisions/`](docs/decisions/): decisões de arquitetura:
-  - [1](docs/decisions/1-responsabilidade-dos-modelos.md) responsabilidade de cada modelo
-  - [2](docs/decisions/2-carregar-o-seed.md) carregar o seed antes do cenário
-  - [3](docs/decisions/3-api-para-worker.md) como a API passa os relatórios ao Worker
-  - [4](docs/decisions/4-ordem-r3-r4.md) independência da ordem em R3/R4
-  - [5](docs/decisions/5-reatribuicao-e-rollups.md) re-atribuição e rollups depois de alterar um assignment
-  - [6](docs/decisions/6-r6-na-bd.md) R6 garantida pela BD
+- [`docs/schema.md`](docs/schema.md): all tables, columns and constraints.
+- [`docs/decisions/`](docs/decisions/): architecture decisions:
+  - [1](docs/decisions/1-responsabilidade-dos-modelos.md) responsibility of each model
+  - [2](docs/decisions/2-carregar-o-seed.md) loading the seed before the scenario
+  - [3](docs/decisions/3-api-para-worker.md) how the API passes reports to the Worker
+  - [4](docs/decisions/4-ordem-r3-r4.md) order independence in R3/R4
+  - [5](docs/decisions/5-reatribuicao-e-rollups.md) reattribution and rollups after changing an assignment
+  - [6](docs/decisions/6-r6-na-bd.md) R6 guaranteed by the DB

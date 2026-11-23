@@ -1,6 +1,6 @@
-"""R7: os rollups (hora, resumo, estação) acompanham as medições e os assignments.
+"""R7: the rollups (hour, summary, station) follow the measurements and the assignments.
 
-Seed, TS-0001 em 2026-11-02: AZ-D01-20261102 [07:00, 11:00) e AZ-D02-20261102 [13:00, 17:00).
+Seed, TS-0001 on 2026-11-02: AZ-D01-20261102 [07:00, 11:00) and AZ-D02-20261102 [13:00, 17:00).
 """
 
 from decimal import Decimal
@@ -62,7 +62,7 @@ def line(hhmm, metrics, **kwargs):
     return make_line(metrics, measured_at=at(hhmm), **kwargs)
 
 
-# --- criação pelo Worker ----------------------------------------------------------
+# --- creation by the Worker -------------------------------------------------------
 
 def test_worker_creates_hourly_summary_and_station_rollups():
     submit(
@@ -70,9 +70,9 @@ def test_worker_creates_hourly_summary_and_station_rollups():
         line("07:05", "SPD=20;KWH=2.25;AX1=38.4", station="REB"),
         line("07:10", "SPD=33;KWH=3;AX1=37", station="ALF"),
     )
-    assert hourly(AZ1, "SPD") == [("07:00", 3, D("21.00"), D("0.250"))]   # média
-    assert hourly(AZ1, "KWH") == [("07:00", 3, D("6.75"), D("0.250"))]    # soma
-    assert hourly(AZ1, "AX1") == [("07:00", 3, D("38.40"), D("0.250"))]   # máximo
+    assert hourly(AZ1, "SPD") == [("07:00", 3, D("21.00"), D("0.250"))]   # mean
+    assert hourly(AZ1, "KWH") == [("07:00", 3, D("6.75"), D("0.250"))]    # sum
+    assert hourly(AZ1, "AX1") == [("07:00", 3, D("38.40"), D("0.250"))]   # maximum
     assert summary(AZ1) == {"SPD": (3, D("21.00")), "KWH": (3, D("6.75")), "AX1": (3, D("38.40"))}
     assert stations(AZ1) == {"REB": (2, D("38.4")), "ALF": (1, D("37"))}
 
@@ -88,21 +88,21 @@ def test_coverage_and_rounding_for_a_full_hour():
     submit(*(line(f"08:{5 * i:02d}", f"SPD={v}") for i, v in enumerate(values)))
     ((hour, count, value, cov),) = hourly(AZ1, "SPD")
     assert (hour, count, cov) == ("08:00", 12, D("1.000"))
-    assert value == D("26.18")  # 314.1 / 12 = 26.175 -> 26.18 (meio para cima)
+    assert value == D("26.18")  # 314.1 / 12 = 26.175 -> 26.18 (round half up)
 
 
 def test_unattributed_measurements_have_no_rollups():
-    submit(line("12:00", "SPD=10", station="REB"))  # entre duties
+    submit(line("12:00", "SPD=10", station="REB"))  # between duties
     assert hourly(AZ1, "SPD") == [] and summary(AZ1) == {} and stations(AZ1) == {}
     assert hourly(AZ2, "SPD") == []
 
 
-# --- correções, remoções e conflitos (R3/R4) ------------------------------------
+# --- corrections, removals, and conflicts (R3/R4) -------------------------------
 
 def test_correction_updates_rollups():
     submit(line("07:00", "SPD=10;KWH=1", rev=0), line("07:05", "SPD=20;KWH=1", rev=0))
     assert hourly(AZ1, "SPD") == [("07:00", 2, D("15.00"), D("0.167"))]
-    submit(line("07:05", "SPD=40", rev=1))  # corrige SPD, mantém KWH
+    submit(line("07:05", "SPD=40", rev=1))  # corrects SPD, keeps KWH
     assert hourly(AZ1, "SPD") == [("07:00", 2, D("25.00"), D("0.167"))]
     assert hourly(AZ1, "KWH") == [("07:00", 2, D("2.00"), D("0.167"))]
 
@@ -111,19 +111,19 @@ def test_removed_metric_leaves_the_rollups():
     submit(line("07:00", "SPD=10;AX1=36", rev=0), line("07:05", "SPD=20;AX1=39", rev=0))
     submit(line("07:05", "AX1=-", rev=1))
     assert hourly(AZ1, "AX1") == [("07:00", 1, D("36.00"), D("0.083"))]
-    assert summary(AZ1)["SPD"] == (2, D("15.00"))  # a medição continua (ainda tem SPD)
+    assert summary(AZ1)["SPD"] == (2, D("15.00"))  # the measurement remains (still has SPD)
 
 
 def test_measurement_with_no_metrics_left_is_not_counted():
     submit(line("07:00", "SPD=10", rev=0, station="REB"), line("07:05", "SPD=20", rev=0, station="REB"))
-    submit(line("07:05", "SPD=-", rev=1, station="REB"))  # remove a única métrica
+    submit(line("07:05", "SPD=-", rev=1, station="REB"))  # removes the only metric
     assert hourly(AZ1, "SPD") == [("07:00", 1, D("10.00"), D("0.083"))]
     assert stations(AZ1) == {"REB": (1, None)}
 
 
 def test_conflict_removes_the_disputed_values_from_rollups():
     submit(line("07:00", "SPD=10", rev=0), line("07:05", "SPD=20", rev=0))
-    submit(line("07:05", "SPD=99", rev=0))  # mesma identidade, conteúdo diferente
+    submit(line("07:05", "SPD=99", rev=0))  # same identity, different content
     assert hourly(AZ1, "SPD") == [("07:00", 1, D("10.00"), D("0.083"))]
 
 
@@ -133,11 +133,11 @@ def test_assignment_changes_move_rollups_between_duties():
     submit(line("08:00", "SPD=10"), line("09:30", "SPD=30"), line("10:00", "SPD=50"))
     assert summary(AZ1) == {"SPD": (3, D("30.00"))}
 
-    # encurta AZ-D01 para [07:00, 09:00): 09:30 e 10:00 saem
+    # shortens AZ-D01 to [07:00, 09:00): 09:30 and 10:00 leave
     assert client.patch(f"/v1/assignments/{assignment_id(AZ1)}", json={"ended_at": at("09:00")}).status_code == 200
     assert summary(AZ1) == {"SPD": (1, D("10.00"))}
 
-    # novo assignment da TS-0001 na AZ-D02 em [09:00, 11:00): 09:30 e 10:00 entram na AZ-D02
+    # new assignment of TS-0001 on AZ-D02 in [09:00, 11:00): 09:30 and 10:00 enter AZ-D02
     response = client.post(f"/v1/duties/{AZ2}/assignments",
                            json={"trainset": "TS-0001", "started_at": at("09:00"), "ended_at": at("11:00")})
     assert response.status_code == 201
@@ -149,6 +149,6 @@ def test_assignment_changes_move_rollups_between_duties():
 def test_overlapping_assignment_change_keeps_rollups():
     submit(line("10:00", "SPD=10"))
     before = (hourly(AZ1, "SPD"), summary(AZ1), summary(AZ2))
-    # estender AZ-D01 até às 14:00 sobrepõe AZ-D02 (mesma composição) -> 409
+    # extending AZ-D01 until 14:00 overlaps AZ-D02 (same trainset) -> 409
     assert client.patch(f"/v1/assignments/{assignment_id(AZ1)}", json={"ended_at": at("14:00")}).status_code == 409
     assert (hourly(AZ1, "SPD"), summary(AZ1), summary(AZ2)) == before

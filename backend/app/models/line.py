@@ -26,7 +26,7 @@ class Line(Base):
         order_by="LineStation.position",
         cascade="all, delete-orphan",
     )
-    # estações da linha, pela ordem do percurso
+    # stations of the line, in route order
     stations: Mapped[list["Station"]] = relationship(
         secondary="line_stations",
         order_by="LineStation.position",

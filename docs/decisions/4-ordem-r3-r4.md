@@ -1,40 +1,40 @@
-# 0004 — Independência da ordem de chegada em R3 e R4
+# 0004 — Independence of arrival order in R3 and R4
 
 
-## Contexto
+## Context
 
-Os relatórios de uma mesma medição podem chegar por qualquer ordem: em tempo real, num batch do depósito horas depois, ou a misturar os dois. O estado de uma medição e a deteção de conflitos não podem depender dessa ordem.
+Reports for the same measurement can arrive in any order: in real time, in a depot batch hours later, or mixing the two. The state of a measurement and conflict detection cannot depend on that order.
 
-- **R3**: o estado de uma medição resulta das revisões aplicadas por ordem de `rev`. Um número define a métrica, `-` remove-a e uma chave ausente mantém-na. A estação vem da revisão com o `rev` mais alto. Sem métricas, a medição não aparece.
-- **R4**: relatórios com a mesma identidade (`serial`, `measured_at`, `rev`) e conteúdo diferente estão em conflito, e todos eles vão para quarentena com o motivo `conflict`.
+- **R3**: the state of a measurement results from the revisions applied in `rev` order. A number defines the metric, `-` removes it and an absent key keeps it. The station comes from the revision with the highest `rev`. Without metrics, the measurement does not appear.
+- **R4**: reports with the same identity (`serial`, `measured_at`, `rev`) and different content are in conflict, and all of them go to quarantine with reason `conflict`.
 
-## Decisão
+## Decision
 
-**Guardar sempre a revisão.** Todo o relatório válido dá uma linha em `report_revisions`, também quando é duplicado ou entra em conflito (`_apply_revision` em `services/process_report.py`). Assim, um relatório que chegue mais tarde encontra sempre todos os anteriores com a mesma identidade, qualquer que tenha sido o resultado deles.
+**Always store the revision.** Every valid report produces a row in `report_revisions`, even when it is a duplicate or enters conflict (`_apply_revision` in `services/process_report.py`). Thus, a report that arrives later always finds all earlier ones with the same identity, whatever their result was.
 
-**R4: a decisão olha para todas as revisões da identidade, não só para a última.** `classify_revision` (`domain/revisions.py`) recebe o conteúdo novo e o de todas as revisões já guardadas com a mesma identidade:
-- nenhuma → `NEW` (aplicado);
-- todas iguais (mesma estação, mesmas métricas, valores comparados como `Decimal`, por isso `11.6 == 11.60`) → `DUPLICATE`;
-- alguma diferente → `CONFLICT`. O relatório novo **e todos os anteriores com essa identidade**, incluindo os já aplicados e os duplicados, passam a `quarantined/conflict`;
-- se a identidade já estiver em conflito → `CONFLICT`, mesmo que o novo seja igual a uma das versões. Um conflito não se desfaz.
+**R4: the decision looks at all revisions of the identity, not only the last one.** `classify_revision` (`domain/revisions.py`) receives the new content and that of all revisions already stored with the same identity:
+- none → `NEW` (applied);
+- all equal (same station, same metrics, values compared as `Decimal`, so `11.6 == 11.60`) → `DUPLICATE`;
+- any different → `CONFLICT`. The new report **and all earlier ones with that identity**, including those already applied and duplicates, become `quarantined/conflict`;
+- if the identity is already in conflict → `CONFLICT`, even if the new one is equal to one of the versions. A conflict is not undone.
 
-Assim, o conjunto final de estados é o mesmo para qualquer ordem. Por exemplo, com A = A′ ≠ B:
-- A, A′, B → A aplicado, A′ duplicado, depois B dá conflito e A e A′ passam a conflito;
-- B, A, A′ → B aplicado, A dá conflito (e B passa a conflito), A′ entra numa identidade em conflito.
+Thus, the final set of states is the same for any order. For example, with A = A′ ≠ B:
+- A, A′, B → A applied, A′ duplicate, then B causes a conflict and A and A′ become conflict;
+- B, A, A′ → B applied, A causes a conflict (and B becomes conflict), A′ enters an identity already in conflict.
 
-Nos dois casos ficam os três em `conflict`.
+In both cases all three end up in `conflict`.
 
-**R3: a medição é recalculada de raiz a cada alteração.** `_rebuild_measurement` lê todas as revisões `applied` da medição (`serial`, `measured_at`), de todos os `rev`, e passa-as a `apply_revisions` (`domain/revisions.py`), que as **ordena por `rev`** antes de as aplicar. A medição é recalculada a partir das revisões, sem aplicar só a última por cima do estado anterior. Por isso, uma revisão `rev=1` que chega antes da `rev=0` dá o mesmo resultado. Quando a R4 tira revisões de `applied`, a medição é recalculada sem elas e pode voltar ao estado de outro `rev` ou desaparecer.
+**R3: the measurement is recalculated from scratch on every change.** `_rebuild_measurement` reads all `applied` revisions of the measurement (`serial`, `measured_at`), across all `rev` values, and passes them to `apply_revisions` (`domain/revisions.py`), which **sorts them by `rev`** before applying them. The measurement is recalculated from the revisions, rather than applying only the latest on top of the previous state. Therefore, a `rev=1` revision arriving before `rev=0` gives the same result. When R4 removes revisions from `applied`, the measurement is recalculated without them and may return to the state of another `rev` or disappear.
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Aplicar cada revisão por cima do estado atual da medição**: o resultado dependeria da ordem (`rev=0` a chegar depois de `rev=1` apagaria valores mais recentes) e não haveria forma de desfazer uma revisão que depois entra em conflito.
-- **Não guardar duplicados nem conflitos**: um terceiro relatório diferente não saberia que já tinha havido duas versões, e o primeiro aplicado nunca passaria a conflito.
-- **UNIQUE em `(trainset_id, measured_at, rev)`**: impediria guardar as várias versões de uma identidade, que é exatamente o que a R4 precisa de ver (ver [0001](1-responsabilidade-dos-modelos.md)).
+- **Apply each revision on top of the current measurement state**: the result would depend on the order (`rev=0` arriving after `rev=1` would erase more recent values) and there would be no way to undo a revision that later enters conflict.
+- **Not storing duplicates or conflicts**: a third different report would not know that there had already been two versions, and the first applied one would never become conflict.
+- **UNIQUE on `(trainset_id, measured_at, rev)`**: it would prevent storing the various versions of an identity, which is exactly what R4 needs to see (see [0001](1-responsabilidade-dos-modelos.md)).
 
-## Consequências
+## Consequences
 
-- O estado efetivo (medição, quarentena por conflito) não depende da ordem de chegada. Isto está coberto por `tests/unit/test_revisions.py` e `tests/integration/test_process_report_r4.py`.
-- **O que depende da ordem** é só *qual* de dois relatórios iguais fica `applied` e qual fica `duplicate` (R2: o primeiro a chegar). O conteúdo da medição é o mesmo nos dois casos. Por isso o Worker e o `rebuild-read-models` processam por `id` crescente, para darem o mesmo resultado.
-- A garantia assume que os relatórios de uma identidade são processados um de cada vez. Com vários Workers em paralelo, dois relatórios da mesma identidade podiam ser classificados ao mesmo tempo sem se verem um ao outro. É mais uma razão para o compose arrancar um só Worker (ver [0003](3-api-para-worker.md)).
-- Recalcular a medição a cada relatório custa uma leitura das suas revisões. São poucas por medição, por isso o custo é baixo.
+- The effective state (measurement, quarantine due to conflict) does not depend on arrival order. This is covered by `tests/unit/test_revisions.py` and `tests/integration/test_process_report_r4.py`.
+- **What depends on the order** is only *which* of two identical reports becomes `applied` and which becomes `duplicate` (R2: the first to arrive). The measurement content is the same in both cases. Therefore the Worker and `rebuild-read-models` process by increasing `id`, to give the same result.
+- The guarantee assumes that reports of an identity are processed one at a time. With several Workers in parallel, two reports of the same identity could be classified at the same time without seeing each other. This is another reason for compose to start only one Worker (see [0003](3-api-para-worker.md)).
+- Recalculating the measurement for each report costs one read of its revisions. There are few per measurement, so the cost is low.

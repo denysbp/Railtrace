@@ -20,8 +20,8 @@ lines_router = APIRouter(
 def list_lines(
     db: Session = Depends(get_db)
 ):
-    # Só leitura. Line.stations já vem ordenado por LineStation.position;
-    # selectinload carrega as estações de todas as linhas numa só query extra.
+    # Read-only. Line.stations is already ordered by LineStation.position;
+    # selectinload loads the stations of all lines in a single extra query.
     return db.scalars(
         select(Line)
         .options(selectinload(Line.stations))

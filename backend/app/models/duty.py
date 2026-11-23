@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 
 class Duty(Base):
-    """Serviço planeado numa linha (ex.: AZ-D01-20261102)."""
+    """Planned service on a line (e.g. AZ-D01-20261102)."""
 
     __tablename__ = "duties"
     __table_args__ = (

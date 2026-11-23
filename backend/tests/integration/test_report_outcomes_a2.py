@@ -24,9 +24,9 @@ def outcome_row(report_id):
 
 
 def store_pending(*lines, batch=False):
-    """Grava relatórios como a API (sem os processar); opcionalmente num batch."""
+    """Stores reports like the API (without processing them); optionally in a batch."""
     with SessionLocal() as db:
-        batch_row = Batch(name="teste") if batch else None
+        batch_row = Batch(name="test") if batch else None
         reports = [
             ReportRaw(raw_content=line, received_at=RECEIVED_AT, batch=batch_row, batch_line=(i + 1 if batch else None))
             for i, line in enumerate(lines)
@@ -41,7 +41,7 @@ def process(report_id):
         process_report_module.process_report(db.get(ReportRaw, report_id), db)
 
 
-# --- o Worker escreve o read model ------------------------------------------------
+# --- the Worker writes the read model ---------------------------------------------
 
 def test_worker_writes_outcome_with_copied_fields():
     good, dup, bad = submit(make_line("SPD=20"), make_line("SPD=20.0"), with_bad_checksum(make_line("SPD=1")))
@@ -63,11 +63,11 @@ def test_conflict_updates_outcome_of_already_applied_report():
 
 def test_technical_error_writes_no_outcome(monkeypatch):
     def boom(*args, **kwargs):
-        raise RuntimeError("falha simulada")
+        raise RuntimeError("simulated failure")
 
     monkeypatch.setattr(process_report_module, "_rebuild_measurement", boom)
     (report,) = submit(make_line("SPD=20"))
-    assert outcome_row(report) is None  # continua pending: sem resultado
+    assert outcome_row(report) is None  # remains pending: no outcome
 
 
 def test_unprocessed_reports_have_no_outcome_and_count_as_pending():
@@ -85,12 +85,12 @@ def test_unprocessed_reports_have_no_outcome_and_count_as_pending():
     assert (stats["reports_total"], stats["pending"]) == (3, 1)
 
 
-# --- os endpoints leem o read model, não reports_raw --------------------------------
+# --- the endpoints read the read model, not reports_raw ------------------------------
 
 def test_endpoints_read_report_outcomes_not_reports_raw():
     batch_id, (report,) = store_pending(with_bad_checksum(make_line("SPD=1")), batch=True)
     process(report)
-    # Mexe só em reports_raw (o read model fica igual): as respostas não podem mudar
+    # Only touches reports_raw (the read model stays the same): the responses must not change
     with SessionLocal() as db:
         db.execute(text("update reports_raw set status = 'applied', quarantine_reason = null where id = :id"), {"id": report})
         db.commit()

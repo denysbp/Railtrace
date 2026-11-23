@@ -1,5 +1,5 @@
-"""Importa todos os modelos para que fiquem registados em Base.metadata
-(necessário para o Alembic autogenerate e para resolver as relationships)."""
+"""Imports all models so they are registered in Base.metadata
+(needed for Alembic autogenerate and to resolve relationships)."""
 
 from app.models.assignment import Assignment
 from app.models.base import Base

@@ -21,25 +21,25 @@ if TYPE_CHECKING:
 
 
 def _enum_values(enum_cls: type) -> list[str]:
-    # Grava na BD o valor ("pending") em vez do nome do membro ("PENDING").
+    # Stores the value ("pending") in the DB instead of the member name ("PENDING").
     return [member.value for member in enum_cls]
 
 
 class ReportRaw(Base):
     __tablename__ = "reports_raw"
     __table_args__ = (
-        # quarantine_reason preenchido <=> status = quarantined
+        # quarantine_reason set <=> status = quarantined
         CheckConstraint(
             "(status = 'quarantined') = (quarantine_reason IS NOT NULL)",
             name="ck_reports_raw_quarantine_reason",
         ),
-        # batch_line só existe (e é obrigatório) quando o relatório veio de um batch
+        # batch_line only exists (and is required) when the report came from a batch
         CheckConstraint(
             "(batch_id IS NULL) = (batch_line IS NULL)",
             name="ck_reports_raw_batch_line",
         ),
         CheckConstraint("batch_line >= 1", name="ck_reports_raw_batch_line_positive"),
-        # A mesma linha do ficheiro não pode ser gravada duas vezes no mesmo batch
+        # The same file line cannot be stored twice in the same batch
         UniqueConstraint("batch_id", "batch_line", name="uq_reports_raw_batch_line"),
     )
 
@@ -66,15 +66,15 @@ class ReportRaw(Base):
         nullable=True,
     )
 
-    # NULL = enviado sozinho em tempo real (POST /v1/reports)
+    # NULL = sent on its own in real time (POST /v1/reports)
     batch_id: Mapped[int | None] = mapped_column(
-        # append-only: não se apaga um batch com relatórios
+        # append-only: a batch with reports is not deleted
         ForeignKey("batches.id", ondelete="RESTRICT", name="fk_reports_raw_batch_id_batches"),
         nullable=True,
     )
-    # Número da linha no ficheiro original (1 = primeira linha), para rastreabilidade
+    # Line number in the original file (1 = first line), for traceability
     batch_line: Mapped[int | None] = mapped_column(nullable=True)
 
     batch: Mapped["Batch | None"] = relationship(back_populates="reports")
-    # Revisão criada a partir deste relatório (None se ainda não foi processado ou ficou em quarentena)
+    # Revision created from this report (None if not processed yet or quarantined)
     revision: Mapped["ReportRevision | None"] = relationship(back_populates="report_raw")

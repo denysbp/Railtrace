@@ -42,7 +42,7 @@ def _utc(instant: datetime) -> datetime:
 
 
 def duty_readings(db: Session, code: str, metric: str) -> dict:
-    """Valores de uma métrica nas medições da duty, por ordem temporal."""
+    """Values of a metric in the duty's measurements, in temporal order."""
     _check_metric(metric)
     duty = _duty(db, code)
     rows = db.execute(
@@ -73,7 +73,7 @@ def duty_readings(db: Session, code: str, metric: str) -> dict:
 
 
 def duty_hourly(db: Session, code: str, metric: str) -> dict:
-    """Rollups por hora UTC de uma métrica (R7)."""
+    """UTC-hourly rollups of a metric (R7)."""
     _check_metric(metric)
     duty = _duty(db, code)
     rows = db.scalars(
@@ -92,7 +92,7 @@ def duty_hourly(db: Session, code: str, metric: str) -> dict:
 
 
 def duty_summary(db: Session, code: str) -> dict:
-    """Composições, número de medições e resumo por métrica da duty inteira (R7)."""
+    """Trainsets, number of measurements and per-metric summary of the whole duty (R7)."""
     duty = _duty(db, code)
     trainsets = db.scalars(
         select(Trainset.serial)
@@ -107,15 +107,15 @@ def duty_summary(db: Session, code: str) -> dict:
             select(DutyMetricSummary.metric, DutyMetricSummary.value).where(DutyMetricSummary.duty_id == duty.id)
         ).all()
     )
-    # pela ordem do registo de métricas (SPD, KWH, AX1..AX8)
+    # in metric registry order (SPD, KWH, AX1..AX8)
     metrics = {metric: float(values[metric]) for metric in METRIC_STRATEGIES if metric in values}
     return {"duty": code, "trainsets": list(trainsets), "measurements": measurements, "metrics": metrics}
 
 
 def duty_stations(db: Session, code: str) -> dict:
-    """Todas as estações da linha da duty, pela ordem do percurso, com os rollups (R7).
+    """All stations of the duty's line, in route order, with their rollups (R7).
 
-    Uma estação sem medições na duty aparece com reports 0 e max_axle None.
+    A station without measurements in the duty appears with reports 0 and max_axle None.
     """
     duty = _duty(db, code)
     line = db.get(Line, duty.line_id)
@@ -124,7 +124,7 @@ def duty_stations(db: Session, code: str) -> dict:
         for row in db.scalars(select(DutyStationStats).where(DutyStationStats.duty_id == duty.id))
     }
     stations = []
-    for station in line.stations:  # já ordenadas por LineStation.position
+    for station in line.stations:  # already ordered by LineStation.position
         row = stats.get(station.id)
         stations.append({
             "station": station.code,
@@ -136,12 +136,12 @@ def duty_stations(db: Session, code: str) -> dict:
 
 
 def _received(db: Session, *where) -> int:
-    """Quantos relatórios foram recebidos (só conta linhas da fila reports_raw)."""
+    """How many reports were received (only counts rows in the reports_raw queue)."""
     return db.scalar(select(func.count()).select_from(ReportRaw).where(*where))
 
 
 def _outcome_counts(db: Session, *where) -> tuple[int, int, int, dict[str, int]]:
-    """(processados, applied, duplicate, {motivo: n}) a partir do read model report_outcomes."""
+    """(processed, applied, duplicate, {reason: n}) from the report_outcomes read model."""
     applied = duplicate = processed = 0
     quarantined: dict[str, int] = {}
     rows = db.execute(
@@ -166,7 +166,7 @@ class BatchNotFoundError(Exception):
 
 
 def batch_outcome(db: Session, batch_id: int) -> dict:
-    """Resultado atual de cada relatório do batch. pending = recebidos ainda sem resultado."""
+    """Current result of each report in the batch. pending = received but no result yet."""
     if db.get(Batch, batch_id) is None:
         raise BatchNotFoundError
     lines = _received(db, ReportRaw.batch_id == batch_id)
@@ -182,7 +182,7 @@ def batch_outcome(db: Session, batch_id: int) -> dict:
 
 
 def quarantine_list(db: Session, reason: QuarantineReason, limit: int) -> list[dict]:
-    """Relatórios em quarentena com esse motivo, os mais recentes primeiro."""
+    """Quarantined reports with that reason, most recent first."""
     rows = db.scalars(
         select(ReportOutcome)
         .where(ReportOutcome.status == ReportStatus.QUARANTINED, ReportOutcome.quarantine_reason == reason)
@@ -201,8 +201,8 @@ def quarantine_list(db: Session, reason: QuarantineReason, limit: int) -> list[d
 
 
 def stats(db: Session) -> dict:
-    """Totais. Resultados dos relatórios e medições vêm dos read models;
-    de reports_raw só se conta quantos foram recebidos (pending = recebidos - processados)."""
+    """Totals. Report results and measurements come from the read models;
+    reports_raw is only counted for how many were received (pending = received - processed)."""
     reports_total = _received(db)
     processed, _, _, quarantined = _outcome_counts(db)
     measurements, attributed = db.execute(

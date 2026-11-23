@@ -26,7 +26,7 @@ def upgrade() -> None:
     sa.Column('report_raw_id', sa.Integer(), nullable=False),
     sa.Column('batch_id', sa.Integer(), nullable=True),
     sa.Column('batch_line', sa.Integer(), nullable=True),
-    # Reutiliza os tipos ENUM já criados para reports_raw (create_type=False)
+    # Reuses the ENUM types already created for reports_raw (create_type=False)
     sa.Column('status', postgresql.ENUM(name='report_status', create_type=False), nullable=False),
     sa.Column('quarantine_reason', postgresql.ENUM(name='quarantine_reason', create_type=False), nullable=True),
     sa.Column('raw_line', sa.Text(), nullable=False),
@@ -41,7 +41,7 @@ def upgrade() -> None:
     op.create_index('ix_report_outcomes_reason_received_at', 'report_outcomes', ['quarantine_reason', 'received_at'], unique=False)
     # ### end Alembic commands ###
 
-    # Preenche o read model com os relatórios já processados (não altera reports_raw)
+    # Populates the read model with the already processed reports (does not change reports_raw)
     op.execute(
         "INSERT INTO report_outcomes "
         "(report_raw_id, batch_id, batch_line, status, quarantine_reason, raw_line, received_at) "

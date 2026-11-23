@@ -26,7 +26,7 @@ def test_start_is_included_and_end_is_excluded():
 
 def test_outside_every_assignment_is_unattributed():
     assert find_duty(at(6, 59), ASSIGNMENTS) is None
-    assert find_duty(at(12), ASSIGNMENTS) is None  # entre duas duties (ex.: no depósito)
+    assert find_duty(at(12), ASSIGNMENTS) is None  # between two duties (e.g. in the depot)
     assert find_duty(at(8), []) is None
 
 

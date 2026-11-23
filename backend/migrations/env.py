@@ -4,25 +4,25 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from app.config import get_settings
-from app.models import Base  # importa todos os modelos -> registados em Base.metadata
+from app.models import Base  # imports all models -> registered in Base.metadata
 
-# Config do Alembic (valores do alembic.ini)
+# Alembic config (values from alembic.ini)
 config = context.config
 
-# Logging definido no alembic.ini
+# Logging defined in alembic.ini
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# URL vem das settings (env / .env), nunca do alembic.ini.
-# "%" é escapado porque o configparser o trata como interpolação.
+# URL comes from settings (env / .env), never from alembic.ini.
+# "%" is escaped because configparser treats it as interpolation.
 config.set_main_option("sqlalchemy.url", get_settings().database_url.replace("%", "%%"))
 
-# Metadata usada pelo --autogenerate
+# Metadata used by --autogenerate
 target_metadata = Base.metadata
 
 
 def run_migrations_offline() -> None:
-    """Gera o SQL sem ligar à base de dados (`alembic upgrade head --sql`)."""
+    """Generates the SQL without connecting to the database (`alembic upgrade head --sql`)."""
     context.configure(
         url=config.get_main_option("sqlalchemy.url"),
         target_metadata=target_metadata,
@@ -36,7 +36,7 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    """Aplica as migrações ligando à base de dados."""
+    """Applies the migrations by connecting to the database."""
     connectable = engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",

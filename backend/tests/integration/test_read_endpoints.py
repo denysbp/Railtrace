@@ -5,7 +5,7 @@ from app.main import app
 from .conftest import make_line, submit, with_bad_checksum
 
 client = TestClient(app)
-AZ1 = "AZ-D01-20261102"  # TS-0001, [07:00, 11:00) em 2026-11-02, linha AZ
+AZ1 = "AZ-D01-20261102"  # TS-0001, [07:00, 11:00) on 2026-11-02, line AZ
 
 
 def at(hhmm):
@@ -32,7 +32,7 @@ def test_readings_returns_points_in_time_order():
             {"measured_at": "2026-11-02T08:10:00Z", "value": 33.0, "trainset": "TS-0001", "station": "ALF"},
         ],
     }
-    # só as medições que têm a métrica
+    # only the measurements that have the metric
     kwh = client.get(f"/v1/duties/{AZ1}/readings", params={"metric": "KWH"}).json()["points"]
     assert [p["value"] for p in kwh] == [1.5, 2.25]
 
@@ -59,7 +59,7 @@ def test_summary_returns_trainsets_measurements_and_metrics():
         "measurements": 3,
         "metrics": {"SPD": 21.0, "KWH": 3.75, "AX1": 38.4, "AX4": 40.0},
     }
-    assert list(body["metrics"]) == ["SPD", "KWH", "AX1", "AX4"]  # ordem do registo
+    assert list(body["metrics"]) == ["SPD", "KWH", "AX1", "AX4"]  # registration order
 
 
 def test_stations_lists_every_station_of_the_line_in_order():
@@ -67,7 +67,7 @@ def test_stations_lists_every_station_of_the_line_in_order():
     body = client.get(f"/v1/duties/{AZ1}/stations").json()
     assert body["duty"] == AZ1 and body["line"] == "AZ"
     stations = body["stations"]
-    assert len(stations) == 18  # todas as estações da linha AZ
+    assert len(stations) == 18  # all stations of line AZ
     assert stations[0] == {"station": "REB", "name": "Reboleira", "reports": 1, "max_axle": 36.1}
     assert stations[1]["station"] == "AMD" and stations[1]["reports"] == 0 and stations[1]["max_axle"] is None
     assert stations[2] == {"station": "ALF", "name": "Alfornelos", "reports": 1, "max_axle": 40.0}
@@ -85,13 +85,13 @@ def test_errors():
         assert client.get(f"/v1/duties/NAO-EXISTE/{path}").status_code == 404
     assert client.get(f"/v1/duties/{AZ1}/readings", params={"metric": "DOOR"}).status_code == 422
     assert client.get(f"/v1/duties/{AZ1}/hourly", params={"metric": "DOOR"}).status_code == 422
-    assert client.get(f"/v1/duties/{AZ1}/readings").status_code == 422  # metric obrigatório
+    assert client.get(f"/v1/duties/{AZ1}/readings").status_code == 422  # metric is required
 
 
 def test_stats_counts_reports_and_measurements():
-    setup_measurements()  # 3 aplicados e atribuídos
+    setup_measurements()  # 3 applied and attributed
     submit(
-        make_line("SPD=1", measured_at=at("12:00")),            # aplicado, não atribuído
+        make_line("SPD=1", measured_at=at("12:00")),            # applied, unattributed
         with_bad_checksum(make_line("SPD=1", measured_at=at("12:05"))),  # bad_checksum
         make_line("SPD=1", measured_at=at("12:10"), serial="TS-0099"),   # unknown_trainset
     )

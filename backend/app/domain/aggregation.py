@@ -8,11 +8,11 @@ from decimal import ROUND_HALF_UP, Decimal
 
 
 class AggregationStrategy(ABC):
-    """Como se agregam os valores de uma métrica numa hora ou numa duty inteira."""
+    """How the values of a metric are aggregated in an hour or over an entire duty."""
 
     @abstractmethod
     def aggregate(self, values: list[Decimal]) -> Decimal:
-        """values nunca vem vazio."""
+        """values is never empty."""
 
 
 class MeanStrategy(AggregationStrategy):
@@ -36,7 +36,7 @@ METRIC_STRATEGIES: dict[str, AggregationStrategy] = {
     **{f"AX{axle}": MaxStrategy() for axle in range(1, 9)},
 }
 
-# Métricas de eixo (AX*): usadas no máximo por estação
+# Axle metrics (AX*): used at most once per station
 AXLE_METRICS = frozenset(metric for metric in METRIC_STRATEGIES if metric.startswith("AX"))
 
 
@@ -44,7 +44,7 @@ def strategy_for(metric: str) -> AggregationStrategy:
     return METRIC_STRATEGIES[metric]
 
 
-SLOTS_PER_HOUR = 12  # um relatório a cada 5 minutos
+SLOTS_PER_HOUR = 12  # one report every 5 minutes
 VALUE_PLACES = Decimal("0.01")
 COVERAGE_PLACES = Decimal("0.001")
 
@@ -54,20 +54,20 @@ def round_value(value: Decimal) -> Decimal:
 
 
 def coverage(count: int) -> Decimal:
-    """min(count / 12, 1), com 3 casas decimais."""
+    """min(count / 12, 1), with 3 decimal places."""
     return min(
         Decimal(count) / SLOTS_PER_HOUR, Decimal(1)
     ).quantize(COVERAGE_PLACES, rounding=ROUND_HALF_UP)
 
 
 def utc_hour(instant: datetime) -> datetime:
-    """Início da hora UTC a que pertence o instante (fusos convertidos para UTC)."""
+    """Start of the UTC hour the instant belongs to (timezones converted to UTC)."""
     return instant.astimezone(timezone.utc).replace(minute=0, second=0, microsecond=0)
 
 
 @dataclass(frozen=True)
 class MetricPoint:
-    """Um valor de uma métrica numa medição."""
+    """A metric value in a measurement."""
 
     measured_at: datetime
     metric: str
@@ -95,7 +95,7 @@ def _aggregate(metric: str, values: list[Decimal]) -> Decimal:
 
 
 def hourly_rollups(points: Iterable[MetricPoint]) -> list[HourlyRollup]:
-    """Por métrica e hora UTC: count, value (estratégia da métrica) e coverage."""
+    """Per metric and UTC hour: count, value (metric strategy) and coverage."""
     groups: dict[tuple[str, datetime], list[Decimal]] = defaultdict(list)
     for point in points:
         groups[(point.metric, utc_hour(point.measured_at))].append(point.value)
@@ -106,7 +106,7 @@ def hourly_rollups(points: Iterable[MetricPoint]) -> list[HourlyRollup]:
 
 
 def duty_summary(points: Iterable[MetricPoint]) -> list[MetricSummary]:
-    """Por métrica, sobre a duty inteira, com a mesma estratégia das horas."""
+    """Per metric, over the entire duty, using the same strategy as for hours."""
     groups: dict[str, list[Decimal]] = defaultdict(list)
     for point in points:
         groups[point.metric].append(point.value)
@@ -118,7 +118,7 @@ def duty_summary(points: Iterable[MetricPoint]) -> list[MetricSummary]:
 
 @dataclass(frozen=True)
 class StationReading:
-    """Uma medição feita numa estação, com as suas métricas."""
+    """A measurement taken at a station, with its metrics."""
 
     station: int
     metrics: dict[str, Decimal]
@@ -128,11 +128,11 @@ class StationReading:
 class StationStats:
     station: int
     reports: int
-    max_axle: Decimal | None  # None = nenhuma métrica AX* nessa estação
+    max_axle: Decimal | None  # None = no AX* metric at that station
 
 
 def station_stats(readings: Iterable[StationReading]) -> list[StationStats]:
-    """Por estação: número de relatórios e o maior valor AX*."""
+    """Per station: number of reports and the highest AX* value."""
     counts: dict[int, int] = defaultdict(int)
     axles: dict[int, list[Decimal]] = defaultdict(list)
     for reading in readings:

@@ -23,16 +23,16 @@ CHECK_SQL = "(status = 'quarantined') = (quarantine_reason IS NOT NULL)"
 
 
 def _recreate_report_status(values: list[str]) -> None:
-    """O Postgres não remove valores de um ENUM: cria o tipo de novo com `values`.
+    """Postgres does not remove values from an ENUM: it creates the type again with `values`.
 
-    A CHECK que compara status com 'quarantined' depende do tipo antigo, por isso
-    é removida antes e criada outra vez no fim.
+    The CHECK that compares status with 'quarantined' depends on the old type, so
+    it is removed first and created again at the end.
     """
     op.drop_constraint(CHECK_NAME, "reports_raw", type_="check")
     op.execute("ALTER TABLE reports_raw ALTER COLUMN status DROP DEFAULT")
     op.execute("ALTER TYPE report_status RENAME TO report_status_old")
     sa.Enum(*values, name="report_status").create(op.get_bind())
-    # Falha se houver linhas com um valor que deixou de existir
+    # Fails if there are rows with a value that no longer exists
     op.execute(
         "ALTER TABLE reports_raw ALTER COLUMN status "
         "TYPE report_status USING status::text::report_status"
@@ -43,7 +43,7 @@ def _recreate_report_status(values: list[str]) -> None:
 
 
 def upgrade() -> None:
-    """conflict passa a ser só motivo de quarentena, não um status."""
+    """conflict becomes only a quarantine reason, not a status."""
     _recreate_report_status(["pending", "applied", "duplicate", "quarantined"])
 
 

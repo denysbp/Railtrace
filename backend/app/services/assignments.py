@@ -42,12 +42,12 @@ def create_assignment(
     started_at: datetime,
     ended_at: datetime,
 ) -> Assignment:
-    """Liga uma composição a uma duty.
+    """Links a trainset to a duty.
 
-    Regras:
-    - a composição tem de ser da mesma linha da duty;
-    - não pode sobrepor outro assignment da mesma composição nem da mesma duty
-      (garantido na BD pelas ExcludeConstraint).
+    Rules:
+    - the trainset must be on the same line as the duty;
+    - it cannot overlap another assignment of the same trainset or the same duty
+      (enforced in the DB by the ExcludeConstraints).
     """
     duty = db.scalar(select(Duty).where(Duty.code == duty_code))
     if duty is None:
@@ -67,7 +67,7 @@ def create_assignment(
     )
     db.add(assignment)
     _flush_or_overlap(db)
-    # R5: as medições da composição dentro do novo intervalo passam a ser desta duty
+    # R5: measurements of the trainset within the new interval now belong to this duty
     reattribute_measurements(db, trainset.id, started_at, ended_at)
     db.commit()
     return assignment
@@ -90,7 +90,7 @@ def update_assignment(
     if ended_at <= started_at:
         raise InvalidIntervalError
 
-    # R5: afetadas = medições entre o intervalo antigo e o novo (as que entram e as que saem)
+    # R5: affected = measurements between the old and new intervals (those entering and those leaving)
     affected_start = min(assignment.started_at, started_at)
     affected_end = max(assignment.ended_at, ended_at)
 
@@ -103,7 +103,7 @@ def update_assignment(
 
 
 def _flush_or_overlap(db: Session) -> None:
-    """Envia o assignment para a BD; uma sobreposição (ExcludeConstraint) dá AssignmentOverlapError."""
+    """Sends the assignment to the DB; an overlap (ExcludeConstraint) raises AssignmentOverlapError."""
     try:
         db.flush()
     except IntegrityError as e:

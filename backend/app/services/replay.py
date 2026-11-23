@@ -51,7 +51,7 @@ def replay_quarantine(reason: QuarantineReason, dry_run: bool = False) -> list[R
 
 def _replay_one(db, report_id: int, reason: QuarantineReason) -> ReplayResult | None:
     report = db.scalar(select(ReportRaw).where(ReportRaw.id == report_id).with_for_update())
-    # Pode ter mudado desde a listagem (ex.: outro replay): só repete se ainda estiver igual
+    # It may have changed since listing (e.g. another replay): only retry if still the same
     if report.status != ReportStatus.QUARANTINED or report.quarantine_reason != reason:
         return None
     apply_rules(report, db)

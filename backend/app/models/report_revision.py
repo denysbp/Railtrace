@@ -13,23 +13,23 @@ if TYPE_CHECKING:
 
 class ReportRevision(Base):
     """
-    Relatório válido já interpretado (uma revisão de uma medição).
+    Valid report already interpreted (a revision of a measurement).
 
-    Não há UNIQUE em (trainset_id, measured_at, rev): a R4 permite vários
-    relatórios com a mesma identidade quando há conflito, e os candidatos
-    têm de ficar guardados para o conflito poder ser detetado.
+    There is no UNIQUE on (trainset_id, measured_at, rev): R4 allows several
+    reports with the same identity when there is a conflict, and candidates
+    must be kept stored so the conflict can be detected.
     """
 
     __tablename__ = "report_revisions"
     __table_args__ = (
         CheckConstraint("rev >= 0", name="ck_report_revisions_rev_non_negative"),
-        # Procura das revisões de uma medição (identidade + rev)
+        # Lookup of the revisions of a measurement (identity + rev)
         Index("ix_report_revisions_identity", "trainset_id", "measured_at", "rev"),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    # Cada relatório original dá no máximo uma revisão
+    # Each original report yields at most one revision
     report_raw_id: Mapped[int] = mapped_column(
         ForeignKey("reports_raw.id", ondelete="RESTRICT"),
         unique=True,
@@ -41,7 +41,7 @@ class ReportRevision(Base):
     )
     measured_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     rev: Mapped[int] = mapped_column(nullable=False)
-    # NULL = relatório sem estação ("-" no relatório)
+    # NULL = report without a station ("-" in the report)
     station_id: Mapped[int | None] = mapped_column(
         ForeignKey("stations.id", ondelete="RESTRICT"),
         nullable=True,
@@ -61,10 +61,10 @@ class ReportRevision(Base):
     )
 
 
-# Fiz esse modelo pq se surgir uma nova metrica nao temos
-# de alterar a tabela.
+# This model exists so that if a new metric appears we do not have
+# to change the table.
 class ReportRevisionMetric(Base):
-    """Valor de uma métrica recebido numa revisão."""
+    """Value of a metric received in a revision."""
 
     __tablename__ = "report_revision_metrics"
 
@@ -73,8 +73,8 @@ class ReportRevisionMetric(Base):
         primary_key=True,
     )
     metric: Mapped[str] = mapped_column(String(16), primary_key=True)
-    # Numeric sem precisão fixa: guarda o valor exatamente como foi recebido
-    # E NULL para seguir as regras de remocao tipo R3
+    # Numeric without fixed precision: stores the value exactly as received
+    # And NULL to follow removal rules such as R3
     value: Mapped[Decimal | None] = mapped_column(Numeric, nullable=True)
 
     report_revision: Mapped["ReportRevision"] = relationship(back_populates="metrics")

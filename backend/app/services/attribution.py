@@ -7,7 +7,7 @@ from app.services.rollups import refresh_rollups
 
 
 def assignment_periods(db: Session, trainset_id: int) -> list[AssignmentPeriod]:
-    """Todos os assignments de uma composição, como períodos do domain."""
+    """All assignments of a trainset, as domain periods."""
     rows = db.execute(
         select(Assignment.duty_id, Assignment.started_at, Assignment.ended_at)
         .where(Assignment.trainset_id == trainset_id)
@@ -16,10 +16,10 @@ def assignment_periods(db: Session, trainset_id: int) -> list[AssignmentPeriod]:
 
 
 def reattribute_measurements(db: Session, trainset_id: int, start: datetime, end: datetime) -> None:
-    """Recalcula a duty das medições da composição com measured_at em [start, end).
+    """Recalculates the duty of the trainset's measurements with measured_at in [start, end).
 
-    Usado quando um assignment é criado ou alterado. Não faz commit: corre na
-    transação de quem chama. O assignment novo/alterado tem de já ter sido flushed.
+    Used when an assignment is created or changed. Does not commit: runs in
+    the caller's transaction. The new/changed assignment must already have been flushed.
     """
     periods = assignment_periods(db, trainset_id)
     measurements = db.scalars(
@@ -29,7 +29,7 @@ def reattribute_measurements(db: Session, trainset_id: int, start: datetime, end
             Measurement.measured_at < end,
         )
     ).all()
-    # R7: os rollups mudam nas duties de onde as medições saem e para onde entram
+    # R7: rollups change in the duties measurements leave and enter
     affected_duties = set()
     for measurement in measurements:
         new_duty_id = find_duty(measurement.measured_at, periods)

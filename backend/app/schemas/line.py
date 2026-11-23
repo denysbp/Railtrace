@@ -21,4 +21,4 @@ class LineWithStationsResponse(BaseModel):
 
     code: str
     name: str
-    stations: list[StationResponse]  # pela ordem do percurso
+    stations: list[StationResponse]  # in route order

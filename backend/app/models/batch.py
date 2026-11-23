@@ -16,7 +16,7 @@ class Batch(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    # Identificador do ficheiro (ex.: "depot-batch-01"), usado nas estatísticas por batch
+    # File identifier (e.g. "depot-batch-01"), used in per-batch statistics
     name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
 
     received_at: Mapped[datetime] = mapped_column(

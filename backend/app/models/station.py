@@ -11,10 +11,10 @@ if TYPE_CHECKING:
 
 
 class Station(Base):
-    """Estação física (ex.: SSE - Saldanha).
+    """Physical station (e.g. SSE - Saldanha).
 
-    Uma estação de correspondência existe uma só vez e liga-se a várias
-    linhas através de LineStation.
+    An interchange station exists only once and connects to several
+    lines through LineStation.
     """
 
     __tablename__ = "stations"
@@ -27,7 +27,7 @@ class Station(Base):
         back_populates="station",
         cascade="all, delete-orphan",
     )
-    # Atalho só de leitura: linhas que passam nesta estação
+    # Read-only shortcut: lines that pass through this station
     lines: Mapped[list["Line"]] = relationship(
         secondary="line_stations",
         viewonly=True,

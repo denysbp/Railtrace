@@ -1,4 +1,4 @@
-"""Regra R5 (atribuição). Funções puras, sem BD."""
+"""Rule R5 (attribution). Pure functions, no DB."""
 
 from collections.abc import Iterable
 from dataclasses import dataclass
@@ -13,7 +13,7 @@ class AssignmentPeriod:
     ended_at: datetime
 
     def covers(self, instant: datetime) -> bool:
-        # início incluído, fim excluído
+        # start inclusive, end exclusive
         return self.started_at <= instant < self.ended_at
 
 

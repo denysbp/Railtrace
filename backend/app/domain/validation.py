@@ -32,7 +32,7 @@ def is_clock_invalid(measured_at: str, received_at: datetime) -> bool:
         return True
     if instant.tzinfo is None:
         return True
-    # datetimes com fuso comparam-se como instantes UTC
+    # timezone-aware datetimes compare as UTC instants
     return not (CLOCK_MIN <= instant <= received_at + CLOCK_MAX_AHEAD)
 
 
@@ -40,7 +40,7 @@ def is_malformated_form(text: str) -> bool:
     if not text.startswith("$") or text.count("$") != 1 or text.count("*") != 1:
         return True
     checksum = text.split("*")[1]
-    # hh: exatamente 2 dígitos hexadecimais
+    # hh: exactly 2 hexadecimal digits
     return len(checksum) != 2 or any(c not in string.hexdigits for c in checksum)
 
 
@@ -59,7 +59,7 @@ def is_malformated_fields(text: str) -> bool:
         if not sep or not name or name in seen:
             return True
         seen.add(name)
-        # "-" = métrica removida (R3)
+        # "-" = metric removed (R3)
         if value != "-" and not _is_number(value):
             return True
 
@@ -71,6 +71,6 @@ def _is_digits(value: str) -> bool:
 
 
 def _is_number(value: str) -> bool:
-    """Número decimal simples: 12, 12.5, -0.3 (sem expoentes, espaços, nan/inf)."""
+    """Simple decimal number: 12, 12.5, -0.3 (no exponents, spaces, nan/inf)."""
     whole, dot, fraction = value.removeprefix("-").partition(".")
     return _is_digits(whole) and (not dot or _is_digits(fraction))

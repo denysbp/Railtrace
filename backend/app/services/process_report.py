@@ -39,11 +39,11 @@ def _set_outcome(
     status: ReportStatus,
     reason: QuarantineReason | None = None,
 ) -> None:
-    """Grava o resultado de um relatório: o status em reports_raw (tira-o da fila)
-    e o read model report_outcomes (o que os endpoints leem, A2).
+    """Stores the result of a report: the status in reports_raw (removes it from the queue)
+    and the report_outcomes read model (what the endpoints read, A2).
 
-    Sem commit: o commit é feito uma vez no fim de process_report (A3).
-    Upsert porque a R4 pode mudar um relatório já processado para conflict.
+    No commit: the commit is done once at the end of process_report (A3).
+    Upsert because R4 can change an already processed report to conflict.
     """
     report.status = status
     report.quarantine_reason = reason
@@ -75,29 +75,29 @@ def _quarantine(
 
 
 def process_report(report: ReportRaw, db: Session) -> bool:
-    """Aplica as regras a um relatório numa só transação.
+    """Applies the rules to a report in a single transaction.
 
-    Devolve False em caso de erro técnico: faz rollback e o relatório continua
-    pending, para ser tentado outra vez.
+    Returns False on a technical error: rolls back and the report stays
+    pending, to be tried again.
     """
     try:
-        lock_read_models_shared(db)  # espera se um rebuild (A4) estiver a correr
+        lock_read_models_shared(db)  # waits if a rebuild (A4) is running
         apply_rules(report, db)
         db.commit()
         return True
     except Exception:
         db.rollback()
-        traceback.print_exc()  # não esconder o erro
+        traceback.print_exc()  # do not hide the error
         return False
 
 
 def apply_rules(report: ReportRaw, db: Session) -> None:
-    """Aplica R1–R5 e R7 a um relatório, sem commit (quem chama gere a transação).
+    """Applies R1–R5 and R7 to a report, without commit (the caller manages the transaction).
 
-    R1: verificações pela ordem do desafio; a primeira que falha dá o motivo.
+    R1: checks in challenge order; the first one that fails gives the reason.
     """
     text = report.raw_content
-    # 1. Forma $...*hh, sem outro $ nem *
+    # 1. Form $...*hh, with no other $ or *
     if is_malformated_form(text):
         _quarantine(db, report, QuarantineReason.MALFORMED)
         return
@@ -105,39 +105,39 @@ def apply_rules(report: ReportRaw, db: Session) -> None:
     if not check_sum_valid(text):
         _quarantine(db, report, QuarantineReason.BAD_CHECKSUM)
         return
-    # 3. 6 campos, tipo TRN, cada campo válido, sem chaves repetidas, ≥ 1 métrica
+    # 3. 6 fields, type TRN, each field valid, no repeated keys, ≥ 1 metric
     if is_malformated_fields(text):
         _quarantine(db, report, QuarantineReason.MALFORMED)
         return
     parsed = parse_report(text)
-    # 4. Todas as chaves de métrica conhecidas
+    # 4. All metric keys are known
     if has_unknown_metric(text[1:].split("*")[0].split(",")[5]):
         _quarantine(db, report, QuarantineReason.UNKNOWN_METRIC)
         return
-    # 5. Estação "-" ou conhecida (None = "-")
+    # 5. Station "-" or known (None = "-")
     station_id = None
     if parsed.station is not None:
         station_id = db.scalar(select(Station.id).where(Station.code == parsed.station))
         if station_id is None:
             _quarantine(db, report, QuarantineReason.UNKNOWN_STATION)
             return
-    # 6. Composição registada
+    # 6. Trainset registered
     trainset_id = db.scalar(select(Trainset.id).where(Trainset.serial == parsed.serial))
     if trainset_id is None:
         _quarantine(db, report, QuarantineReason.UNKNOWN_TRAINSET)
         return
-    # 7. Clock: received_at = quando a API gravou o relatório, não quando o Worker o processa
+    # 7. Clock: received_at = when the API stored the report, not when the Worker processes it
     if is_clock_invalid(parsed.measured_at, report.received_at):
         _quarantine(db, report, QuarantineReason.CLOCK_INVALID)
         return
-    # 8. Conflito (R4), dentro de _apply_revision
-    measured_at = datetime.fromisoformat(parsed.measured_at)  # válido: passou is_clock_invalid
+    # 8. Conflict (R4), inside _apply_revision
+    measured_at = datetime.fromisoformat(parsed.measured_at)  # valid: passed is_clock_invalid
     _apply_revision(report, db, trainset_id, measured_at, parsed.rev, station_id, parsed.metrics)
 
 
 def _apply_revision(report, db, trainset_id, measured_at, rev, station_id, metrics) -> None:
-    """R2 + R4: compara com as revisões já guardadas com a mesma identidade."""
-    # Revisões com a mesma identidade (serial, measured_at, rev) e o estado dos seus relatórios
+    """R2 + R4: compares with revisions already stored with the same identity."""
+    # Revisions with the same identity (serial, measured_at, rev) and the status of their reports
     existing = db.scalars(
         select(ReportRevision)
         .where(
@@ -147,7 +147,7 @@ def _apply_revision(report, db, trainset_id, measured_at, rev, station_id, metri
         )
         .options(selectinload(ReportRevision.metrics), selectinload(ReportRevision.report_raw))
     ).all()
-    # Num replay (R8) o relatório pode já ter a sua revisão: não conta como "outra"
+    # In a replay (R8) the report may already have its revision: it does not count as "other"
     already_stored = any(other.report_raw_id == report.id for other in existing)
     existing = [other for other in existing if other.report_raw_id != report.id]
     identity_in_conflict = any(
@@ -160,8 +160,8 @@ def _apply_revision(report, db, trainset_id, measured_at, rev, station_id, metri
         identity_in_conflict,
     )
 
-    # Guarda sempre a revisão (também duplicados e conflitos): é o registo da identidade
-    # deste relatório, necessário para que um conflito posterior o encontre (R4).
+    # Always store the revision (also duplicates and conflicts): it is the record of
+    # this report's identity, needed so a later conflict can find it (R4).
     if not already_stored:
         db.add(
             ReportRevision(
@@ -175,13 +175,13 @@ def _apply_revision(report, db, trainset_id, measured_at, rev, station_id, metri
         )
 
     if outcome is RevisionOutcome.DUPLICATE:
-        _set_outcome(db, report, ReportStatus.DUPLICATE)  # não muda a medição (R2)
+        _set_outcome(db, report, ReportStatus.DUPLICATE)  # does not change the measurement (R2)
         return
 
     if outcome is RevisionOutcome.NEW:
         _set_outcome(db, report, ReportStatus.APPLIED)
     else:
-        # R4: todos os relatórios desta identidade passam a conflict, incluindo os aplicados
+        # R4: all reports with this identity become conflict, including the applied ones
         _quarantine(db, report, QuarantineReason.CONFLICT)
         for other in existing:
             _quarantine(db, other.report_raw, QuarantineReason.CONFLICT)
@@ -198,7 +198,7 @@ def _content(revision: ReportRevision) -> RevisionContent:
 
 
 def _rebuild_measurement(db: Session, trainset_id: int, measured_at: datetime) -> None:
-    """R3: o estado da medição vem só das revisões aplicadas (sem conflitos nem duplicados)."""
+    """R3: the measurement state comes only from applied revisions (no conflicts or duplicates)."""
     applied = db.scalars(
         select(ReportRevision)
         .join(ReportRevision.report_raw)
@@ -216,11 +216,11 @@ def _rebuild_measurement(db: Session, trainset_id: int, measured_at: datetime) -
         .where(Measurement.trainset_id == trainset_id, Measurement.measured_at == measured_at)
         .options(selectinload(Measurement.metrics))
     )
-    # Duty antes da alteração: os seus rollups também mudam se a medição sair dela (R7)
+    # Duty before the change: its rollups also change if the measurement leaves it (R7)
     old_duty_id = measurement.duty_id if measurement is not None else None
 
     if not state.metrics:
-        # Sem métricas a medição não aparece (R3)
+        # Without metrics the measurement does not appear (R3)
         if measurement is not None:
             db.delete(measurement)
             db.flush()
@@ -231,9 +231,9 @@ def _rebuild_measurement(db: Session, trainset_id: int, measured_at: datetime) -
         measurement = Measurement(trainset_id=trainset_id, measured_at=measured_at)
         db.add(measurement)
     measurement.station_id = state.station
-    # R5: duty do assignment desta composição que cobre measured_at (None = não atribuída)
+    # R5: duty of this trainset's assignment covering measured_at (None = unassigned)
     measurement.duty_id = find_duty(measured_at, assignment_periods(db, trainset_id))
-    # Sincroniza as métricas: atualiza as que ficam, apaga as que saíram, junta as novas
+    # Synchronizes metrics: updates those that remain, deletes those that left, adds new ones
     current = {metric.metric: metric for metric in measurement.metrics}
     for name, metric in current.items():
         if name in state.metrics:
@@ -244,5 +244,5 @@ def _rebuild_measurement(db: Session, trainset_id: int, measured_at: datetime) -
         if name not in current:
             measurement.metrics.append(MeasurementMetric(metric=name, value=value))
 
-    db.flush()  # os rollups são calculados a partir das medições já gravadas
+    db.flush()  # rollups are computed from the already stored measurements
     refresh_rollups(db, [old_duty_id, measurement.duty_id])

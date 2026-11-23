@@ -1,5 +1,5 @@
-"""Worker: um erro técnico deixa o relatório pending e ele é tentado outra vez na
-passagem seguinte pela fila, sem reiniciar e sem tentativas seguidas."""
+"""Worker: a technical error leaves the report pending and it is tried again on the
+next pass through the queue, without restarting and without consecutive attempts."""
 
 import contextlib
 import importlib
@@ -21,7 +21,7 @@ class StopWorker(Exception):
 
 
 def store(*lines):
-    """Grava relatórios pending, como a API (sem os processar)."""
+    """Stores pending reports, like the API (without processing them)."""
     with SessionLocal() as db:
         reports = [ReportRaw(raw_content=line, received_at=RECEIVED_AT) for line in lines]
         db.add_all(reports)
@@ -30,7 +30,7 @@ def store(*lines):
 
 
 def run_worker(monkeypatch, passes):
-    """Corre o Worker até `passes` passagens pela fila (cada fim de fila = um sleep)."""
+    """Runs the Worker until `passes` passes through the queue (each end of queue = one sleep)."""
     sleeps = {"n": 0}
 
     def fake_sleep(_):
@@ -45,9 +45,9 @@ def run_worker(monkeypatch, passes):
 
 
 def fail_for(monkeypatch, failing_ids, times=None):
-    """Faz _apply_revision falhar para os relatórios em `failing_ids`.
+    """Makes _apply_revision fail for the reports in `failing_ids`.
 
-    times=None: falha sempre. Devolve a lista de ids tentados, por ordem.
+    times=None: always fails. Returns the list of attempted ids, in order.
     """
     original = process_report_module._apply_revision
     attempts = []
@@ -57,7 +57,7 @@ def fail_for(monkeypatch, failing_ids, times=None):
         attempts.append(report.id)
         if report.id in failing_ids and (times is None or failures["n"] < times):
             failures["n"] += 1
-            raise RuntimeError("falha técnica simulada")
+            raise RuntimeError("simulated technical failure")
         return original(report, *args, **kwargs)
 
     monkeypatch.setattr(process_report_module, "_apply_revision", flaky)
@@ -70,7 +70,7 @@ def test_temporary_failure_is_retried_in_the_next_pass_without_restart(monkeypat
 
     run_worker(monkeypatch, passes=3)
 
-    assert attempts == [report, report]  # 1ª passagem falha, 2ª aplica
+    assert attempts == [report, report]  # 1st pass fails, 2nd applies
     assert outcome(report) == ("applied", None)
 
 
@@ -81,9 +81,9 @@ def test_permanent_failure_does_not_block_others_and_is_tried_once_per_pass(monk
 
     run_worker(monkeypatch, passes=4)
 
-    assert outcome(ok) == ("applied", None)        # não ficou bloqueado pelo que falha
-    assert outcome(broken) == ("pending", None)    # continua pending para nova tentativa
-    assert attempts.count(broken) == 4             # uma tentativa por passagem
+    assert outcome(ok) == ("applied", None)        # was not blocked by the one that fails
+    assert outcome(broken) == ("pending", None)    # remains pending for a new attempt
+    assert attempts.count(broken) == 4             # one attempt per pass
     assert attempts.count(ok) == 1
 
 
@@ -102,5 +102,5 @@ def test_no_immediate_retry_of_the_same_report(monkeypatch):
         with pytest.raises(StopWorker):
             worker_module.Worker().run()
 
-    # depois de cada tentativa falhada há um sleep antes da seguinte
+    # after each failed attempt there is a sleep before the next one
     assert sleeps_between == [1, 2, 3]

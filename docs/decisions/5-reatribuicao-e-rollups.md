@@ -1,34 +1,34 @@
-# 0005 — Re-atribuição e rollups depois de alterar um assignment
+# 0005 — Reattribution and rollups after changing an assignment
 
 
-## Contexto
+## Context
 
-- **R5**: uma medição pertence à duty do assignment da sua composição que cobre `measured_at`, com o início incluído e o fim excluído (`[started_at, ended_at)`). Sem assignment que a cubra, não é atribuída (`duty_id = NULL`).
-- **R7**: por duty, os rollups por hora, o resumo da duty e as estatísticas por estação (`duty_hourly_rollups`, `duty_metric_summaries`, `duty_station_stats`).
+- **R5**: a measurement belongs to the duty of its trainset's assignment that covers `measured_at`, with the start inclusive and the end exclusive (`[started_at, ended_at)`). With no assignment covering it, it is unassigned (`duty_id = NULL`).
+- **R7**: per duty, the hourly rollups, the duty summary and the station statistics (`duty_hourly_rollups`, `duty_metric_summaries`, `duty_station_stats`).
 
-Os assignments mudam depois de as medições já existirem: `POST /v1/duties/{code}/assignments` cria um, e `PATCH /v1/assignments/{id}` muda o início ou o fim (passo 5 do cenário). As medições já gravadas e os rollups das duties envolvidas têm de acompanhar a alteração.
+Assignments change after measurements already exist: `POST /v1/duties/{code}/assignments` creates one, and `PATCH /v1/assignments/{id}` changes the start or end (step 5 of the scenario). The already stored measurements and the rollups of the duties involved must follow the change.
 
-## Decisão
+## Decision
 
-**A re-atribuição é feita na mesma transação que a alteração do assignment** (`services/assignments.py`):
-1. O assignment é criado ou alterado e enviado para a BD com `flush`. As exclusion constraints validam-no já aqui (ver [0006](6-r6-na-bd.md)).
-2. `reattribute_measurements` (`services/attribution.py`) lê todos os assignments da composição e as medições dessa composição no intervalo afetado:
-   - **criar**: o intervalo do novo assignment;
-   - **alterar**: da menor à maior das datas antigas e novas (`min(início antigo, início novo)` até `max(fim antigo, fim novo)`), para apanhar as medições que entram e as que saem.
-3. Para cada medição, `find_duty` (`domain/attribution.py`) decide a duty. Só as que mudam são escritas.
-4. Os rollups são recalculados **para todas as duties de onde saíram medições e para onde entraram** (`refresh_rollups` em `services/rollups.py`).
-5. Um só commit no fim: o assignment, as medições e os rollups mudam juntos ou não muda nada.
+**Reattribution is done in the same transaction as the assignment change** (`services/assignments.py`):
+1. The assignment is created or changed and sent to the DB with `flush`. The exclusion constraints validate it already here (see [0006](6-r6-na-bd.md)).
+2. `reattribute_measurements` (`services/attribution.py`) reads all assignments of the trainset and the measurements of that trainset in the affected range:
+   - **create**: the range of the new assignment;
+   - **change**: from the earliest to the latest of the old and new dates (`min(old start, new start)` to `max(old end, new end)`), to capture measurements that enter and those that leave.
+3. For each measurement, `find_duty` (`domain/attribution.py`) decides the duty. Only those that change are written.
+4. Rollups are recalculated **for all duties that measurements left and entered** (`refresh_rollups` in `services/rollups.py`).
+5. A single commit at the end: the assignment, the measurements and the rollups change together or nothing changes.
 
-**Os rollups de uma duty são sempre recalculados de raiz** (`_recompute_duty`): apaga as linhas dessa duty nas três tabelas, lê todas as medições atribuídas à duty e volta a calcular com as funções puras de `domain/aggregation.py`. Não há atualizações incrementais (somar ou subtrair um valor). Antes disso, a linha da duty fica bloqueada (`SELECT … FOR UPDATE`) para dois recálculos da mesma duty não se cruzarem.
+**A duty's rollups are always recalculated from scratch** (`_recompute_duty`): it deletes the rows for that duty in the three tables, reads all measurements assigned to the duty and recalculates using the pure functions in `domain/aggregation.py`. There are no incremental updates (adding or subtracting a value). Before that, the duty row is locked (`SELECT … FOR UPDATE`) so that two recalculations of the same duty do not overlap.
 
-O mesmo `refresh_rollups` é usado pelo Worker: quando uma medição é criada, alterada ou apagada, são recalculadas a duty antiga e a nova (`_rebuild_measurement`). No `rebuild-read-models` (A4), os recálculos são adiados (`defer_rollups`) e cada duty é calculada uma só vez no fim.
+The same `refresh_rollups` is used by the Worker: when a measurement is created, changed or deleted, the old duty and the new duty are recalculated (`_rebuild_measurement`). In `rebuild-read-models` (A4), recalculations are deferred (`defer_rollups`) and each duty is calculated only once at the end.
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Re-atribuir todas as medições da composição**: daria o mesmo resultado, mas lê medições fora do intervalo que não podem mudar.
+- **Reattribute all measurements of the trainset**: it would give the same result, but reads measurements outside the range that cannot change.
 
-## Consequências
+## Consequences
 
-- Depois do `PATCH` responder, `/summary`, `/hourly`, `/stations` e `/readings` já refletem a nova atribuição. É o que o checkpoint final do cenário verifica.
-- O custo de recalcular uma duty é proporcional ao número de medições dessa duty (uma duty tem 4 h, ~48 medições por composição).
-- **Limitação conhecida**: o Worker e a alteração de um assignment não partilham nenhum lock. Imagina que o Worker está a criar uma medição da composição ao mesmo tempo que um assignment dessa composição é alterado. O Worker pode ter lido os assignments antigos, e a re-atribuição pode não ver a medição ainda por gravar. Nesse caso, a medição fica na duty antiga até ser processada outra vez (por exemplo com `railtrace rebuild-read-models`). No cenário isto não acontece, porque o passo 5 só corre depois de `pending = 0`.
+- After the `PATCH` responds, `/summary`, `/hourly`, `/stations` and `/readings` already reflect the new assignment. This is what the scenario's final checkpoint checks.
+- The cost of recalculating a duty is proportional to the number of measurements in that duty (a duty lasts 4 h, ~48 measurements per trainset).
+- **Known limitation**: the Worker and an assignment change share no lock. Imagine the Worker is creating a measurement for a trainset at the same time as an assignment for that trainset is changed. The Worker may have read the old assignments, and the reattribution may not see the measurement yet to be stored. In that case, the measurement stays in the old duty until it is processed again (for example with `railtrace rebuild-read-models`). In the scenario this does not happen, because step 5 only runs after `pending = 0`.

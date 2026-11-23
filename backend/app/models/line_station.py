@@ -11,11 +11,11 @@ if TYPE_CHECKING:
 
 
 class LineStation(Base):
-    """Estação numa linha, com a sua posição no percurso (1 = primeira)."""
+    """Station on a line, with its position in the route (1 = first)."""
 
     __tablename__ = "line_stations"
     __table_args__ = (
-        # Duas estações não podem ocupar a mesma posição na mesma linha
+        # Two stations cannot occupy the same position on the same line
         UniqueConstraint("line_id", "position", name="uq_line_stations_line_position"),
         CheckConstraint("position >= 1", name="ck_line_stations_position_positive"),
     )
@@ -27,7 +27,7 @@ class LineStation(Base):
     station_id: Mapped[int] = mapped_column(
         ForeignKey("stations.id", ondelete="RESTRICT"),
         primary_key=True,
-        index=True,  # a PK (line_id, station_id) não serve pesquisas só por station_id
+        index=True,  # the PK (line_id, station_id) cannot serve lookups by station_id alone
     )
     position: Mapped[int] = mapped_column(nullable=False)
 

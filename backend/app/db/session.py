@@ -10,7 +10,7 @@ settings = get_settings()
 engine = create_engine(
     settings.database_url,
     echo=settings.db_echo,
-    pool_pre_ping=True,  # descarta ligações mortas (ex.: após restart do Postgres)
+    pool_pre_ping=True,  # discards dead connections (e.g. after a Postgres restart)
 )
 
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)

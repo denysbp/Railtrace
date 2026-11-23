@@ -3,28 +3,28 @@ from dataclasses import dataclass
 from decimal import Decimal
 from enum import Enum
 
-Metrics = dict[str, Decimal | None]  # None = métrica removida ("-")
+Metrics = dict[str, Decimal | None]  # None = metric removed ("-")
 
 
 @dataclass(frozen=True)
 class RevisionContent:
-    """Conteúdo de um relatório que é comparado em R2/R4: estação + métricas."""
+    """Report content compared in R2/R4: station + metrics."""
 
     station: Hashable | None
     metrics: Metrics
 
 
 class RevisionOutcome(Enum):
-    NEW = "new"              # primeira revisão com esta identidade -> aplicar
-    DUPLICATE = "duplicate"  # igual às que já existem -> não muda nada (R2)
-    CONFLICT = "conflict"    # mesma identidade, conteúdo diferente (R4)
+    NEW = "new"              # first revision with this identity -> apply
+    DUPLICATE = "duplicate"  # same as existing ones -> changes nothing (R2)
+    CONFLICT = "conflict"    # same identity, different content (R4)
 
 
 def same_content(a: RevisionContent, b: RevisionContent) -> bool:
-    """Mesma estação e mesmas métricas, com os valores comparados como números.
+    """Same station and same metrics, with values compared as numbers.
 
-    Decimal compara pelo valor: Decimal("11.6") == Decimal("11.60").
-    Chaves diferentes (uma métrica a mais ou a menos) = conteúdo diferente.
+    Decimal compares by value: Decimal("11.6") == Decimal("11.60").
+    Different keys (one metric more or less) = different content.
     """
     return a.station == b.station and a.metrics == b.metrics
 
@@ -34,11 +34,11 @@ def classify_revision(
     existing: Iterable[RevisionContent],
     identity_in_conflict: bool,
 ) -> RevisionOutcome:
-    """Decide o que fazer com um relatório válido, dadas as revisões já guardadas
-    com a mesma identidade (serial, measured_at, rev).
+    """Decides what to do with a valid report, given the revisions already stored
+    with the same identity (serial, measured_at, rev).
 
-    Uma identidade em conflito continua em conflito: um novo relatório com essa
-    identidade é sempre CONFLICT, mesmo que seja igual a uma das versões.
+    An identity in conflict stays in conflict: a new report with that
+    identity is always CONFLICT, even if it matches one of the versions.
     """
     if identity_in_conflict:
         return RevisionOutcome.CONFLICT
@@ -57,13 +57,13 @@ class Revision:
 
 
 def apply_revisions(revisions: Iterable[Revision]) -> RevisionContent:
-    """Estado de uma medição (R3): revisões aplicadas por ordem crescente de rev.
+    """State of a measurement (R3): applied revisions in ascending rev order.
 
-    - um número define a métrica, "-" (None) remove-a, uma chave ausente mantém-na;
-    - a estação vem da revisão com o rev mais alto;
-    - não depende da ordem de chegada (ordena por rev).
+    - a number sets the metric, "-" (None) removes it, a missing key keeps it;
+    - the station comes from the revision with the highest rev;
+    - independent of arrival order (sorted by rev).
 
-    Métricas vazias no resultado = a medição não deve aparecer.
+    Empty metrics in the result = the measurement must not appear.
     """
     ordered = sorted(revisions, key=lambda revision: revision.rev)
     metrics: Metrics = {}

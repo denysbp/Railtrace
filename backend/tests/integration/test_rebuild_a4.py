@@ -23,26 +23,26 @@ def at(hhmm):
 
 
 def build_history():
-    """Um pouco de tudo: aplicados, duplicado, revisões, remoção, conflito com recuo,
-    quarentenas, um batch e uma alteração de assignment."""
+    """A bit of everything: applied, duplicate, revisions, removal, conflict with fallback,
+    quarantines, a batch, and an assignment change."""
     submit(
         make_line("SPD=10;KWH=1;AX1=36", measured_at=at("07:00"), station="REB"),
-        make_line("SPD=10.00;KWH=1;AX1=36", measured_at=at("07:00"), station="REB"),       # duplicado
+        make_line("SPD=10.00;KWH=1;AX1=36", measured_at=at("07:00"), station="REB"),       # duplicate
         make_line("SPD=20;AX1=38", measured_at=at("07:05"), rev=0, station="ALF"),
-        make_line("SPD=22;AX1=-", measured_at=at("07:05"), rev=1, station="ALF"),          # revisão + remoção
+        make_line("SPD=22;AX1=-", measured_at=at("07:05"), rev=1, station="ALF"),          # revision + removal
         make_line("SPD=30", measured_at=at("08:00"), rev=0),
         make_line("SPD=31", measured_at=at("08:00"), rev=1),
-        make_line("SPD=99", measured_at=at("08:00"), rev=1),                               # conflito -> recua a rev 0
-        make_line("SPD=40", measured_at=at("12:00")),                                      # não atribuída
+        make_line("SPD=99", measured_at=at("08:00"), rev=1),                               # conflict -> falls back to rev 0
+        make_line("SPD=40", measured_at=at("12:00")),                                      # unattributed
         with_bad_checksum(make_line("SPD=1", measured_at=at("09:00"))),
         make_line("SPD=1", measured_at=at("09:05"), serial="TS-0099"),
     )
-    with SessionLocal() as db:  # batch gravado como a API
-        batch = Batch(name="teste")
+    with SessionLocal() as db:  # batch stored like the API
+        batch = Batch(name="test")
         db.add_all([
             ReportRaw(raw_content=make_line("SPD=50", measured_at=at("09:30")), received_at=RECEIVED_AT, batch=batch, batch_line=1),
             ReportRaw(raw_content=make_line("SPD=10;KWH=1;AX1=36", measured_at=at("07:00"), station="REB"),
-                      received_at=RECEIVED_AT, batch=batch, batch_line=2),                 # duplicado vindo do batch
+                      received_at=RECEIVED_AT, batch=batch, batch_line=2),                 # duplicate from the batch
         ])
         db.commit()
         batch_id = batch.id
@@ -59,7 +59,7 @@ def build_history():
 
 
 def api_answers(batch_id):
-    """Todas as respostas da API que dependem dos read models."""
+    """All API responses that depend on the read models."""
     answers = {
         "stats": client.get("/v1/stats").json(),
         "batch": client.get(f"/v1/depot/batches/{batch_id}").json(),
@@ -78,7 +78,7 @@ def api_answers(batch_id):
 def test_rebuild_gives_the_same_api_answers():
     batch_id = build_history()
     before = api_answers(batch_id)
-    assert before["stats"]["measurements"] > 0 and before["stats"]["quarantined"]  # o histórico tem conteúdo
+    assert before["stats"]["measurements"] > 0 and before["stats"]["quarantined"]  # the history has content
 
     with SessionLocal() as db:
         counts = rebuild_read_models(db)
@@ -89,7 +89,7 @@ def test_rebuild_gives_the_same_api_answers():
 def test_rebuild_repairs_damaged_read_models():
     batch_id = build_history()
     before = api_answers(batch_id)
-    with SessionLocal() as db:  # estraga os read models
+    with SessionLocal() as db:  # damages the read models
         db.execute(text("delete from duty_hourly_rollups; delete from report_outcomes; delete from measurements"))
         db.commit()
     assert api_answers(batch_id) != before
@@ -108,13 +108,13 @@ def test_rebuild_failure_changes_nothing(monkeypatch):
     def fail_on_fifth(report, db):
         calls["n"] += 1
         if calls["n"] == 5:
-            raise RuntimeError("falha a meio do rebuild")
+            raise RuntimeError("failure in the middle of the rebuild")
         return original(report, db)
 
     monkeypatch.setattr(rebuild_module, "apply_rules", fail_on_fifth)
     with SessionLocal() as db, pytest.raises(RuntimeError):
         rebuild_read_models(db)
-    assert api_answers(batch_id) == before  # tudo numa transação: nada mudou
+    assert api_answers(batch_id) == before  # all in one transaction: nothing changed
 
 
 def test_rebuild_keeps_reports_fixed_by_replay():

@@ -33,12 +33,12 @@ def refresh_rollups(db: Session, duty_ids: Iterable[int | None]) -> None:
 
 
 def defer_rollups(db: Session) -> None:
-    """A partir daqui, refresh_rollups só junta as duties afetadas."""
+    """From here on, refresh_rollups only adds the affected duties."""
     db.info[DEFERRED_KEY] = set()
 
 
 def flush_deferred_rollups(db: Session) -> None:
-    """Calcula uma vez cada duty junta desde defer_rollups e volta ao modo normal."""
+    """Computes once each duty added since defer_rollups and returns to normal mode."""
     refresh_rollups_ids = db.info.pop(DEFERRED_KEY, set())
     refresh_rollups(db, refresh_rollups_ids)
 

@@ -1,20 +1,20 @@
-# 0002 — Carregar o seed antes do cenário
+# 0002 — Loading the seed before the scenario
 
 
-## Contexto
+## Context
 
-O cenário pede para correr os passos 2–7 (`scripts/scenario.sh` / `make scenario`) num sistema acabado de arrancar. O subject não diz se o seed (`data/seed.json`) tem de ser carregado antes disso ou não.
+The scenario asks to run steps 2–7 (`scripts/scenario.sh` / `make scenario`) on a freshly started system. The subject does not say whether the seed (`data/seed.json`) has to be loaded beforehand or not.
 
-Num sistema acabado de arrancar, as tabelas de referência (`lines`, `stations`, `line_stations`, `trainsets`, `duties`, `assignments`) estão vazias.
+On a freshly started system, the reference tables (`lines`, `stations`, `line_stations`, `trainsets`, `duties`, `assignments`) are empty.
 
-## Decisão
+## Decision
 
-O seed é carregado antes do passo 2, com `railtrace seed --file data/seed.json`. É o primeiro passo de `scripts/scenario.sh`.
+The seed is loaded before step 2, with `railtrace seed --file data/seed.json`. It is the first step of `scripts/scenario.sh`.
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Não carregar o seed**: sem composições, estações e duties, o Worker não consegue validar os relatórios e tudo iria ficar em quarentena. Os passos 5 e 6 também não funcionariam: os assignments da `VD-D03-20261103`, a linha `VD` e a duty `VD-T01-20261104` só existem no seed.
+- **Not loading the seed**: without trainsets, stations and duties, the Worker cannot validate reports and everything would end up in quarantine. Steps 5 and 6 would not work either: the assignments of `VD-D03-20261103`, the `VD` line and the duty `VD-T01-20261104` only exist in the seed.
 
-## Consequências
+## Consequences
 
-- O comando `seed` é idempotente, por isso o script pode correr num sistema onde o seed já foi carregado.
+- The `seed` command is idempotent, so the script can run on a system where the seed has already been loaded.

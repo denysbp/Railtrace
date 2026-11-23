@@ -8,7 +8,7 @@ from app.models.base import Base
 
 
 class Measurement(Base):
-    """Estado efetivo de uma medição depois de aplicadas as revisões válidas."""
+    """Effective state of a measurement after valid revisions have been applied."""
 
     __tablename__ = "measurements"
     __table_args__ = (
@@ -23,13 +23,13 @@ class Measurement(Base):
         nullable=False,
     )
     measured_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
-    # NULL = medição sem estação ("-" no relatório)
+    # NULL = measurement without a station ("-" in the report)
     station_id: Mapped[int | None] = mapped_column(
         ForeignKey("stations.id", ondelete="RESTRICT"),
         nullable=True,
         index=True,
     )
-    # NULL = medição não atribuída a nenhuma duty
+    # NULL = measurement not assigned to any duty
     duty_id: Mapped[int | None] = mapped_column(
         ForeignKey("duties.id", ondelete="RESTRICT"),
         nullable=True,
@@ -54,11 +54,11 @@ class Measurement(Base):
 
 
 class MeasurementMetric(Base):
-    """Valor efetivo de uma métrica numa medição."""
+    """Effective value of a metric in a measurement."""
 
     __tablename__ = "measurement_metrics"
     __table_args__ = (
-        # Consultas por métrica (a PK começa por measurement_id e não serve para isso)
+        # Lookups by metric (the PK starts with measurement_id and cannot serve this)
         Index("ix_measurement_metrics_metric", "metric", "measurement_id"),
     )
 
@@ -67,7 +67,7 @@ class MeasurementMetric(Base):
         primary_key=True,
     )
     metric: Mapped[str] = mapped_column(String(16), primary_key=True)
-    # Numeric sem precisão fixa: guarda o valor exatamente como foi recebido
+    # Numeric without fixed precision: stores the value exactly as received
     value: Mapped[Decimal | None] = mapped_column(Numeric, nullable=True)
 
     measurement: Mapped["Measurement"] = relationship(back_populates="metrics")

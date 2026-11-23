@@ -12,7 +12,7 @@ class AssignmentCreate(BaseModel):
     @model_validator(mode="after")
     def _check_interval(self) -> Self:
         if self.ended_at <= self.started_at:
-            raise ValueError("ended_at tem de ser posterior a started_at")
+            raise ValueError("ended_at must be after started_at")
         return self
 
 
@@ -28,7 +28,7 @@ class AssignmentUpdate(BaseModel):
             and self.ended_at is not None
             and self.ended_at <= self.started_at
         ):
-            raise ValueError("ended_at tem de ser posterior a started_at")
+            raise ValueError("ended_at must be after started_at")
         return self
 
 
@@ -43,7 +43,7 @@ class AssignmentResponse(BaseModel):
 
 
 class DutyAssignmentCreate(BaseModel):
-    """Body do POST /duties/{code}/assignments (a duty vem do path)."""
+    """Body of POST /duties/{code}/assignments (the duty comes from the path)."""
 
     trainset: str = Field(min_length=1, examples=["TS-0001"])
     started_at: AwareDatetime
@@ -52,5 +52,5 @@ class DutyAssignmentCreate(BaseModel):
     @model_validator(mode="after")
     def _check_interval(self) -> Self:
         if self.ended_at <= self.started_at:
-            raise ValueError("ended_at tem de ser posterior a started_at")
+            raise ValueError("ended_at must be after started_at")
         return self

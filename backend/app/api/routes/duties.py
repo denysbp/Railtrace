@@ -41,7 +41,7 @@ duties_router = APIRouter(
 )
 def list_duties(
     day: date = Query(..., alias="date", description="YYYY-MM-DD"),
-    line: str | None = Query(None, description="Código da linha (ex.: AZ)"),
+    line: str | None = Query(None, description="Line code (e.g. AZ)"),
     db: Session = Depends(get_db)
 ):
     start = datetime.combine(day, time.min, tzinfo=timezone.utc)
@@ -63,7 +63,7 @@ def get_duty(
     code: str,
     db: Session = Depends(get_db)
 ):
-    # Só leitura: a duty e os seus assignments, por ordem de início
+    # Read-only: the duty and its assignments, in start order
     duty = db.scalar(
         select(Duty)
         .where(Duty.code == code)
@@ -88,7 +88,7 @@ def add_assignment(
     body: DutyAssignmentCreate,
     db: Session = Depends(get_db)
 ):
-    # As regras estão no serviço; aqui só se traduzem os erros em HTTP
+    # The rules are in the service; here errors are only translated to HTTP
     try:
         return create_assignment(db, code, body.trainset, body.started_at, body.ended_at)
     except DutyNotFoundError:
@@ -113,7 +113,7 @@ def add_assignment(
         )
 
 
-# --- Read models (R7): só leitura, as consultas estão em services/read_models.py
+# --- Read models (R7): read-only, the queries are in services/read_models.py
 
 def _read(query, *args):
     try:
@@ -136,7 +136,7 @@ def _read(query, *args):
 )
 def get_duty_readings(
     code: str,
-    metric: str = Query(..., description="Ex.: SPD, KWH, AX1"),
+    metric: str = Query(..., description="e.g. SPD, KWH, AX1"),
     db: Session = Depends(get_db)
 ):
     return _read(read_models.duty_readings, db, code, metric)
@@ -148,7 +148,7 @@ def get_duty_readings(
 )
 def get_duty_hourly(
     code: str,
-    metric: str = Query(..., description="Ex.: SPD, KWH, AX1"),
+    metric: str = Query(..., description="e.g. SPD, KWH, AX1"),
     db: Session = Depends(get_db)
 ):
     return _read(read_models.duty_hourly, db, code, metric)

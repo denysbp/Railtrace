@@ -7,7 +7,7 @@ RUN npm ci
 
 COPY . .
 
-# As rewrites (/api -> backend) são fixadas no build, por isso API_URL entra como build arg
+# The rewrites (/api -> backend) are fixed at build time, so API_URL is passed as a build arg
 ARG API_URL=http://api:8000
 ENV API_URL=${API_URL} \
     NEXT_TELEMETRY_DISABLED=1

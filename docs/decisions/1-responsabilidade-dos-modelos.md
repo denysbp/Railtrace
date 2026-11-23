@@ -1,78 +1,78 @@
-# 0001 — Responsabilidade de cada modelo
+# 0001 — Responsibility of each model
 
 
-## Contexto
+## Context
 
-Os modelos SQLAlchemy vivem em `backend/app/models/` e são todos registados em `app/models/__init__.py`, para ficarem em `Base.metadata` (Alembic e relationships). Este documento fixa o que cada modelo representa, quem o escreve e o que **não** é responsabilidade dele.
+The SQLAlchemy models live in `backend/app/models/` and are all registered in `app/models/__init__.py` so that they appear in `Base.metadata` (Alembic and relationships). This document defines what each model represents, who writes it and what is **not** its responsibility.
 
-Os modelos só guardam dados e garantem a sua integridade (FKs, UNIQUE, CHECK, exclusion constraints). Não contêm regras de negócio: essas ficam em `domain/` (funções puras) e `services/` (coordenação e acesso à BD).
+Models only store data and ensure its integrity (FKs, UNIQUE, CHECK, exclusion constraints). They do not contain business rules: those live in `domain/` (pure functions) and `services/` (coordination and DB access).
 
-## Decisão
+## Decision
 
-### Dados de referência
+### Reference data
 
-Carregados pelo comando `railtrace seed` (`services/seed.py`), de forma idempotente.
+Loaded by the `railtrace seed` command (`services/seed.py`), idempotently.
 
-| Modelo | Tabela | Responsabilidade |
+| Model | Table | Responsibility |
 |---|---|---|
-| `Line` | `lines` | Linha de metro, identificada pelo `code` único (ex.: `AZ`). |
-| `Station` | `stations` | Estação física, identificada pelo `code` único (ex.: `SSE`). Uma estação de correspondência existe uma só vez. |
-| `LineStation` | `line_stations` | Liga estações a linhas e guarda a `position` de cada estação no percurso. Permite que uma estação pertença a várias linhas. `UNIQUE(line_id, position)`. |
-| `Trainset` | `trainsets` | Composição, identificada pelo `serial` único (ex.: `TS-0001`), com a sua linha (`home_line_id`). |
-| `Duty` | `duties` | Serviço planeado numa linha, com início e fim planeados (`planned_end > planned_start`). |
-| `Assignment` | `assignments` | Liga uma composição a uma duty durante um intervalo `[started_at, ended_at)`. Duas exclusion constraints (GiST, extensão `btree_gist`) impedem que uma composição esteja em duas duties ao mesmo tempo e que uma duty tenha duas composições ao mesmo tempo. Também é escrito pela API (`POST /duties/{code}/assignments`, `PATCH /assignments/{id}`). |
+| `Line` | `lines` | Metro line, identified by the unique `code` (e.g. `AZ`). |
+| `Station` | `stations` | Physical station, identified by the unique `code` (e.g. `SSE`). An interchange station exists only once. |
+| `LineStation` | `line_stations` | Links stations to lines and stores the `position` of each station on the route. Allows a station to belong to several lines. `UNIQUE(line_id, position)`. |
+| `Trainset` | `trainsets` | Trainset, identified by the unique `serial` (e.g. `TS-0001`), with its line (`home_line_id`). |
+| `Duty` | `duties` | Planned service on a line, with planned start and end (`planned_end > planned_start`). |
+| `Assignment` | `assignments` | Links a trainset to a duty during an interval `[started_at, ended_at)`. Two exclusion constraints (GiST, `btree_gist` extension) prevent a trainset from being in two duties at the same time and a duty from having two trainsets at the same time. Also written by the API (`POST /duties/{code}/assignments`, `PATCH /assignments/{id}`). |
 
-### Ingestão
+### Ingestion
 
-Escritos pela API. A API só guarda o que recebe; não interpreta relatórios.
+Written by the API. The API only stores what it receives; it does not interpret reports.
 
-| Modelo | Tabela | Responsabilidade |
+| Model | Table | Responsibility |
 |---|---|---|
-| `Batch` | `batches` | Ficheiro enviado pelo depósito (`POST /depot/batches`). Agrupa os relatórios desse ficheiro. |
-| `ReportRaw` | `reports_raw` | Relatório tal como foi recebido, append-only: `raw_content` nunca é alterado. Guarda a origem (`batch_id` e `batch_line`, ou NULL quando veio em tempo real por `POST /reports`) e o resultado do processamento (`status` e, em quarentena, `quarantine_reason`). |
+| `Batch` | `batches` | File sent by the depot (`POST /depot/batches`). Groups the reports from that file. |
+| `ReportRaw` | `reports_raw` | Report as it was received, append-only: `raw_content` is never changed. Stores the origin (`batch_id` and `batch_line`, or NULL when it came in real time via `POST /reports`) and the processing result (`status` and, when quarantined, `quarantine_reason`). |
 
-`ReportRaw` não tem campos interpretados (composição, instante, métricas): esses só existem depois do processamento, em `ReportRevision`.
+`ReportRaw` has no interpreted fields (trainset, instant, metrics): those only exist after processing, in `ReportRevision`.
 
-### Telemetria
+### Telemetry
 
-Escritos pelo Worker (ainda por implementar).
+Written by the Worker (not yet implemented).
 
-| Modelo | Tabela | Responsabilidade |
+| Model | Table | Responsibility |
 |---|---|---|
-| `ReportRevision` | `report_revisions` | Relatório válido já interpretado: composição, `measured_at`, `rev` (≥ 0) e estação. Cada `ReportRaw` dá no máximo uma revisão (`report_raw_id` único). |
-| `ReportRevisionMetric` | `report_revision_metrics` | Valores das métricas recebidos numa revisão, uma linha por métrica. PK `(report_revision_id, metric)`. |
-| `Measurement` | `measurements` | Estado efetivo de uma medição depois de aplicadas as revisões válidas. Uma por composição e instante (`UNIQUE(trainset_id, measured_at)`). Guarda a atribuição a uma duty (`duty_id`, NULL quando não atribuída). |
-| `MeasurementMetric` | `measurement_metrics` | Valores efetivos das métricas de uma medição. PK `(measurement_id, metric)`. |
+| `ReportRevision` | `report_revisions` | Valid report already interpreted: trainset, `measured_at`, `rev` (≥ 0) and station. Each `ReportRaw` produces at most one revision (unique `report_raw_id`). |
+| `ReportRevisionMetric` | `report_revision_metrics` | Metric values received in a revision, one row per metric. PK `(report_revision_id, metric)`. |
+| `Measurement` | `measurements` | Effective state of a measurement after valid revisions have been applied. One per trainset and instant (`UNIQUE(trainset_id, measured_at)`). Stores the assignment to a duty (`duty_id`, NULL when unassigned). |
+| `MeasurementMetric` | `measurement_metrics` | Effective metric values of a measurement. PK `(measurement_id, metric)`. |
 
-### Read models dos endpoints de leitura (A2)
+### Read models for the read endpoints (A2)
 
-Escritos pelo Worker na mesma transação em que processa cada relatório. Os endpoints de leitura só leem estas tabelas (e `measurements`).
+Written by the Worker in the same transaction in which it processes each report. The read endpoints only read these tables (and `measurements`).
 
-| Modelo | Tabela | Responsabilidade |
+| Model | Table | Responsibility |
 |---|---|---|
-| `ReportOutcome` | `report_outcomes` | Resultado de cada relatório já processado: `status`, `quarantine_reason`, origem (`batch_id`, `batch_line`), linha original e hora de receção. Atualizado quando a R4 põe relatórios anteriores em conflito. Um relatório sem linha aqui ainda está por processar. Lido por `/depot/batches/{id}`, `/quarantine` e `/stats`. |
-| `DutyHourlyRollup` | `duty_hourly_rollups` | R7: por duty, métrica e hora UTC, `count`, `value` e `coverage`. |
-| `DutyMetricSummary` | `duty_metric_summaries` | R7: por duty e métrica, o valor sobre a duty inteira. |
-| `DutyStationStats` | `duty_station_stats` | R7: por duty e estação, o número de relatórios e o maior valor `AX*`. |
+| `ReportOutcome` | `report_outcomes` | Result of each already processed report: `status`, `quarantine_reason`, origin (`batch_id`, `batch_line`), original line and arrival time. Updated when R4 puts earlier reports in conflict. A report with no row here is still pending processing. Read by `/depot/batches/{id}`, `/quarantine` and `/stats`. |
+| `DutyHourlyRollup` | `duty_hourly_rollups` | R7: per duty, metric and UTC hour, `count`, `value` and `coverage`. |
+| `DutyMetricSummary` | `duty_metric_summaries` | R7: per duty and metric, the value over the whole duty. |
+| `DutyStationStats` | `duty_station_stats` | R7: per duty and station, the number of reports and the largest `AX*` value. |
 
 ### Enums (`models/enums.py`)
 
 - `ReportStatus`: `pending`, `applied`, `duplicate`, `quarantined`.
-- `QuarantineReason`: `malformed`, `bad_checksum`, `clock_invalid`, `unknown_trainset`, `unknown_station`, `unknown_metric`, `conflict`. `conflict` é só motivo de quarentena, não um status.
+- `QuarantineReason`: `malformed`, `bad_checksum`, `clock_invalid`, `unknown_trainset`, `unknown_station`, `unknown_metric`, `conflict`. `conflict` is only a quarantine reason, not a status.
 
-Na BD fica gravado o valor (`'pending'`), não o nome do membro (`values_callable`).
+The DB stores the value (`'pending'`), not the member name (`values_callable`).
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Métricas como colunas** (`spd`, `kwh`, `ax1`…) em `report_revisions` e `measurements`: uma métrica nova obrigaria a alterar as tabelas. Com uma linha por métrica, uma métrica nova não muda o schema.
-- **UNIQUE em `(trainset_id, measured_at, rev)`** em `report_revisions`: impediria guardar relatórios diferentes com a mesma identidade, que a R4 exige para detetar conflitos. Fica só um índice não único nessas colunas.
-- **`station_id` obrigatório**: a maioria dos relatórios dos dados de exemplo não tem estação (`-`). Por isso `station_id` aceita NULL em `report_revisions` e `measurements`.
+- **Metrics as columns** (`spd`, `kwh`, `ax1`…) in `report_revisions` and `measurements`: a new metric would require changing the tables. With one row per metric, a new metric does not change the schema.
+- **UNIQUE on `(trainset_id, measured_at, rev)`** in `report_revisions`: it would prevent storing different reports with the same identity, which R4 requires in order to detect conflicts. Only a non-unique index remains on those columns.
+- **Mandatory `station_id`**: most reports in the sample data have no station (`-`). Therefore `station_id` accepts NULL in `report_revisions` and `measurements`.
 
-## Consequências
+## Consequences
 
-- Separação clara entre o que foi **recebido** (`ReportRaw`), o que foi **interpretado** (`ReportRevision`) e o **estado efetivo** (`Measurement`). Os read models podem ser reconstruídos a partir das revisões sem tocar nos relatórios originais.
-- Um `ReportRaw` com revisão não pode ser apagado (FK `RESTRICT`), o que mantém o append-only.
-- As métricas são apagadas com a revisão ou medição a que pertencem (`ON DELETE CASCADE`).
-- Os valores usam `Numeric` sem precisão fixa (lidos como `Decimal`), para guardar o valor exatamente como foi recebido. `value` aceita NULL, para representar a remoção de uma métrica (R3).
-- Nenhuma constraint garante que as métricas são conhecidas nem que `duty_id` é coerente com os assignments: são regras do Worker.
-- `Measurement` não guarda que revisão lhe deu origem.
+- Clear separation between what was **received** (`ReportRaw`), what was **interpreted** (`ReportRevision`) and the **effective state** (`Measurement`). The read models can be rebuilt from the revisions without touching the original reports.
+- A `ReportRaw` with a revision cannot be deleted (FK `RESTRICT`), which maintains append-only.
+- Metrics are deleted with the revision or measurement they belong to (`ON DELETE CASCADE`).
+- Values use `Numeric` without fixed precision (read as `Decimal`), to store the value exactly as it was received. `value` accepts NULL, to represent the removal of a metric (R3).
+- No constraint guarantees that metrics are known or that `duty_id` is consistent with assignments: those are Worker rules.
+- `Measurement` does not store which revision produced it.

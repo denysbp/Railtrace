@@ -10,10 +10,10 @@ from app.models.report_raw import ReportRaw
 def ingest_batch(db: Session, name: str, file: BinaryIO) -> int:
     batch = Batch(name=name)
 
-    # utf-8-sig: os ficheiros do depósito começam com um BOM; sem isto a
-    # primeira linha seria "﻿# depot ..." e não começaria por "#"
-    # newline="\n": separa só em "\n" e não converte nada; o "\r" de um CRLF
-    # sai no rstrip abaixo (um "\r" isolado no meio da linha fica intacto)
+    # utf-8-sig: depot files start with a BOM; without this the
+    # first line would be "﻿# depot ..." and would not start with "#"
+    # newline="\n": splits only on "\n" and converts nothing; the "\r" of a CRLF
+    # is removed by the rstrip below (a lone "\r" in the middle of a line stays intact)
     text = io.TextIOWrapper(file, encoding="utf-8-sig", newline="\n")
 
     for number, line in enumerate(text, start=1):

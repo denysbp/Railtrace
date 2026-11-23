@@ -1,35 +1,35 @@
-# 0003 — Como a API passa os relatórios ao Worker
+# 0003 — How the API passes reports to the Worker
 
 
-## Contexto
+## Context
 
-Os relatórios chegam de duas formas: um a um em tempo real (`POST /v1/reports`) ou em ficheiro pelo depósito (`POST /v1/depot/batches`). Processar um relatório implica validar (R1), aplicar revisões (R2–R4), atribuir a uma duty (R5) e atualizar os rollups (R7). A API tem de responder depressa e não pode perder relatórios, mesmo que o Worker esteja parado ou falhe a meio.
+Reports arrive in two ways: one at a time in real time (`POST /v1/reports`) or in a file from the depot (`POST /v1/depot/batches`). Processing a report involves validating (R1), applying revisions (R2–R4), assigning to a duty (R5) and updating rollups (R7). The API must respond quickly and must not lose reports, even if the Worker is stopped or fails midway.
 
-## Decisão
+## Decision
 
-A tabela `reports_raw` é a fila. Não há broker (Redis, RabbitMQ…): a API e o Worker só partilham o PostgreSQL.
+The `reports_raw` table is the queue. There is no broker (Redis, RabbitMQ…): the API and the Worker only share PostgreSQL.
 
-**API (produtor)**
-- `POST /v1/reports` grava uma linha em `reports_raw` com o texto tal como chegou, faz commit e responde `202 Accepted` com o `report_id`. Não interpreta o relatório.
-- `POST /v1/depot/batches` cria um `Batch` e uma linha em `reports_raw` por cada linha do ficheiro (ignora linhas vazias e comentários `#`), tudo numa só transação (`services/ingest.py`). Responde `202` com o `batch_id`.
-- `status` começa em `pending` e `received_at` é a hora de gravação na API. A R1 usa essa hora para o `clock_invalid`, e não a hora em que o Worker processa o relatório.
+**API (producer)**
+- `POST /v1/reports` stores a row in `reports_raw` with the text exactly as it arrived, commits and responds with `202 Accepted` and the `report_id`. It does not interpret the report.
+- `POST /v1/depot/batches` creates a `Batch` and one row in `reports_raw` per line of the file (ignoring empty lines and `#` comments), all in a single transaction (`services/ingest.py`). Responds `202` with the `batch_id`.
+- `status` starts as `pending` and `received_at` is the time it was stored by the API. R1 uses that time for `clock_invalid`, not the time when the Worker processes the report.
 
-**Worker (consumidor)**, em `app/worker.py`:
-- Pede o próximo relatório `pending` com `id` maior do que o último visto, por ordem de `id` (= ordem de chegada), com `SELECT … FOR UPDATE SKIP LOCKED LIMIT 1`.
-- Processa-o numa só transação (`services/process_report.py`, A3): muda o `status` em `reports_raw`, grava `report_outcomes` (A2), as revisões, a medição e os rollups, e faz commit uma vez no fim.
-- Se houver um erro técnico, faz rollback e o relatório fica `pending`. O cursor avança mesmo assim, para um relatório com erro não bloquear os seguintes.
-- Quando não há mais nada, o cursor volta a 0 (para repetir os `pending` que falharam) e o Worker espera 1 s antes de voltar a procurar.
+**Worker (consumer)**, in `app/worker.py`:
+- Requests the next `pending` report with an `id` greater than the last one seen, in `id` order (= arrival order), with `SELECT … FOR UPDATE SKIP LOCKED LIMIT 1`.
+- Processes it in a single transaction (`services/process_report.py`, A3): changes the `status` in `reports_raw`, stores `report_outcomes` (A2), the revisions, the measurement and the rollups, and commits once at the end.
+- If there is a technical error, it rolls back and the report remains `pending`. The cursor advances anyway, so that a failing report does not block the following ones.
+- When there is nothing left, the cursor returns to 0 (to retry the `pending` ones that failed) and the Worker waits 1 s before looking again.
 
-**Coordenação com outras escritas**: o Worker e o `replay-quarantine` pegam num lock partilhado (`pg_advisory_xact_lock_shared`, `services/locks.py`). O `rebuild-read-models` (A4) pega no mesmo lock em modo exclusivo, por isso o processamento espera enquanto um rebuild corre. A ingestão na API não usa este lock e nunca fica bloqueada.
+**Coordination with other writes**: the Worker and `replay-quarantine` take a shared lock (`pg_advisory_xact_lock_shared`, `services/locks.py`). `rebuild-read-models` (A4) takes the same lock in exclusive mode, so processing waits while a rebuild runs. API ingestion does not use this lock and is never blocked.
 
-## Alternativas consideradas
-- **Broker de mensagens**: mais um serviço para correr e manter. Haveria duas fontes de verdade (fila e BD), e seria preciso garantir que gravar na BD e publicar a mensagem acontecem juntos. Com a fila na BD, gravar o relatório *é* pô-lo na fila.
+## Alternatives considered
+- **Message broker**: one more service to run and maintain. There would be two sources of truth (queue and DB), and it would be necessary to ensure that storing in the DB and publishing the message happen together. With the queue in the DB, storing the report *is* putting it in the queue.
 
 
-## Consequências
+## Consequences
 
-- Um relatório aceite (`202`) nunca se perde: fica em `reports_raw` até ser processado, mesmo que o Worker esteja em baixo.
-- `pending` em `/v1/stats` e em `/v1/depot/batches/{id}` = recebidos − processados. O cenário espera por `pending = 0` antes de verificar os valores.
-- A latência entre receber e processar um relatório é até ~1 s quando a fila está vazia.
-- `SKIP LOCKED` permite vários Workers sem processarem o mesmo relatório. Mesmo assim, o compose arranca só um, porque a ordem de chegada importa para a R2 (ver [0004](4-ordem-r3-r4.md)).
-- Um relatório que falha sempre por erro técnico volta a ser tentado em cada passagem. O erro aparece no log do Worker.
+- An accepted report (`202`) is never lost: it stays in `reports_raw` until processed, even if the Worker is down.
+- `pending` in `/v1/stats` and in `/v1/depot/batches/{id}` = received − processed. The scenario waits for `pending = 0` before checking the values.
+- The latency between receiving and processing a report is up to ~1 s when the queue is empty.
+- `SKIP LOCKED` allows multiple Workers without processing the same report. Even so, compose starts only one, because arrival order matters for R2 (see [0004](4-ordem-r3-r4.md)).
+- A report that always fails due to a technical error is retried on each pass. The error appears in the Worker log.

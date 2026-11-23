@@ -1,37 +1,37 @@
-# 0006 — R6 garantida pela base de dados
+# 0006 — R6 guaranteed by the database
 
 
-## Contexto
+## Context
 
-R6 (assignments): uma composição não pode estar em duas duties ao mesmo tempo, e uma duty não pode ter duas composições ao mesmo tempo. Os intervalos são `[started_at, ended_at)`, por isso um assignment que acaba às 08:40 e outro que começa às 08:40 não se sobrepõem.
+R6 (assignments): a trainset cannot be in two duties at the same time, and a duty cannot have two trainsets at the same time. The ranges are `[started_at, ended_at)`, so an assignment ending at 08:40 and another starting at 08:40 do not overlap.
 
-Os assignments são escritos por três caminhos diferentes: o seed, `POST /v1/duties/{code}/assignments` e `PATCH /v1/assignments/{id}`. Pode haver pedidos em simultâneo.
+Assignments are written by three different paths: the seed, `POST /v1/duties/{code}/assignments` and `PATCH /v1/assignments/{id}`. There may be concurrent requests.
 
-## Decisão
+## Decision
 
-A regra fica no schema, com duas **exclusion constraints** GiST em `assignments` (`models/assignment.py`, migração `da18af22626b`):
+The rule lives in the schema, with two GiST **exclusion constraints** on `assignments` (`models/assignment.py`, migration `da18af22626b`):
 
 ```sql
 EXCLUDE USING gist (trainset_id WITH =, tstzrange(started_at, ended_at, '[)') WITH &&)  -- ex_assignments_trainset_no_overlap
 EXCLUDE USING gist (duty_id     WITH =, tstzrange(started_at, ended_at, '[)') WITH &&)  -- ex_assignments_duty_no_overlap
 ```
 
-- `tstzrange(…, '[)')` representa o intervalo com o início incluído e o fim excluído, igual ao da R5 (`AssignmentPeriod.covers`).
-- `&&` = "os intervalos sobrepõem-se". Junto com `=` na composição (ou na duty), a BD recusa duas linhas com a mesma composição (ou duty) e intervalos sobrepostos.
-- A extensão `btree_gist` (criada na migração) permite usar `=` sobre inteiros num índice GiST.
-- `CHECK (ended_at > started_at)` (`ck_assignments_interval`) impede intervalos vazios ou invertidos.
+- `tstzrange(…, '[)')` represents the range with the start inclusive and the end exclusive, the same as in R5 (`AssignmentPeriod.covers`).
+- `&&` = "the ranges overlap". Together with `=` on the trainset (or duty), the DB rejects two rows with the same trainset (or duty) and overlapping ranges.
+- The `btree_gist` extension (created in the migration) allows using `=` on integers in a GiST index.
+- `CHECK (ended_at > started_at)` (`ck_assignments_interval`) prevents empty or inverted ranges.
 
-O serviço não verifica sobreposições antes de escrever. Faz `flush` e traduz o erro da BD (`_flush_or_overlap` em `services/assignments.py`): `ExclusionViolation` passa a `AssignmentOverlapError`, que a API devolve como `409 Conflict` ("Assignment overlaps an existing one"). O frontend mostra essa mensagem tal como vem.
+The service does not check for overlaps before writing. It performs `flush` and translates the DB error (`_flush_or_overlap` in `services/assignments.py`): `ExclusionViolation` becomes `AssignmentOverlapError`, which the API returns as `409 Conflict` ("Assignment overlaps an existing one"). The frontend displays that message as received.
 
-## Alternativas consideradas
+## Alternatives considered
 
-- **Verificar no código com um `SELECT` antes do `INSERT`/`UPDATE`**: dois pedidos em simultâneo podiam passar os dois na verificação e gravar assignments sobrepostos. Para o evitar seria preciso bloquear tabelas ou usar `SERIALIZABLE`. A constraint é atómica e não depende de quem escreve.
-- **Verificar no código e na BD**: duplicava a regra em dois sítios que podiam divergir (por exemplo na inclusão do fim), sem ganho. A BD é a única fonte da regra.
-- **Trigger**: faz o mesmo que a exclusion constraint, com mais código e sem índice.
+- **Check in code with a `SELECT` before `INSERT`/`UPDATE`**: two concurrent requests could both pass the check and store overlapping assignments. To avoid that, it would be necessary to lock tables or use `SERIALIZABLE`. The constraint is atomic and does not depend on who writes.
+- **Check in code and in the DB**: it would duplicate the rule in two places that could diverge (for example on end inclusivity), with no benefit. The DB is the only source of the rule.
+- **Trigger**: does the same as the exclusion constraint, with more code and no index.
 
-## Consequências
+## Consequences
 
-- Nenhum caminho de escrita (API, seed, SQL manual) consegue gravar assignments sobrepostos.
-- O `PATCH` do passo 5 tem de ser feito por ordem: primeiro encurtar o fim da TS-0003, depois antecipar o início da TS-0005. Na ordem inversa, os dois sobrepunham-se por um momento e a BD recusava o pedido.
-- **O que a BD não garante**: que a composição é da mesma linha da duty. Isso é verificado no serviço (`TrainsetWrongLineError` → `422`), porque obrigaria a comparar com outras tabelas, coisa que uma constraint não faz.
-- O seed só ignora um assignment que já exista **exatamente igual** (`_insert_assignments` em `services/seed.py`). Se um assignment do seed tiver sido alterado (por exemplo pelo passo 5 do cenário), voltar a carregar o seed tenta inseri-lo outra vez, e a constraint recusa-o com `ExclusionViolation`. Por isso o cenário tem de correr numa BD limpa.
+- No write path (API, seed, manual SQL) can store overlapping assignments.
+- The `PATCH` of step 5 must be done in order: first shorten the end of TS-0003, then bring forward the start of TS-0005. In the reverse order, the two would overlap for a moment and the DB would reject the request.
+- **What the DB does not guarantee**: that the trainset belongs to the same line as the duty. This is checked in the service (`TrainsetWrongLineError` → `422`), because it would require comparing with other tables, which a constraint cannot do.
+- The seed only ignores an assignment that already exists **exactly as is** (`_insert_assignments` in `services/seed.py`). If a seed assignment has been changed (for example by step 5 of the scenario), reloading the seed tries to insert it again, and the constraint rejects it with `ExclusionViolation`. Therefore the scenario must run on a clean DB.

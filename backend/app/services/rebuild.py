@@ -25,26 +25,26 @@ DERIVED_TABLES = (
 
 
 def rebuild_read_models(db: Session) -> dict[str, int]:
-    """Apaga os read models e volta a processar todos os relatórios, por ordem de chegada.
+    """Deletes the read models and reprocesses all reports, in arrival order.
 
-    - Numa só transação: se falhar a meio, fica tudo como estava, e a API continua a
-      responder com os dados antigos até ao commit.
-    - Por ordem de id (chegada): a R2 decide qual de dois relatórios iguais é o
-      aplicado e qual é o duplicado, e esta ordem dá o mesmo resultado que o Worker.
-    - Lock exclusivo: o Worker e o replay esperam até ao fim (a ingestão não é bloqueada).
+    - Single transaction: if it fails halfway, everything is left as it was, and the API keeps
+      responding with the old data until the commit.
+    - By id order (arrival): R2 decides which of two identical reports is
+      applied and which is the duplicate, and this order gives the same result as the Worker.
+    - Exclusive lock: the Worker and replay wait until it finishes (ingestion is not blocked).
 
-    Os relatórios originais (raw_content, received_at, origem) não são alterados; só o
-    estado da fila (status) volta a pending antes de cada relatório ser processado outra vez.
+    The original reports (raw_content, received_at, source) are not changed; only the
+    queue state (status) goes back to pending before each report is processed again.
     """
     try:
         lock_read_models_exclusive(db)
         for model in DERIVED_TABLES:
             db.execute(delete(model))
         db.execute(update(ReportRaw).values(status=ReportStatus.PENDING, quarantine_reason=None))
-        db.expire_all()  # os objetos carregados a seguir veem os valores acabados de repor
+        db.expire_all()  # objects loaded afterwards see the freshly restored values
 
         report_ids = db.scalars(select(ReportRaw.id).order_by(ReportRaw.id)).all()
-        # Os rollups de cada duty são calculados uma vez no fim, não a cada relatório
+        # Each duty's rollups are computed once at the end, not per report
         defer_rollups(db)
         for report_id in report_ids:
             apply_rules(db.get(ReportRaw, report_id), db)

@@ -24,7 +24,7 @@ wait_pending_zero() {
     while true; do
         pending=$(curl -sS --fail "$API/v1/stats" | python3 -c 'import json,sys; print(json.load(sys.stdin)["pending"])')
         [ "$pending" -eq 0 ] && break
-        echo "pending=$pending, a aguardar..."
+        echo "pending=$pending, waiting..."
         sleep 2
     done
     echo "pending=0"
@@ -61,7 +61,7 @@ request() {
     code=$(curl -sS -o /dev/stderr -w '%{http_code}' -X "$1" "$API$2" \
         -H 'Content-Type: application/json' -d "$3")
     echo " -> HTTP $code"
-    [[ "$code" == 2* ]] || { echo "pedido falhou: $1 $2" >&2; exit 1; }
+    [[ "$code" == 2* ]] || { echo "request failed: $1 $2" >&2; exit 1; }
 }
 
 check() {
@@ -176,20 +176,20 @@ echo "batch_id=$BATCH_02"
 wait_pending_zero
 check checkpoint_a_after_step_4
 
-step "5. VD-D03-20261103: TS-0003 retirada às 08:40Z (primeiro o fim da TS-0003, depois o início da TS-0005)"
+step "5. VD-D03-20261103: TS-0003 removed at 08:40Z (first the end of TS-0003, then the start of TS-0005)"
 request PATCH "/v1/assignments/$(assignment_id VD-D03-20261103 TS-0003)" '{"ended_at": "2026-11-03T08:40:00Z"}'
 request PATCH "/v1/assignments/$(assignment_id VD-D03-20261103 TS-0005)" '{"started_at": "2026-11-03T08:40:00Z"}'
 
-step "6. TS-0099 na linha VD, assignment em VD-T01-20261104, replay-quarantine"
+step "6. TS-0099 on line VD, assignment at VD-T01-20261104, replay-quarantine"
 request POST /v1/trainsets '{"serial": "TS-0099", "line": "VD"}'
 request POST /v1/duties/VD-T01-20261104/assignments \
     '{"trainset": "TS-0099", "started_at": "2026-11-04T09:00:00Z", "ended_at": "2026-11-04T15:00:00Z"}'
 "${COMPOSE[@]}" run --rm cli replay-quarantine --reason unknown_trainset
 
-step "7. aguardar pending = 0"
+step "7. wait for pending = 0"
 wait_pending_zero
 check final_after_step_7
 
 FAILS=$(awk '{s += $1} END {print s + 0}' "$RESULT_FILE")
 echo
-if [ "$FAILS" -eq 0 ]; then echo "SCENARIO: PASS"; else echo "SCENARIO: FAIL ($FAILS valores errados)"; exit 1; fi
+if [ "$FAILS" -eq 0 ]; then echo "SCENARIO: PASS"; else echo "SCENARIO: FAIL ($FAILS wrong values)"; exit 1; fi

@@ -8,7 +8,7 @@ from app.models.base import Base
 
 
 class DutyHourlyRollup(Base):
-    # guardar as agregações das métricas de uma duty, separadas por hora.
+    # Store metric aggregations for a duty, separated by hour.
     __tablename__ = "duty_hourly_rollups"
     __table_args__ = (
         CheckConstraint("count > 0", name="ck_duty_hourly_rollups_count_positive"),
@@ -23,7 +23,7 @@ class DutyHourlyRollup(Base):
 
 
 class DutyMetricSummary(Base):
-    # Qual foi o resultado global de uma métrica na duty?
+    # What was the overall result of a metric in the duty?
     __tablename__ = "duty_metric_summaries"
     __table_args__ = (
         CheckConstraint("count > 0", name="ck_duty_metric_summaries_count_positive"),
@@ -36,7 +36,7 @@ class DutyMetricSummary(Base):
 
 
 class DutyStationStats(Base):
-    # Que atividade e valores máximos houve em cada estação?
+    # What activity and maximum values were there at each station?
     __tablename__ = "duty_station_stats"
     __table_args__ = (
         CheckConstraint("reports > 0", name="ck_duty_station_stats_reports_positive"),
@@ -45,5 +45,5 @@ class DutyStationStats(Base):
     duty_id: Mapped[int] = mapped_column(ForeignKey("duties.id", ondelete="CASCADE"), primary_key=True)
     station_id: Mapped[int] = mapped_column(ForeignKey("stations.id", ondelete="RESTRICT"), primary_key=True)
     reports: Mapped[int] = mapped_column(nullable=False)
-    # None = nenhuma métrica AX* nas medições dessa estação
+    # None = no AX* metric in the measurements at that station
     max_axle: Mapped[Decimal | None] = mapped_column(Numeric, nullable=True)

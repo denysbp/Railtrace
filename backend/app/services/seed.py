@@ -89,7 +89,7 @@ def load_seed(db: Session, path: Path) -> dict[str, int]:
 def _insert_ignore(db: Session, model, rows: list[dict]) -> int:
     if not rows:
         return 0
-    # RETURNING devolve só as linhas realmente inseridas
+    # RETURNING returns only the rows actually inserted
     pk = list(model.__table__.primary_key.columns)[0]
     result = db.execute(insert(model).values(rows).on_conflict_do_nothing().returning(pk))
     return len(result.all())
@@ -102,10 +102,10 @@ def _ids_by(db: Session, key_column, id_column) -> dict:
 def _insert_assignments(db: Session, rows: list[dict]) -> int:
     inserted = 0
     for row in rows:
-        # scalar procura exatamente como os msm valores
+        # scalar looks up exactly the same values
         exists = db.scalar(select(Assignment.id).filter_by(**row))
         if exists is None:
             db.add(Assignment(**row))
-            db.flush() # envia as operacoes sem terminar a transacao
+            db.flush() # sends the operations without ending the transaction
             inserted += 1
     return inserted

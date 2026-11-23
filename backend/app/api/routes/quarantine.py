@@ -24,8 +24,8 @@ quarantine_router = APIRouter(
 )
 def get_quarantines(
     reason: QuarantineReason = Query(..., description="Quarantine reason"),
-    limit: int = Query(..., description="Número máximo de resultados"),
+    limit: int = Query(..., description="Maximum number of results"),
     db: Session = Depends(get_db)
 ):
-    # Só leitura do read model report_outcomes (A2)
+    # Read-only from the report_outcomes read model (A2)
     return read_models.quarantine_list(db, reason, limit)

@@ -10,13 +10,13 @@ from app.models.report_raw import _enum_values
 
 class ReportOutcome(Base):
     """
-    resultado de cada relatório já processado (A2).
+    Result of each already processed report (A2).
 
-    Escrito pelo Worker na mesma transação em que processa o relatório (e atualizado
-    quando a R4 põe relatórios anteriores em conflito). É o que leem os endpoints
-    /depot/batches/{id}, /quarantine e /stats, em vez de reports_raw.
+    Written by the Worker in the same transaction in which it processes the report (and updated
+    when R4 puts earlier reports in conflict). This is what the endpoints
+    /depot/batches/{id}, /quarantine and /stats read instead of reports_raw.
 
-    Um relatório ainda não processado não tem linha aqui.
+    A report that has not been processed yet has no row here.
     """
 
     __tablename__ = "report_outcomes"
@@ -26,7 +26,7 @@ class ReportOutcome(Base):
             "(status = 'quarantined') = (quarantine_reason IS NOT NULL)",
             name="ck_report_outcomes_quarantine_reason",
         ),
-        # GET /quarantine?reason=: por motivo, os mais recentes primeiro
+        # GET /quarantine?reason=: by reason, most recent first
         Index("ix_report_outcomes_reason_received_at", "quarantine_reason", "received_at"),
     )
 

@@ -26,7 +26,7 @@ logs:
 ps:
 	$(COMPOSE) ps
 
-# population db
+# populate db
 
 scenario:
 	@bash scripts/scenario.sh
@@ -38,7 +38,7 @@ live-stream: $(DATA)
 migrate:
 	$(COMPOSE) exec api alembic upgrade head
 
-# Serviços individuais
+# Individual services
 db: $(ENV_FILE)
 	$(COMPOSE) up -d --wait db
 
@@ -56,7 +56,7 @@ env: $(ENV_FILE)
 
 $(ENV_FILE):
 	@for var in $(ENV_VARS); do echo "$$var=change-me" >> $@; done
-	@echo "$@ criado com valores por defeito (change-me)"
+	@echo "$@ created with default values (change-me)"
 
 
 clean:

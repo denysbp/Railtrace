@@ -31,7 +31,7 @@ def upgrade() -> None:
     )
     op.add_column('reports_raw', sa.Column('batch_id', sa.Integer(), nullable=True))
     op.add_column('reports_raw', sa.Column('batch_line', sa.Integer(), nullable=True))
-    # A unique (batch_id, batch_line) também serve de índice para pesquisas por batch_id
+    # A unique (batch_id, batch_line) also serves as an index for lookups by batch_id
     op.create_unique_constraint('uq_reports_raw_batch_line', 'reports_raw', ['batch_id', 'batch_line'])
     op.create_foreign_key(
         'fk_reports_raw_batch_id_batches', 'reports_raw', 'batches',
@@ -39,7 +39,7 @@ def upgrade() -> None:
     )
     # ### end Alembic commands ###
 
-    # O autogenerate não deteta CheckConstraint em tabelas existentes
+    # autogenerate does not detect CheckConstraint on existing tables
     op.create_check_constraint(
         'ck_reports_raw_batch_line', 'reports_raw',
         '(batch_id IS NULL) = (batch_line IS NULL)',
